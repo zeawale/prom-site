@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     categories: Category;
     services: Service;
+    leads: Lead;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    leads: LeadsSelect<false> | LeadsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    settings: Setting;
+  };
+  globalsSelect: {
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -176,10 +182,61 @@ export interface Category {
    * Латиницей, через дефис: otchetnost-i-nalogi
    */
   slug: string;
-  /**
-   * Слаг иконки: report, signature, truck
-   */
-  icon?: string | null;
+  icon:
+    | 'report'
+    | 'calculator'
+    | 'signature'
+    | 'receipt'
+    | 'book'
+    | 'folder'
+    | 'print'
+    | 'exchange'
+    | 'sync'
+    | 'network'
+    | 'globe'
+    | 'cloud'
+    | 'server'
+    | 'database'
+    | 'mobile'
+    | 'phone'
+    | 'email'
+    | 'clock'
+    | 'calendar'
+    | 'location'
+    | 'chat'
+    | 'mic'
+    | 'video'
+    | 'headset'
+    | 'wallet'
+    | 'bank'
+    | 'ruble'
+    | 'cart'
+    | 'cash-register'
+    | 'barcode'
+    | 'scan'
+    | 'truck'
+    | 'warehouse'
+    | 'package'
+    | 'plane'
+    | 'users'
+    | 'handshake'
+    | 'education'
+    | 'certificate'
+    | 'health'
+    | 'shield'
+    | 'lock'
+    | 'key'
+    | 'check'
+    | 'star'
+    | 'sparkle'
+    | 'bolt'
+    | 'rocket'
+    | 'idea'
+    | 'timer'
+    | 'chart'
+    | 'gear'
+    | 'tools'
+    | 'search';
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -197,13 +254,71 @@ export interface Service {
    */
   headline: string;
   /**
-   * 30–35 слов
+   * До 130 символов
    */
   description: string;
   category: number | Category;
-  icon?: string | null;
+  icon:
+    | 'report'
+    | 'calculator'
+    | 'signature'
+    | 'receipt'
+    | 'book'
+    | 'folder'
+    | 'print'
+    | 'exchange'
+    | 'sync'
+    | 'network'
+    | 'globe'
+    | 'cloud'
+    | 'server'
+    | 'database'
+    | 'mobile'
+    | 'phone'
+    | 'email'
+    | 'clock'
+    | 'calendar'
+    | 'location'
+    | 'chat'
+    | 'mic'
+    | 'video'
+    | 'headset'
+    | 'wallet'
+    | 'bank'
+    | 'ruble'
+    | 'cart'
+    | 'cash-register'
+    | 'barcode'
+    | 'scan'
+    | 'truck'
+    | 'warehouse'
+    | 'package'
+    | 'plane'
+    | 'users'
+    | 'handshake'
+    | 'education'
+    | 'certificate'
+    | 'health'
+    | 'shield'
+    | 'lock'
+    | 'key'
+    | 'check'
+    | 'star'
+    | 'sparkle'
+    | 'bolt'
+    | 'rocket'
+    | 'idea'
+    | 'timer'
+    | 'chart'
+    | 'gear'
+    | 'tools'
+    | 'search';
   isPopular?: boolean | null;
   isNew?: boolean | null;
+  /**
+   * Карточка останется в CMS, но не будет показана на сайте
+   */
+  isHidden?: boolean | null;
   related?: (number | Service)[] | null;
   popup?: {
     whoNeedsIt?:
@@ -236,6 +351,27 @@ export interface Service {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads".
+ */
+export interface Lead {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  comment?: string | null;
+  status: 'new' | 'in_progress' | 'closed';
+  /**
+   * Откуда отправлена заявка
+   */
+  page?: string | null;
+  consentAt?: string | null;
+  consentIp?: string | null;
+  consentVersion?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -278,6 +414,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services';
         value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'leads';
+        value: number | Lead;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -386,6 +526,7 @@ export interface ServicesSelect<T extends boolean = true> {
   icon?: T;
   isPopular?: T;
   isNew?: T;
+  isHidden?: T;
   related?: T;
   popup?:
     | T
@@ -417,6 +558,23 @@ export interface ServicesSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads_select".
+ */
+export interface LeadsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  comment?: T;
+  status?: T;
+  page?: T;
+  consentAt?: T;
+  consentIp?: T;
+  consentVersion?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -459,6 +617,49 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  /**
+   * В том виде, в каком показывается на сайте
+   */
+  phone: string;
+  /**
+   * Заполняется автоматически из поля слева
+   */
+  phoneRaw?: string | null;
+  email: string;
+  address: string;
+  workHours: string;
+  legalName: string;
+  inn: string;
+  /**
+   * Уточнить у Дмитрия
+   */
+  ogrn?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  phone?: T;
+  phoneRaw?: T;
+  email?: T;
+  address?: T;
+  workHours?: T;
+  legalName?: T;
+  inn?: T;
+  ogrn?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
