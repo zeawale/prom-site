@@ -1,19 +1,29 @@
 import React from 'react'
 import './styles.css'
+import { Montserrat } from 'next/font/google'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { LeadModalProvider } from '@/components/lead/LeadModalProvider'
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
-}
+const montserrat = Montserrat({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-montserrat',
+})
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ru" className={montserrat.variable}>
       <body>
-        <main>{children}</main>
+        <LeadModalProvider>
+        <Header />
+          {children}
+        <Footer />
+        </LeadModalProvider>
       </body>
     </html>
   )
 }
+
+

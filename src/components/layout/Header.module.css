@@ -1,0 +1,80 @@
+.header {
+  height: var(--header-h);
+  background: var(--surface-brand);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.inner {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logoProm { display: block; width: 150px; height: 49px; border-right: 1px var(--border-default) solid; padding-right: var(--space-4);}
+.logo1c   { display: block; width: 72px;  height: 48px; }
+
+.divider {
+  width: 1px;
+  height: 29px;
+  background: var(--border-subtle);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-inline: auto;
+}
+
+.navLink {
+  font-size: var(--fs-label-14);
+  line-height: 1;
+  color: var(--text-inverse);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.navLink:hover { color: var(--text-accent);  }
+
+.navLinkActive { color: var(--text-accent); font-weight: bold; }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+}
+
+.phone {
+  font-size: var(--fs-label-12);
+  color: var(--text-inverse);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cta {
+  height: 31px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 12px;
+  background: var(--surface-accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--fs-label-12);
+  cursor: pointer;
+}
+
+.cta:hover { filter: brightness(0.92); }
