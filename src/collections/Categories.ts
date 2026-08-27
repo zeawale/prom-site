@@ -1,7 +1,11 @@
 import type { CollectionConfig } from 'payload'
+import { iconField } from './fields/iconField'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'order'],
@@ -23,12 +27,7 @@ export const Categories: CollectionConfig = {
       label: 'Слаг',
       admin: { description: 'Латиницей, через дефис: otchetnost-i-nalogi' },
     },
-    {
-      name: 'icon',
-      type: 'text',
-      label: 'Иконка',
-      admin: { description: 'Слаг иконки: report, signature, truck' },
-    },
+    iconField(),
     {
       name: 'order',
       type: 'number',

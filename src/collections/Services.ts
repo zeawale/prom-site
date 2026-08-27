@@ -1,7 +1,11 @@
 import type { CollectionConfig } from 'payload'
+import { iconField } from './fields/iconField'
 
 export const Services: CollectionConfig = {
   slug: 'services',
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'isPopular', 'isNew'],
@@ -29,7 +33,7 @@ export const Services: CollectionConfig = {
       type: 'textarea',
       required: true,
       label: 'Описание',
-      admin: { description: '30–35 слов' },
+      admin: { description: 'До 130 символов' },
     },
     {
       name: 'category',
@@ -39,13 +43,23 @@ export const Services: CollectionConfig = {
       required: true,
       label: 'Категория',
     },
-    { name: 'icon', type: 'text', label: 'Иконка' },
+    iconField(),
     {
       type: 'row',
       fields: [
         { name: 'isPopular', type: 'checkbox', label: 'Популярное', defaultValue: false },
         { name: 'isNew', type: 'checkbox', label: 'Новинка', defaultValue: false },
       ],
+    },
+    {
+      name: 'isHidden',
+      type: 'checkbox',
+      label: 'Скрыть из каталога',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Карточка останется в CMS, но не будет показана на сайте',
+      },
     },
     {
       name: 'related',
