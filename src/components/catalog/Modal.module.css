@@ -1,0 +1,42 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: start center;
+  padding: var(--space-7) var(--space-5);
+  overflow-y: auto;
+  background: rgb(13 33 70 / 0.5);
+}
+
+.dialog {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: var(--surface-default);
+  border-radius: 24px;
+}
+
+.dialog:focus {
+  outline: none;
+}
+
+.close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: var(--fs-body-m);
+  color: var(--text-muted);
+  background: var(--surface-default);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--text-primary);
+}

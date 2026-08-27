@@ -1,0 +1,111 @@
+.card {
+  display: grid;
+  row-gap: var(--space-4);
+
+  height: 100%;
+  padding: var(--space-6);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  text-decoration: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  border: 1px solid var(--border-default);
+  cursor: pointer;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.iconBox {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--surface-brand-soft);
+  border-radius: 10px;
+  color: var(--icon-brand);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-label-14);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-none);
+  color: var(--text-link);
+}
+
+.badges {
+  display: flex;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.badge {
+  padding: 4px 8px;
+  font-size: var(--fs-label-11);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 10px;
+}
+
+.badgePopular {
+  color: var(--text-inverse);
+  background: var(--surface-accent);
+}
+
+.badgeNew {
+  color: var(--text-inverse);
+  background: var(--surface-brand);
+}
+
+.headline {
+  margin: 0;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.description {
+  margin: 0;
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+
+  height: calc(var(--lh-base) * 3em);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.related {
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-default);
+  font-size: var(--fs-body-xs);
+  color: var(--text-muted);
+}
+
+.relatedLabel {
+  margin-right: var(--space-1);
+}
+
+.relatedItem {
+  color: var(--text-link);
+}

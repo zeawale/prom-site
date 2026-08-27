@@ -1,0 +1,134 @@
+.page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-6);
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: var(--space-6);
+}
+
+.header {
+  min-width: 0;
+}
+
+.heading {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--text-primary);
+}
+
+.lead {
+  margin: 0;
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-7);
+  align-items: stretch;
+}
+
+
+.content {
+  position: relative;
+  min-width: 0;
+}
+
+.gridWrap {
+  position: relative;
+  min-height: 0;
+}
+
+.grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  align-content: start;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: var(--space-4);
+  padding-bottom: var(--space-7);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) transparent;
+}
+
+.grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.grid::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 999px;
+}
+
+.grid::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.grid:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.gridWrap::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 64px;
+  background: linear-gradient(to top, var(--surface-muted), transparent);
+  pointer-events: none;
+}
+
+.empty {
+  align-self: start;
+  padding: var(--space-7);
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+}
+
+.contentInner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 900px) {
+  .page {
+    height: auto;
+    display: block;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .content {
+    display: block;
+  }
+  .grid {
+    height: auto;
+    grid-template-columns: 1fr;
+    overflow-y: visible;
+    padding-right: 0;
+  }
+  .gridWrap::after {
+    display: none;
+  }
+}

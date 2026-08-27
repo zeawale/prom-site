@@ -1,15 +1,17 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
+import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from '../payload.config'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import type { Category } from '../payload-types'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const CATEGORIES = [
+/** Слаг иконки — union из 26 значений, генерируется Payload из select-поля */
+type IconSlug = NonNullable<Category['icon']>
+
+const CATEGORIES: { slug: string; title: string; icon: IconSlug }[] = [
   { slug: 'otchetnost-i-nalogi', title: 'Отчётность и налоги', icon: 'report' },
   { slug: 'edo', title: 'ЭДО', icon: 'signature' },
   { slug: 'proverka-kontragentov', title: 'Проверка контрагентов', icon: 'shield' },
@@ -19,7 +21,11 @@ const CATEGORIES = [
   { slug: 'internet-torgovlya', title: 'Интернет-торговля', icon: 'cart' },
   { slug: 'logistika-i-dostavka', title: 'Логистика и доставка', icon: 'truck' },
   { slug: 'avtomatizatsiya-ucheta', title: 'Автоматизация учёта', icon: 'gear' },
-  { slug: 'infrastruktura-i-podderzhka', title: 'Инфраструктура и поддержка', icon: 'server' },
+  {
+    slug: 'infrastruktura-i-podderzhka',
+    title: 'Инфраструктура и поддержка',
+    icon: 'server',
+  },
 ]
 
 type RawService = {
@@ -27,7 +33,7 @@ type RawService = {
   category_ids: string[]
   is_popular: boolean
   is_new: boolean
-  icon: string
+  icon: IconSlug
   title: string
   headline: string
   description: string
@@ -52,18 +58,18 @@ const seed = async () => {
   console.log('Коллекции очищены')
 
   // 2. Категории
-  const catIdBySlug = new Map<string, number | string>()
+  const catIdBySlug = new Map<string, number>()
   for (const [i, c] of CATEGORIES.entries()) {
     const created = await payload.create({
       collection: 'categories',
       data: { ...c, order: i },
     })
-    catIdBySlug.set(c.slug, created.id)
+    catIdBySlug.set(c.slug, created.id as number)
   }
   console.log(`Категорий создано: ${catIdBySlug.size}`)
 
   // 3. Сервисы без related
-  const svcIdBySlug = new Map<string, number | string>()
+  const svcIdBySlug = new Map<string, number>()
   for (const s of raw) {
     const categoryId = catIdBySlug.get(s.category_ids[0])
     if (!categoryId) throw new Error(`Нет категории ${s.category_ids[0]} для ${s.id}`)
@@ -91,7 +97,7 @@ const seed = async () => {
         sourceUrls: s.source_urls.map((url) => ({ url })),
       },
     })
-    svcIdBySlug.set(s.id, created.id)
+    svcIdBySlug.set(s.id, created.id as number)
   }
   console.log(`Сервисов создано: ${svcIdBySlug.size}`)
 
@@ -99,19 +105,39 @@ const seed = async () => {
   let linked = 0
   for (const s of raw) {
     if (!s.related_ids.length) continue
+
     const related = s.related_ids.map((r) => {
       const id = svcIdBySlug.get(r)
       if (!id) throw new Error(`Битая ссылка ${r} в ${s.id}`)
       return id
     })
+
+    const selfId = svcIdBySlug.get(s.id)
+    if (!selfId) throw new Error(`Не найден сервис ${s.id}`)
+
     await payload.update({
       collection: 'services',
-      id: svcIdBySlug.get(s.id)!,
+      id: selfId,
       data: { related },
     })
     linked++
   }
   console.log(`Связей проставлено: ${linked}`)
+
+  // 5. Реквизиты
+  await payload.updateGlobal({
+    slug: 'settings',
+    data: {
+      phone: '+7 (831) 282-31-99',
+      email: 'info@pm52.ru',
+      address: 'Нижний Новгород, Казанское шоссе, д.12 к.1 оф.311',
+      workHours: 'Пн–Пт 09:00–18:00',
+      legalName: 'ООО «НПП ПРО-М»',
+      inn: '5260165194',
+    },
+  })
+  console.log('Реквизиты записаны')
+
   console.log('Готово')
   process.exit(0)
 }

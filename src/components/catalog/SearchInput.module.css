@@ -1,0 +1,23 @@
+.wrap {
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: inherit;
+  font-size: var(--fs-body-m);
+  color: var(--text-primary);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  outline: 2px solid var(--surface-brand);
+  outline-offset: -1px;
+}
