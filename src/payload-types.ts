@@ -72,6 +72,7 @@ export interface Config {
     categories: Category;
     services: Service;
     leads: Lead;
+    programs: Program;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
+    programs: ProgramsSelect<false> | ProgramsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -95,9 +97,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     settings: Setting;
+    'programs-section': ProgramsSection;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    'programs-section': ProgramsSectionSelect<false> | ProgramsSectionSelect<true>;
   };
   locale: null;
   widgets: {
@@ -190,6 +194,7 @@ export interface Category {
     | 'book'
     | 'folder'
     | 'print'
+    | 'assignment'
     | 'exchange'
     | 'sync'
     | 'network'
@@ -198,6 +203,8 @@ export interface Category {
     | 'server'
     | 'database'
     | 'mobile'
+    | 'devices'
+    | 'extension'
     | 'phone'
     | 'email'
     | 'clock'
@@ -214,6 +221,7 @@ export interface Category {
     | 'cash-register'
     | 'barcode'
     | 'scan'
+    | 'storefront'
     | 'truck'
     | 'warehouse'
     | 'package'
@@ -223,6 +231,8 @@ export interface Category {
     | 'education'
     | 'certificate'
     | 'health'
+    | 'company'
+    | 'badge'
     | 'shield'
     | 'lock'
     | 'key'
@@ -234,6 +244,7 @@ export interface Category {
     | 'idea'
     | 'timer'
     | 'chart'
+    | 'bar-chart'
     | 'gear'
     | 'tools'
     | 'search';
@@ -266,6 +277,7 @@ export interface Service {
     | 'book'
     | 'folder'
     | 'print'
+    | 'assignment'
     | 'exchange'
     | 'sync'
     | 'network'
@@ -274,6 +286,8 @@ export interface Service {
     | 'server'
     | 'database'
     | 'mobile'
+    | 'devices'
+    | 'extension'
     | 'phone'
     | 'email'
     | 'clock'
@@ -290,6 +304,7 @@ export interface Service {
     | 'cash-register'
     | 'barcode'
     | 'scan'
+    | 'storefront'
     | 'truck'
     | 'warehouse'
     | 'package'
@@ -299,6 +314,8 @@ export interface Service {
     | 'education'
     | 'certificate'
     | 'health'
+    | 'company'
+    | 'badge'
     | 'shield'
     | 'lock'
     | 'key'
@@ -310,6 +327,7 @@ export interface Service {
     | 'idea'
     | 'timer'
     | 'chart'
+    | 'bar-chart'
     | 'gear'
     | 'tools'
     | 'search';
@@ -377,6 +395,184 @@ export interface Lead {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "programs".
+ */
+export interface Program {
+  id: number;
+  title: string;
+  /**
+   * Адрес страницы: /programs/слаг
+   */
+  slug: string;
+  /**
+   * В табах текст короче, чем в заголовке
+   */
+  tabLabel: string;
+  /**
+   * Порядок вкладок слева направо
+   */
+  order: number;
+  lead: string;
+  /**
+   * Название программы. Выводится полужирным
+   */
+  bodyStrong: string;
+  /**
+   * Идёт сразу после выделенного начала, в том же абзаце
+   */
+  bodyIntro: string;
+  /**
+   * Абзацы разделяются переводом строки
+   */
+  body: string;
+  ctaText?: string | null;
+  shortFacts?: {
+    items?:
+      | {
+          fact: string;
+          /**
+           * Не длиннее 5 слов
+           */
+          caption: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Продолжение фразы «Подходит: …»
+     */
+    suits?: string | null;
+  };
+  /**
+   * Без двоеточия в конце
+   */
+  cardsTitle?: string | null;
+  cardsLayout?: ('icon' | 'title' | 'icon-title') | null;
+  /**
+   * Пустой список — блок карточек не выводится на сайте
+   */
+  cards?:
+    | {
+        icon?:
+          | (
+              | 'report'
+              | 'calculator'
+              | 'signature'
+              | 'receipt'
+              | 'book'
+              | 'folder'
+              | 'print'
+              | 'assignment'
+              | 'exchange'
+              | 'sync'
+              | 'network'
+              | 'globe'
+              | 'cloud'
+              | 'server'
+              | 'database'
+              | 'mobile'
+              | 'devices'
+              | 'extension'
+              | 'phone'
+              | 'email'
+              | 'clock'
+              | 'calendar'
+              | 'location'
+              | 'chat'
+              | 'mic'
+              | 'video'
+              | 'headset'
+              | 'wallet'
+              | 'bank'
+              | 'ruble'
+              | 'cart'
+              | 'cash-register'
+              | 'barcode'
+              | 'scan'
+              | 'storefront'
+              | 'truck'
+              | 'warehouse'
+              | 'package'
+              | 'plane'
+              | 'users'
+              | 'handshake'
+              | 'education'
+              | 'certificate'
+              | 'health'
+              | 'company'
+              | 'badge'
+              | 'shield'
+              | 'lock'
+              | 'key'
+              | 'check'
+              | 'star'
+              | 'sparkle'
+              | 'bolt'
+              | 'rocket'
+              | 'idea'
+              | 'timer'
+              | 'chart'
+              | 'bar-chart'
+              | 'gear'
+              | 'tools'
+              | 'search'
+            )
+          | null;
+        title?: string | null;
+        text: string;
+        list?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  hasTable?: boolean | null;
+  table?: {
+    title?: string | null;
+    /**
+     * «Возможности», «По подсистемам», «Сервисы ИТС»
+     */
+    firstColumnLabel?: string | null;
+    col1Label?: string | null;
+    col2Label?: string | null;
+    /**
+     * Пусто — колонка не выводится
+     */
+    col3Label?: string | null;
+    rows?:
+      | {
+          label: string;
+          col1?: ('yes' | 'no' | 'text') | null;
+          col2?: ('yes' | 'no' | 'text') | null;
+          col3?: ('yes' | 'no' | 'text') | null;
+          col1Text?: string | null;
+          col2Text?: string | null;
+          col3Text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    hasDetails?: boolean | null;
+    detailsLabel?: string | null;
+    detailsRows?:
+      | {
+          label: string;
+          col1?: ('yes' | 'no' | 'text') | null;
+          col2?: ('yes' | 'no' | 'text') | null;
+          col3?: ('yes' | 'no' | 'text') | null;
+          col1Text?: string | null;
+          col2Text?: string | null;
+          col3Text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -418,6 +614,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'leads';
         value: number | Lead;
+      } | null)
+    | ({
+        relationTo: 'programs';
+        value: number | Program;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -580,6 +780,87 @@ export interface LeadsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "programs_select".
+ */
+export interface ProgramsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  tabLabel?: T;
+  order?: T;
+  lead?: T;
+  bodyStrong?: T;
+  bodyIntro?: T;
+  body?: T;
+  ctaText?: T;
+  shortFacts?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              fact?: T;
+              caption?: T;
+              id?: T;
+            };
+        suits?: T;
+      };
+  cardsTitle?: T;
+  cardsLayout?: T;
+  cards?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        text?: T;
+        list?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  hasTable?: T;
+  table?:
+    | T
+    | {
+        title?: T;
+        firstColumnLabel?: T;
+        col1Label?: T;
+        col2Label?: T;
+        col3Label?: T;
+        rows?:
+          | T
+          | {
+              label?: T;
+              col1?: T;
+              col2?: T;
+              col3?: T;
+              col1Text?: T;
+              col2Text?: T;
+              col3Text?: T;
+              id?: T;
+            };
+        hasDetails?: T;
+        detailsLabel?: T;
+        detailsRows?:
+          | T
+          | {
+              label?: T;
+              col1?: T;
+              col2?: T;
+              col3?: T;
+              col1Text?: T;
+              col2Text?: T;
+              col3Text?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -646,6 +927,33 @@ export interface Setting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "programs-section".
+ */
+export interface ProgramsSection {
+  id: number;
+  title: string;
+  lead: string;
+  cloudBanner: {
+    title: string;
+    text: string;
+    buttons?:
+      | {
+          label: string;
+          href: string;
+          style?: ('primary' | 'accent') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Общий текст, выводится под каждой таблицей тарифов
+   */
+  tariffDisclaimer: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -657,6 +965,32 @@ export interface SettingsSelect<T extends boolean = true> {
   legalName?: T;
   inn?: T;
   ogrn?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "programs-section_select".
+ */
+export interface ProgramsSectionSelect<T extends boolean = true> {
+  title?: T;
+  lead?: T;
+  cloudBanner?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              style?: T;
+              id?: T;
+            };
+      };
+  tariffDisclaimer?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

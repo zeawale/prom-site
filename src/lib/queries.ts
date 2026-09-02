@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Where } from 'payload'
 import type { Service } from '@/payload-types'
+import type { Program } from '@/payload-types'
 
 /** Общий фильтр видимости. Используется во ВСЕХ выборках сервисов. */
 export const VISIBLE: Where = { isHidden: { not_equals: true } }
@@ -75,4 +76,34 @@ export async function getSidebar(services?: Service[]): Promise<{
   }))
 
   return { flags, categories, total: list.length }
+}
+
+export const getPrograms = async (): Promise<Program[]> => {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'programs',
+    sort: 'order',
+    limit: 100,
+    // depth 0: связей у коллекции нет, глубже ходить незачем
+    depth: 0,
+  })
+  return docs
+}
+ 
+/** Одна программа по слагу. undefined, если такой нет */
+export const getProgram = async (slug: string): Promise<Program | undefined> => {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'programs',
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 0,
+  })
+  return docs[0]
+}
+ 
+/** Общая шапка раздела и дисклеймер */
+export const getProgramsSection = async () => {
+  const payload = await getPayload({ config })
+  return payload.findGlobal({ slug: 'programs-section', depth: 0 })
 }
