@@ -13,6 +13,7 @@ export const ICONS = [
   { value: 'book', label: 'Книга', symbol: 'menu-book' },
   { value: 'folder', label: 'Папка', symbol: 'folder' },
   { value: 'print', label: 'Печать', symbol: 'print' },
+  { value: 'assignment', label: 'Задание', symbol: 'assignment' },
 
   // Обмен и инфраструктура
   { value: 'exchange', label: 'Обмен данными', symbol: 'sync-alt' },
@@ -23,6 +24,8 @@ export const ICONS = [
   { value: 'server', label: 'Сервер', symbol: 'dns' },
   { value: 'database', label: 'База данных', symbol: 'database' },
   { value: 'mobile', label: 'Мобильное приложение', symbol: 'smartphone' },
+  { value: 'devices', label: 'Устройства', symbol: 'devices' },
+  { value: 'extension', label: 'Расширение', symbol: 'extension' },
 
   // Связь и контакты
   { value: 'phone', label: 'Телефон', symbol: 'call' },
@@ -43,6 +46,7 @@ export const ICONS = [
   { value: 'cash-register', label: 'Касса', symbol: 'point-of-sale' },
   { value: 'barcode', label: 'Штрихкод', symbol: 'barcode' },
   { value: 'scan', label: 'Сканирование', symbol: 'document-scanner' },
+  { value: 'storefront', label: 'Магазин', symbol: 'storefront' },
 
   // Логистика
   { value: 'truck', label: 'Грузовик', symbol: 'local-shipping' },
@@ -56,6 +60,8 @@ export const ICONS = [
   { value: 'education', label: 'Обучение', symbol: 'school' },
   { value: 'certificate', label: 'Сертификат', symbol: 'workspace-premium' },
   { value: 'health', label: 'Медицина', symbol: 'local-hospital' },
+  { value: 'company', label: 'Организация', symbol: 'corporate-fare' },
+  { value: 'badge', label: 'Карточка сотрудника', symbol: 'badge' },
 
   // Безопасность
   { value: 'shield', label: 'Щит', symbol: 'verified-user' },
@@ -71,6 +77,7 @@ export const ICONS = [
   { value: 'idea', label: 'Идея', symbol: 'lightbulb' },
   { value: 'timer', label: 'Таймер', symbol: 'timer' },
   { value: 'chart', label: 'График', symbol: 'trending-up' },
+  { value: 'bar-chart', label: 'Диаграмма', symbol: 'bar-chart' },
   { value: 'gear', label: 'Шестерёнка', symbol: 'settings' },
   { value: 'tools', label: 'Инструменты', symbol: 'build' },
   { value: 'search', label: 'Поиск', symbol: 'search' },
