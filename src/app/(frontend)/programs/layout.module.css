@@ -1,0 +1,86 @@
+.hero {
+  margin-block-end: var(--space-5);
+}
+
+.title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.lead {
+  margin: 0;
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+/* ---------- Баннер «Работать через браузер» ---------- */
+
+.banner {
+  background: var(--surface-default);
+  border: 0.5px solid var(--border-brand);
+  border-top: 6px solid var(--border-brand);
+  border-radius: 16px;
+  padding: var(--space-6);
+  margin-block-end: var(--space-7);
+}
+
+.bannerTitle {
+  margin: 0 0 var(--space-4);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+}
+
+.bannerText {
+  margin: 0 0 var(--space-5);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+.bannerButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.bannerButton {
+  display: inline-block;
+  min-inline-size: 348px;
+  padding: var(--space-3) 0;
+  border-radius: 20px;
+  font-size: var(--fs-label-16);
+  font-weight: var(--fw-semibold);
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-inverse);
+}
+
+.bannerButton[data-style='primary'] {
+  background: var(--surface-brand);
+}
+
+.bannerButton[data-style='accent'] {
+  background: var(--surface-accent);
+}
+
+.bannerButton:hover {
+  filter: brightness(0.92);
+}
+
+.bannerButton:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .bannerButton {
+    min-inline-size: 0;
+    flex: 1 1 100%;
+  }
+}
