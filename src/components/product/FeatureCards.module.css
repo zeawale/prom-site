@@ -1,0 +1,99 @@
+.section {
+  margin-block-start: var(--space-6);
+}
+
+.heading {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-5);
+}
+
+/* ---------- Сетка ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  /* ul по умолчанию с маркерами и отступом — снимаем, семантика списка нужна,
+     оформление нет */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Последняя карточка в нечётном наборе занимает обе колонки.
+   Только CSS: компоненту не нужно знать, сколько карточек ему передали,
+   и при добавлении шестой карточки в CMS правило перестанет срабатывать само. */
+.card:nth-child(odd):last-child {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Карточка ---------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: var(--space-6);
+}
+
+.iconBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 10px;
+  background: var(--surface-brand-soft);
+  color: var(--icon-brand);
+  margin-block-end: var(--space-5);
+  /* Не даём флексу сжать подложку под размер глифа */
+  flex: none;
+  align-self: flex-start;
+}
+
+
+
+.cardTitle {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+}
+
+.text {
+  margin: 0;
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+/* ---------- Список внутри карточки ---------- */
+
+.list {
+  margin: var(--space-3) 0 0;
+  padding-inline-start: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+.list li::marker {
+  color: var(--text-muted);
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
