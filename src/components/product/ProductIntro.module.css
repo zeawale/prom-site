@@ -1,0 +1,84 @@
+.grid {
+  display: grid;
+  /* Пропорция из Figma: 721 и 506 px. В fr, а не в px — при другой ширине
+     контейнера соотношение сохранится, и мобильный брейкпоинт не придётся
+     пересчитывать. stretch по умолчанию, поэтому синяя карточка тянется
+     по высоте белой. */
+  grid-template-columns: 721fr 506fr;
+  gap: var(--space-5);
+  align-items: stretch;
+  padding: 0 var(--space-5);
+}
+
+/* ---------- Белая карточка ---------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-default);
+  border: 2px solid var(--border-brand);
+  border-radius: 20px;
+  padding: var(--space-6);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.intro,
+.paragraph {
+  margin: 0;
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+.intro {
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+/* ---------- Кнопка ---------- */
+
+.cta {
+  /* 32px под текстом — замер из макета. margin-block-start, а не gap на
+     родителе: между абзацами свой ритм, кнопка отбивается сильнее. */
+  margin-block-start: var(--space-6);
+}
+
+.button {
+  inline-size: 100%;
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: 20px;
+  background: var(--surface-accent);
+  color: var(--text-inverse);
+  /* font-family обязателен: браузерный дефолт кнопки не наследует шрифт
+     страницы, и Montserrat молча заменится на системный */
+  font-family: inherit;
+  font-size: var(--fs-label-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-base);
+  cursor: pointer;
+}
+
+.button:hover {
+  /* Через filter, а не отдельным токеном — переживёт смену базового
+     оранжевого на доступный вариант */
+  filter: brightness(0.92);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 2px;
+}
+
+/* ---------- Мобильный ---------- */
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

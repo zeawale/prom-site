@@ -1,0 +1,21 @@
+.hero {
+  margin-block-end: var(--space-5);
+}
+
+.title {
+  /* h2 в разделе программ визуально совпадает с h1 отдельных страниц —
+     размер задаётся классом, а не тегом. Тег отвечает за структуру,
+     класс за вид: это разные вещи и связывать их не нужно. */
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.lead {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}

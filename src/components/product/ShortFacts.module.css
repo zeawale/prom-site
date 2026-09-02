@@ -1,0 +1,80 @@
+.card {
+  /* Градиент из Figma: 0E4CB9 → 062253.
+     Направление 135deg — светлый угол сверху слева. Если в макете зеркально,
+     менять на 315deg: одна цифра, перекрашивать ничего не нужно. */
+  background: linear-gradient(
+    135deg,
+    var(--surface-brand) 0%,
+    var(--surface-brand-deep) 100%
+  );
+  border-radius: 12px;
+  padding: var(--space-6);
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ---------- Подпись-эйбрау ---------- */
+
+.label {
+  margin: 0;
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-base);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  /* ВНИМАНИЕ: оранжевый на светлом конце градиента даёт 2.66:1 при норме 4.5:1.
+     На тёмном конце 5.38:1 — проходит. Часть принятого риска по оранжевому.
+     Лечится сменой на строку ниже (белый даёт 7.63:1 в худшей точке). */
+  color: var(--text-accent);
+  /* color: var(--text-inverse); */
+}
+
+/* ---------- Факты ---------- */
+
+.list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fact {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-inverse);
+}
+
+.caption {
+  margin: 0;
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-base);
+  /* brand-soft вместо приглушённого серого: 12.64:1 на тёмном конце
+     и 6.25:1 на светлом — проходит на всём протяжении градиента */
+  color: var(--surface-brand-soft);
+}
+
+/* ---------- Подходит ---------- */
+
+.suits {
+  margin: auto 0 0;
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid rgb(255 255 255 / 0.16);
+  font-size: var(--fs-body-xs);
+  line-height: var(--lh-base);
+  color: var(--surface-brand-soft);
+}
+
+.suitsLabel {
+  font-weight: var(--fw-semibold);
+  color: var(--text-inverse);
+}
