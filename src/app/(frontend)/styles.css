@@ -34,6 +34,11 @@ img {
   display: block;
 }
 
+.container {
+  max-inline-size: var(--container);
+  margin-inline: auto;
+  padding: var(--space-5);
+}
 
 a {
   color: currentColor;
