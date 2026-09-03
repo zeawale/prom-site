@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 /** Убирает из телефона всё, кроме плюса и цифр: для href="tel:" */
 const toRaw = (value?: string | null) =>
@@ -9,6 +10,16 @@ export const Settings: GlobalConfig = {
   label: 'Реквизиты и контакты',
   admin: { group: 'Настройки' },
   access: { read: () => true },
+    hooks: {
+    afterChange: [
+      ({ req }) => {
+        if (req?.context?.disableRevalidate) return
+        // Контакты живут в шапке и футере, то есть в корневом лейауте.
+        // Точечная ревалидация здесь невозможна: гасим весь сайт
+        revalidatePath('/', 'layout')
+      },
+    ],
+  },
   fields: [
     {
       type: 'row',

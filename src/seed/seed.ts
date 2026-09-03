@@ -53,14 +53,15 @@ const seed = async () => {
   const raw: RawService[] = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'))
 
   // 1. Чистим — сначала сервисы (на них ссылаются), потом категории
-  await payload.delete({ collection: 'services', where: { id: { exists: true } } })
-  await payload.delete({ collection: 'categories', where: { id: { exists: true } } })
+  await payload.delete({ collection: 'services', where: { id: { exists: true } }, context: { disableRevalidate: true }, })
+  await payload.delete({ collection: 'categories', where: { id: { exists: true } }, context: { disableRevalidate: true }, })
   console.log('Коллекции очищены')
 
   // 2. Категории
   const catIdBySlug = new Map<string, number>()
   for (const [i, c] of CATEGORIES.entries()) {
     const created = await payload.create({
+      context: { disableRevalidate: true },
       collection: 'categories',
       data: { ...c, order: i },
     })
@@ -75,6 +76,7 @@ const seed = async () => {
     if (!categoryId) throw new Error(`Нет категории ${s.category_ids[0]} для ${s.id}`)
 
     const created = await payload.create({
+      context: { disableRevalidate: true },
       collection: 'services',
       data: {
         slug: s.id,
@@ -116,6 +118,7 @@ const seed = async () => {
     if (!selfId) throw new Error(`Не найден сервис ${s.id}`)
 
     await payload.update({
+      context: { disableRevalidate: true },
       collection: 'services',
       id: selfId,
       data: { related },
@@ -126,6 +129,7 @@ const seed = async () => {
 
   // 5. Реквизиты
   await payload.updateGlobal({
+    context: { disableRevalidate: true },
     slug: 'settings',
     data: {
       phone: '+7 (831) 282-31-99',

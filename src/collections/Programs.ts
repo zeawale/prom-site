@@ -1,18 +1,6 @@
 import type { CollectionConfig, Field } from 'payload'
 import { revalidatePath } from 'next/cache'
-import { iconOptions } from '@/lib/icons'
-
-/**
- * Поле иконки. Если в проекте уже есть src/collections/fields/iconField.ts —
- * замени эти пять строк на импорт фабрики, чтобы список опций жил в одном месте.
- * Опции в любом случае берутся из ICONS, так что разъехаться они не могут.
- */
-const iconField: Field = {
-  name: 'icon',
-  type: 'select',
-  label: 'Иконка',
-  options: iconOptions,
-}
+import { iconField } from './fields/iconField'
 
 /**
  * Значение ячейки — select, а не свободный текст с правилом «печатай + или −».
@@ -246,7 +234,7 @@ export const Programs: CollectionConfig = {
       fields: [
         {
           type: 'row',
-          fields: [iconField, { name: 'title', type: 'text', label: 'Заголовок' }],
+          fields: [iconField({ required: false }), { name: 'title', type: 'text', label: 'Заголовок' }],
         },
         { name: 'text', type: 'textarea', label: 'Текст', required: true },
         {

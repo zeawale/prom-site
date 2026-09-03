@@ -1,10 +1,25 @@
 import type { CollectionConfig } from 'payload'
 import { iconField } from './fields/iconField'
+import { revalidatePath } from 'next/cache'
 
 export const Services: CollectionConfig = {
   slug: 'services',
   access: {
     read: () => true,
+  },
+    hooks: {
+    afterChange: [
+      ({ req }) => {
+        if (req?.context?.disableRevalidate) return
+        revalidatePath('/services', 'layout')
+      },
+    ],
+    afterDelete: [
+      ({ req }) => {
+        if (req?.context?.disableRevalidate) return
+        revalidatePath('/services', 'layout')
+      },
+    ],
   },
   admin: {
     useAsTitle: 'title',
