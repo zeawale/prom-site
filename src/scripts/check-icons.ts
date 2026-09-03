@@ -12,8 +12,7 @@ const set = require('@iconify-json/material-symbols/icons.json') as {
   aliases?: Record<string, unknown>
 }
 
-const inSet = (name: string) =>
-  name in set.icons || Boolean(set.aliases && name in set.aliases)
+const inSet = (name: string) => name in set.icons || Boolean(set.aliases && name in set.aliases)
 
 let failed = false
 const fail = (msg: string) => {
@@ -42,9 +41,7 @@ if (missingGlyphs.length) {
 type ProgramsFile = {
   programs: { slug: string; cards?: { icon?: string }[] }[]
 }
-const programs = JSON.parse(
-  readFileSync('src/seed/1c_programs.json', 'utf8'),
-) as ProgramsFile
+const programs = JSON.parse(readFileSync('src/seed/1c_programs.json', 'utf8')) as ProgramsFile
 
 const values = new Set(ICONS.map((i) => i.value))
 const used = new Map<string, string[]>()

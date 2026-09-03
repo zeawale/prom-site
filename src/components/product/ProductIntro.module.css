@@ -15,6 +15,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background: var(--surface-default);
   border: 2px solid var(--border-brand);
   border-radius: 20px;

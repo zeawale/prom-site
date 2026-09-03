@@ -70,4 +70,6 @@
   font-size: var(--fs-label-12);
 }
 
-.link:hover { color: var(--text-accent); }
+.link:hover {
+  color: var(--text-accent);
+}

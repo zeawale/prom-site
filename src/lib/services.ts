@@ -7,7 +7,6 @@ import type { Service } from '@/payload-types'
 export function visibleRelated(related: Service['related']): Service[] {
   if (!related) return []
   return related.filter(
-    (r): r is Service =>
-      typeof r === 'object' && r !== null && r.isHidden !== true,
+    (r): r is Service => typeof r === 'object' && r !== null && r.isHidden !== true,
   )
 }

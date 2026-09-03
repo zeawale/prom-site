@@ -12,18 +12,12 @@ export function ServiceCard({ service }: { service: Service }) {
   const related = visibleRelated(service.related)
 
   const categorySlug =
-    typeof service.category === 'object' && service.category !== null
-      ? service.category.slug
-      : null
+    typeof service.category === 'object' && service.category !== null ? service.category.slug : null
 
   if (!categorySlug) return null
 
   return (
-    <button
-      type="button"
-      className={styles.card}
-      onClick={() => open(categorySlug, service.slug)}
-    >
+    <button type="button" className={styles.card} onClick={() => open(categorySlug, service.slug)}>
       <div className={styles.head}>
         <span className={styles.iconBox}>
           <Icon slug={service.icon} size={20} />
@@ -33,13 +27,9 @@ export function ServiceCard({ service }: { service: Service }) {
         {(service.isPopular || service.isNew) && (
           <div className={styles.badges}>
             {service.isPopular && (
-              <span className={`${styles.badge} ${styles.badgePopular}`}>
-                Популярное
-              </span>
+              <span className={`${styles.badge} ${styles.badgePopular}`}>Популярное</span>
             )}
-            {service.isNew && (
-              <span className={`${styles.badge} ${styles.badgeNew}`}>Новинка</span>
-            )}
+            {service.isNew && <span className={`${styles.badge} ${styles.badgeNew}`}>Новинка</span>}
           </div>
         )}
       </div>

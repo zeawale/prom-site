@@ -53,8 +53,16 @@ const seed = async () => {
   const raw: RawService[] = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'))
 
   // 1. Чистим — сначала сервисы (на них ссылаются), потом категории
-  await payload.delete({ collection: 'services', where: { id: { exists: true } }, context: { disableRevalidate: true }, })
-  await payload.delete({ collection: 'categories', where: { id: { exists: true } }, context: { disableRevalidate: true }, })
+  await payload.delete({
+    collection: 'services',
+    where: { id: { exists: true } },
+    context: { disableRevalidate: true },
+  })
+  await payload.delete({
+    collection: 'categories',
+    where: { id: { exists: true } },
+    context: { disableRevalidate: true },
+  })
   console.log('Коллекции очищены')
 
   // 2. Категории

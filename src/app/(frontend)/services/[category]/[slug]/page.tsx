@@ -33,11 +33,7 @@ export async function generateStaticParams() {
     }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const service = await getService(slug)
   if (!service) return {}
@@ -59,9 +55,7 @@ export default async function ServicePage({
   if (!service) notFound()
 
   const actual =
-    typeof service.category === 'object' && service.category !== null
-      ? service.category.slug
-      : null
+    typeof service.category === 'object' && service.category !== null ? service.category.slug : null
 
   if (actual !== category) notFound()
 

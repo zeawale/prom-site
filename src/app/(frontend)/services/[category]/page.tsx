@@ -32,6 +32,5 @@ export default async function ServicesCategoryPage({
 
   if (!docs.length) notFound()
 
-  return <CatalogPage categorySlug={category} query={q}  />
+  return <CatalogPage categorySlug={category} query={q} />
 }
-

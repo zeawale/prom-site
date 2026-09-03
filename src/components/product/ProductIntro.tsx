@@ -34,18 +34,12 @@ export default function ProductIntro({
   // filter отсекает пустые строки от двойных переводов.
   const paragraphs = body.split('\n').filter((p) => p.trim())
 
-  const button = isValidElement(cta)
-    ? cloneElement(cta, { className: styles.button })
-    : cta
+  const button = isValidElement(cta) ? cloneElement(cta, { className: styles.button }) : cta
 
   return (
     <div className={styles.grid}>
       <div className={styles.card}>
         <div className={styles.text}>
-          {/* Выделено только название, остальное обычным начертанием.
-              Два поля вместо разметки внутри строки: парсить **звёздочки**
-              значило бы вернуть сложность, ради ухода от которой
-              отказались от richText. */}
           <p className={styles.paragraph}>
             <strong className={styles.strong}>{bodyStrong}</strong> {bodyIntro}
           </p>

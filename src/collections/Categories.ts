@@ -7,7 +7,7 @@ export const Categories: CollectionConfig = {
   access: {
     read: () => true,
   },
-    hooks: {
+  hooks: {
     afterChange: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return

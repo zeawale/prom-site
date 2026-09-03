@@ -1,8 +1,6 @@
 import fs from 'fs'
 
-const data = JSON.parse(
-  fs.readFileSync('src/seed/1c_services_catalog.json', 'utf-8'),
-)
+const data = JSON.parse(fs.readFileSync('src/seed/1c_services_catalog.json', 'utf-8'))
 
 const rows = data
   .map((s) => ({

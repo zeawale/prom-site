@@ -15,8 +15,7 @@ export function ServiceDetailClient({ service }: { service: Service }) {
       source="service"
       renderRelated={(related) =>
         related.map((r) => {
-          const cat =
-            typeof r.category === 'object' && r.category !== null ? r.category.slug : null
+          const cat = typeof r.category === 'object' && r.category !== null ? r.category.slug : null
           if (!cat) return null
 
           return (

@@ -24,9 +24,9 @@ if (!dbFile) {
 console.log(`База: ${dbFile}`)
 const db = new DatabaseSync(dbFile)
 
-const tables = db
-  .prepare("SELECT name FROM sqlite_master WHERE type = 'table'")
-  .all() as { name: string }[]
+const tables = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all() as {
+  name: string
+}[]
 
 const doomed = tables
   .map((t) => t.name)

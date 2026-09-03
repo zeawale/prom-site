@@ -22,8 +22,18 @@
   text-decoration: none;
 }
 
-.logoProm { display: block; width: 150px; height: 49px; border-right: 1px var(--border-default) solid; padding-right: var(--space-4);}
-.logo1c   { display: block; width: 72px;  height: 48px; }
+.logoProm {
+  display: block;
+  width: 150px;
+  height: 49px;
+  border-right: 1px var(--border-default) solid;
+  padding-right: var(--space-4);
+}
+.logo1c {
+  display: block;
+  width: 72px;
+  height: 48px;
+}
 
 .divider {
   width: 1px;
@@ -47,9 +57,14 @@
   transition: color 0.15s ease;
 }
 
-.navLink:hover { color: var(--text-accent);  }
+.navLink:hover {
+  color: var(--text-accent);
+}
 
-.navLinkActive { color: var(--text-accent); font-weight: bold; }
+.navLinkActive {
+  color: var(--text-accent);
+  font-weight: bold;
+}
 
 .actions {
   display: flex;
@@ -77,4 +92,6 @@
   cursor: pointer;
 }
 
-.cta:hover { filter: brightness(0.92); }
+.cta:hover {
+  filter: brightness(0.92);
+}

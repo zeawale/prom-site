@@ -6,5 +6,5 @@ export default async function PopularPage({
   searchParams: Promise<{ q?: string }>
 }) {
   const { q } = await searchParams
-  return <CatalogPage flag="popular" query={q}/>
+  return <CatalogPage flag="popular" query={q} />
 }

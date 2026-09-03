@@ -25,7 +25,7 @@ export function ServiceModalProvider({ children }: { children: React.ReactNode }
   const [loading, setLoading] = useState(false)
   const [prevUrl, setPrevUrl] = useState<string | null>(null)
 
-   const close = useCallback(() => {
+  const close = useCallback(() => {
     setService(null)
     setLoading(false)
     if (prevUrl) {
@@ -40,9 +40,7 @@ export function ServiceModalProvider({ children }: { children: React.ReactNode }
     silentPush(`/services/${categorySlug}/${slug}`)
 
     try {
-      const res = await fetch(
-        `/api/services?where[slug][equals]=${slug}&depth=2&limit=1`,
-      )
+      const res = await fetch(`/api/services?where[slug][equals]=${slug}&depth=2&limit=1`)
       const data = await res.json()
       setService(data.docs?.[0] ?? null)
     } catch {

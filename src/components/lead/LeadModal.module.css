@@ -11,7 +11,7 @@
 }
 
 .dialog {
-    display: flex;
+  display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
@@ -44,7 +44,7 @@
 }
 
 .title {
-    text-align: center;
+  text-align: center;
   margin: 0 0 var(--space-5);
   font-size: var(--fs-h2);
   font-weight: var(--fw-bold);
@@ -178,7 +178,7 @@
   width: 500px;
 }
 .success .title {
-    margin: 0;
+  margin: 0;
 }
 
 .successText {
@@ -188,7 +188,7 @@
 }
 
 .asterisk {
-    color: var(--surface-error);
+  color: var(--surface-error);
 }
 
 .requiredNote {

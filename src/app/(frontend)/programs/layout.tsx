@@ -11,11 +11,7 @@ import styles from './layout.module.css'
  * своими страницами, вложенных <main> возникнуть не может. Зато H1 раздела
  * оказывается внутри <main>, а не до него.
  */
-export default async function ProgramsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function ProgramsLayout({ children }: { children: React.ReactNode }) {
   const [programs, section] = await Promise.all([getPrograms(), getProgramsSection()])
 
   // Порядок задан полем order, сортировка уже в запросе

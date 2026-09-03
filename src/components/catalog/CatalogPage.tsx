@@ -33,30 +33,27 @@ export async function CatalogPage({ categorySlug, flag, query }: Props) {
 
   const q = query?.trim().toLowerCase()
   const services = q
-    ? docs.filter((s) =>
-        [s.title, s.headline, s.description].join(' ').toLowerCase().includes(q),
-      )
+    ? docs.filter((s) => [s.title, s.headline, s.description].join(' ').toLowerCase().includes(q))
     : docs
 
   return (
-    <ServiceModalProvider>
-      <main className={styles.page}>
-        <header className={styles.header}>
-          <h1 className={styles.heading}>1С сервисы</h1>
-          <p className={styles.lead}>
-            Сервисы «1С:ИТС» подключаются к вашей программе 1С и закрывают отдельные
-            задачи: отчётность, обмен документами, маркировку, кадры, приём оплат.
-            Выберите категорию или найдите сервис по названию.
-          </p>
-        </header>
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <h1 className={styles.heading}>1С сервисы</h1>
+        <p className={styles.lead}>
+          Сервисы «1С:ИТС» подключаются к вашей программе 1С и закрывают отдельные задачи:
+          отчётность, обмен документами, маркировку, кадры, приём оплат. Выберите категорию или
+          найдите сервис по названию.
+        </p>
+      </header>
 
-        <div className={styles.layout}>
-          <div className={styles.aside}>
-            <Sidebar activeSlug={categorySlug ?? flag} />
-          </div>
+      <div className={styles.layout}>
+        <div className={styles.aside}>
+          <Sidebar activeSlug={categorySlug ?? flag} />
+        </div>
 
-          <div className={styles.content}>
-            <div className={styles.contentInner}>
+        <div className={styles.content}>
+          <div className={styles.contentInner}>
             <div className={styles.toolbar}>
               <Suspense fallback={null}>
                 <SearchInput />
@@ -76,17 +73,14 @@ export async function CatalogPage({ categorySlug, flag, query }: Props) {
                   ))}
                 </div>
               </div>
-              
             ) : (
               <p className={styles.empty}>
-                По запросу ничего не нашлось. Попробуйте другое слово или откройте
-                полный каталог.
+                По запросу ничего не нашлось. Попробуйте другое слово или откройте полный каталог.
               </p>
             )}
-            </div>
           </div>
         </div>
-      </main>
-    </ServiceModalProvider>
+      </div>
+    </main>
   )
 }

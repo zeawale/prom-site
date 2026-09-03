@@ -53,8 +53,8 @@
 }
 
 .highlight_title {
-    font-size: var(--fs-h6);
-    margin: 0 0 var(--space-3);
+  font-size: var(--fs-h6);
+  margin: 0 0 var(--space-3);
 }
 
 .description {
@@ -114,7 +114,7 @@
 }
 
 .stepNum {
-    padding-top: 2px;
+  padding-top: 2px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -181,7 +181,7 @@
 
 .relatedCard:hover {
   border-color: var(--border-brand);
-    background: var(--surface-muted);
+  background: var(--surface-muted);
 }
 
 .relatedIcon {
@@ -195,13 +195,11 @@
 }
 
 .relatedTitle {
-   text-align: left;
+  text-align: left;
   font-size: var(--fs-body-s);
   font-weight: var(--fw-semibold);
   color: var(--text-primary);
 }
-
-
 
 .ctaButton {
   padding: var(--space-4) var(--space-6);

@@ -32,11 +32,7 @@ const ICONS = {
   scan: ['1s-raspoznavanie-pervichnykh-dokumentov'],
   mic: ['1s-raspoznavanie-rechi', '1s-sintez-rechi'],
   cloud: ['1c-oblachnyy-arkhiv', '1c-link'],
-  headset: [
-    '1c-konnekt',
-    'otvechaet-auditor',
-    'premialnaya-podderzhka-korporativnykh-klientov',
-  ],
+  headset: ['1c-konnekt', 'otvechaet-auditor', 'premialnaya-podderzhka-korporativnykh-klientov'],
   video: ['1c-lektoriy'],
   gear: ['1s-administrator', '1c-store'],
   health: ['1s-egisz'],

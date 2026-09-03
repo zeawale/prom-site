@@ -3,13 +3,7 @@
 import { useEffect, useRef } from 'react'
 import styles from './Modal.module.css'
 
-export function Modal({
-  children,
-  onClose,
-}: {
-  children: React.ReactNode
-  onClose: () => void
-}) {
+export function Modal({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -38,12 +32,7 @@ export function Modal({
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          type="button"
-          className={styles.close}
-          onClick={onClose}
-          aria-label="Закрыть"
-        >
+        <button type="button" className={styles.close} onClick={onClose} aria-label="Закрыть">
           ✕
         </button>
         {children}

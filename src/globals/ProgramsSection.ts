@@ -12,7 +12,7 @@ export const ProgramsSection: GlobalConfig = {
   admin: { group: 'Продукты' },
   access: { read: () => true },
 
-    hooks: {
+  hooks: {
     afterChange: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return

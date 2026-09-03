@@ -37,7 +37,7 @@ img {
 .container {
   max-inline-size: var(--container);
   margin-inline: auto;
-  padding: var(--space-5);
+  padding: var(--space-6);
 }
 
 a {
@@ -57,4 +57,3 @@ a {
 svg {
   vertical-align: middle;
 }
-

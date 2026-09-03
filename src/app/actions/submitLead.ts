@@ -6,7 +6,6 @@ import config from '@payload-config'
 import { CONSENT_VERSION } from '@/lib/consent'
 import type { LeadResult } from '@/lib/leads'
 
-
 export async function submitLead(formData: FormData): Promise<LeadResult> {
   const name = String(formData.get('name') ?? '').trim()
   const phone = String(formData.get('phone') ?? '').trim()

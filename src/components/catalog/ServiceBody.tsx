@@ -93,10 +93,7 @@ export function ServiceBody({ service, source, renderRelated }: Props) {
       )}
 
       <footer className={styles.cta}>
-        <RequestButton
-          className={styles.ctaButton}
-          source={`${source}:${service.slug}`}
-        >
+        <RequestButton className={styles.ctaButton} source={`${source}:${service.slug}`}>
           {service.popup?.ctaText ?? 'Подключить сервис'}
         </RequestButton>
       </footer>

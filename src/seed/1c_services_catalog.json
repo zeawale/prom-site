@@ -2,20 +2,14 @@
   {
     "id": "1c-otchetnost",
     "slug_1c": "1c-otchetnost",
-    "category_ids": [
-      "otchetnost-i-nalogi"
-    ],
+    "category_ids": ["otchetnost-i-nalogi"],
     "is_popular": true,
     "is_new": false,
     "icon": "report",
     "title": "1С-Отчётность",
     "headline": "Отчёт уходит в налоговую прямо из 1С — без выгрузки файлов",
     "description": "Подготовка и сдача регламентированной отчётности из 1С в ФНС, СФР, Росстат и другие контролирующие органы.",
-    "related_ids": [
-      "1c-sverka",
-      "1s-ens",
-      "1s-finotchetnost"
-    ],
+    "related_ids": ["1c-sverka", "1s-ens", "1s-finotchetnost"],
     "popup": {
       "who_needs_it": [
         "Организациям и ИП, которые обязаны сдавать отчётность в электронном виде",
@@ -53,27 +47,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1c-otchetnost/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1c-otchetnost/"]
   },
   {
     "id": "1c-sverka",
     "slug_1c": "1c-sverka",
-    "category_ids": [
-      "otchetnost-i-nalogi"
-    ],
+    "category_ids": ["otchetnost-i-nalogi"],
     "is_popular": true,
     "is_new": false,
     "icon": "calculator",
     "title": "1С:Сверка 2.0",
     "headline": "Расхождения с контрагентами находятся автоматически — ещё до сдачи декларации по НДС",
     "description": "Автоматическая сверка счетов-фактур и первичных документов с данными контрагентов — с отчётом о расхождениях.",
-    "related_ids": [
-      "1c-otchetnost",
-      "1s-ens",
-      "1c-edo"
-    ],
+    "related_ids": ["1c-otchetnost", "1s-ens", "1c-edo"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которые сверяются с контрагентами вручную и тратят на это дни в конце квартала",
@@ -106,26 +92,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1c-sverka/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1c-sverka/"]
   },
   {
     "id": "1s-ens",
     "slug_1c": "1s-ens",
-    "category_ids": [
-      "otchetnost-i-nalogi"
-    ],
+    "category_ids": ["otchetnost-i-nalogi"],
     "is_popular": false,
     "is_new": false,
     "icon": "calculator",
     "title": "1С:ЕНС",
     "headline": "Состояние единого налогового счёта видно прямо в 1С — без входа на сайт ФНС",
     "description": "Единый налоговый счёт в программе 1С: состояние счёта, предстоящие платежи и задолженность перед бюджетом.",
-    "related_ids": [
-      "1c-otchetnost",
-      "1c-sverka"
-    ],
+    "related_ids": ["1c-otchetnost", "1c-sverka"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам, которые сейчас постоянно переключаются между 1С и личным кабинетом на сайте ФНС и переносят данные вручную",
@@ -141,26 +120,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1s-ens/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1s-ens/"]
   },
   {
     "id": "1s-ausn",
     "slug_1c": "1s-ausn",
-    "category_ids": [
-      "otchetnost-i-nalogi"
-    ],
+    "category_ids": ["otchetnost-i-nalogi"],
     "is_popular": false,
     "is_new": false,
     "icon": "calculator",
     "title": "1С:АУСН",
     "headline": "Данные для расчёта налога уходят в банк и ФНС автоматически — без ручного ввода",
     "description": "Электронный обмен с банком и ФНС для организаций и ИП на АУСН. Сервис передаёт сведения для расчёта налога и получает готовый расчёт обратно в 1С.",
-    "related_ids": [
-      "1c-otchetnost",
-      "1s-ens"
-    ],
+    "related_ids": ["1c-otchetnost", "1s-ens"],
     "popup": {
       "who_needs_it": [
         "Организациям и ИП, которые перешли или переходят на режим АУСН, где налог рассчитывает сама ФНС",
@@ -201,20 +173,14 @@
   {
     "id": "1s-finotchetnost",
     "slug_1c": "1s-finotchetnost",
-    "category_ids": [
-      "otchetnost-i-nalogi"
-    ],
+    "category_ids": ["otchetnost-i-nalogi"],
     "is_popular": false,
     "is_new": false,
     "icon": "report",
     "title": "1С:ФинОтчётность",
     "headline": "Пакет отчётности для банка собирается за несколько минут, а не за несколько часов",
     "description": "Подготовка и отправка в банк финансовой отчётности заёмщика: бухгалтерская отчётность, декларации, отчёты по счетам и скан-копии договоров.",
-    "related_ids": [
-      "1c-otchetnost",
-      "1c-podpis",
-      "1c-direktbank"
-    ],
+    "related_ids": ["1c-otchetnost", "1c-podpis", "1c-direktbank"],
     "popup": {
       "who_needs_it": [
         "Организациям с действующими кредитами, которые регулярно отчитываются перед банком о финансовом состоянии",
@@ -252,26 +218,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/1C-Financial-Reporting"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/1C-Financial-Reporting"]
   },
   {
     "id": "1c-finkontrol",
     "slug_1c": "1c-finkontrol",
-    "category_ids": [
-      "otchetnost-i-nalogi"
-    ],
+    "category_ids": ["otchetnost-i-nalogi"],
     "is_popular": false,
     "is_new": false,
     "icon": "calculator",
     "title": "1С-Финконтроль",
     "headline": "Ошибки в учёте находятся автоматически — до прихода проверки",
     "description": "Внутренний финансовый контроль и автоматическая проверка учёта в казённых, бюджетных и автономных учреждениях по требованиям Правительства РФ.",
-    "related_ids": [
-      "1c-otchetnost",
-      "1c-sverka"
-    ],
+    "related_ids": ["1c-otchetnost", "1c-sverka"],
     "popup": {
       "who_needs_it": [
         "Казённым учреждениям и органам государственной власти, ведущим учёт по плану счетов из приказа Минфина № 162н",
@@ -298,27 +257,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/1C-Financial-control"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/1C-Financial-control"]
   },
   {
     "id": "1c-edo",
     "slug_1c": "1c-edo",
-    "category_ids": [
-      "edo"
-    ],
+    "category_ids": ["edo"],
     "is_popular": true,
     "is_new": false,
     "icon": "exchange",
     "title": "1С-ЭДО",
     "headline": "Счета-фактуры и накладные уходят контрагентам прямо из 1С — без бумаги и курьеров",
     "description": "Обмен счетами-фактурами, УПД и другими юридически значимыми документами с контрагентами из программ 1С.",
-    "related_ids": [
-      "1c-podpis",
-      "1c-otchetnost",
-      "1s-share"
-    ],
+    "related_ids": ["1c-podpis", "1c-otchetnost", "1s-share"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которые печатают, подписывают и возят контрагентам бумажные документы",
@@ -366,20 +317,14 @@
   {
     "id": "1c-podpis",
     "slug_1c": "1c-podpis",
-    "category_ids": [
-      "edo"
-    ],
+    "category_ids": ["edo"],
     "is_popular": false,
     "is_new": false,
     "icon": "signature",
     "title": "1С:Подпись",
     "headline": "Электронная подпись оформляется прямо из 1С и доставляется на рабочее место",
     "description": "Выпуск сертификата электронной подписи от удостоверяющего центра «НПЦ 1С» — для ЭДО, отчётности, Честного знака, Госуслуг и ЕГАИС.",
-    "related_ids": [
-      "1c-edo",
-      "1c-otchetnost",
-      "1c-etp"
-    ],
+    "related_ids": ["1c-edo", "1c-otchetnost", "1c-etp"],
     "popup": {
       "who_needs_it": [
         "Сотрудникам, которые подписывают электронные документы от имени организации — им нужен сертификат физлица и машиночитаемая доверенность",
@@ -417,27 +362,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1c-podpis/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1c-podpis/"]
   },
   {
     "id": "edo-bez-elektronnoy-podpisi-dlya-uchastnikov-1s-biznes-set",
     "slug_1c": "edo-bez-elektronnoy-podpisi-dlya-uchastnikov-1s-biznes-set",
-    "category_ids": [
-      "edo"
-    ],
+    "category_ids": ["edo"],
     "is_popular": false,
     "is_new": false,
     "icon": "exchange",
     "title": "ЭДО без электронной подписи для участников 1С:Бизнес-сеть",
     "headline": "Документы от контрагентов попадают в базу без настройки обмена",
     "description": "Обмен электронными документами без подписи между пользователями программ 1С. Полученные документы заносятся в базу автоматически, без ручного ввода.",
-    "related_ids": [
-      "1c-edo",
-      "1s-share",
-      "1c-podpis"
-    ],
+    "related_ids": ["1c-edo", "1s-share", "1c-podpis"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которые ещё не готовы к полноценному ЭДО, но хотят перестать перебивать документы контрагентов вручную",
@@ -477,9 +414,7 @@
   {
     "id": "1s-share",
     "slug_1c": "1s-share",
-    "category_ids": [
-      "edo"
-    ],
+    "category_ids": ["edo"],
     "is_popular": false,
     "is_new": false,
     "icon": "exchange",
@@ -532,20 +467,14 @@
   {
     "id": "1c-etp",
     "slug_1c": "1c-etp",
-    "category_ids": [
-      "edo"
-    ],
+    "category_ids": ["edo"],
     "is_popular": false,
     "is_new": false,
     "icon": "signature",
     "title": "1С-ЭТП",
     "headline": "Подпись для торгов и госпорталов оформляется из 1С — сертификат готов за сутки",
     "description": "Работа на электронных торговых площадках и в государственных системах, включая выпуск сертификата подписи.",
-    "related_ids": [
-      "1c-podpis",
-      "1c-edo",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["1c-podpis", "1c-edo", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Участникам госзакупок по 44-ФЗ и закупок по 223-ФЗ",
@@ -578,28 +507,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/1C-Etp",
-      "https://1c-etp.ru/"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/1C-Etp", "https://1c-etp.ru/"]
   },
   {
     "id": "1c-kontragent",
     "slug_1c": "1c-kontragent",
-    "category_ids": [
-      "proverka-kontragentov"
-    ],
+    "category_ids": ["proverka-kontragentov"],
     "is_popular": true,
     "is_new": false,
     "icon": "shield",
     "title": "1С:Контрагент",
     "headline": "Карточка контрагента заполняется по ИНН за пять секунд — без опечаток в реквизитах",
     "description": "Заполнение реквизитов контрагентов по ИНН из ЕГРЮЛ и ЕГРИП, актуальные адреса из ФИАС и отчёт со сведениями о любой фирме — прямо в программе 1С.",
-    "related_ids": [
-      "1spark-riski",
-      "1c-otchetnost",
-      "1c-edo"
-    ],
+    "related_ids": ["1spark-riski", "1c-otchetnost", "1c-edo"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам и менеджерам, которые вручную перебивают реквизиты контрагентов в договоры и платёжки",
@@ -632,28 +552,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/3",
-      "https://v8.1c.ru/its/services/"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/3", "https://v8.1c.ru/its/services/"]
   },
   {
     "id": "1spark-riski",
     "slug_1c": "1spark-riski",
-    "category_ids": [
-      "proverka-kontragentov"
-    ],
+    "category_ids": ["proverka-kontragentov"],
     "is_popular": true,
     "is_new": false,
     "icon": "shield",
     "title": "1СПАРК Риски",
     "headline": "Проблемный контрагент виден до сделки — сервис предупредит о банкротстве и ликвидации",
     "description": "Оценка надёжности контрагентов от 1С и «Интерфакса»: индексы СПАРК, уведомления об изменениях, справки.",
-    "related_ids": [
-      "1c-kontragent",
-      "1c-otchetnost",
-      "1c-edo"
-    ],
+    "related_ids": ["1c-kontragent", "1c-otchetnost", "1c-edo"],
     "popup": {
       "who_needs_it": [
         "Руководителям и менеджерам, принимающим решения о сделках: сервис оценит платёжеспособность контрагента и покажет, похожа ли фирма на «однодневку»",
@@ -686,27 +597,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1spark-riski/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1spark-riski/"]
   },
   {
     "id": "1s-status-samozanyatogo",
     "slug_1c": "1s-status-samozanyatogo",
-    "category_ids": [
-      "proverka-kontragentov"
-    ],
+    "category_ids": ["proverka-kontragentov"],
     "is_popular": false,
     "is_new": false,
     "icon": "shield",
     "title": "1С:Статус самозанятого",
     "headline": "Статус самозанятого проверяется при договоре, платеже и акте",
     "description": "Проверка, зарегистрирован ли контрагент-физлицо как плательщик налога на профессиональный доход. Выполняется в 1С в ключевые моменты сделки.",
-    "related_ids": [
-      "1c-kontragent",
-      "1spark-riski",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["1c-kontragent", "1spark-riski", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Компаниям и ИП, которые работают с самозанятыми исполнителями: если статус контрагента прекратился, с выплаты придётся удерживать НДФЛ и начислять взносы",
@@ -738,27 +641,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/1C-Self-Employed"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/1C-Self-Employed"]
   },
   {
     "id": "1s-kabinet-sotrudnika",
     "slug_1c": "1s-kabinet-sotrudnika",
-    "category_ids": [
-      "personal-i-kadry"
-    ],
+    "category_ids": ["personal-i-kadry"],
     "is_popular": true,
     "is_new": false,
     "icon": "users",
     "title": "1С:Кабинет сотрудника",
     "headline": "Заявления и приказы подписываются с телефона — без бумаги",
     "description": "Кадровый электронный документооборот: сотрудники подписывают документы в личном кабинете, кадровая служба обрабатывает их в привычном интерфейсе 1С.",
-    "related_ids": [
-      "1c-podpis",
-      "1c-edo",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["1c-podpis", "1c-edo", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Компаниям, где кадровые документы до сих пор печатают, подписывают вручную и хранят в папках",
@@ -796,27 +691,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1s-kabinet-sotrudnika/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1s-kabinet-sotrudnika/"]
   },
   {
     "id": "smartway",
     "slug_1c": "smartway",
-    "category_ids": [
-      "personal-i-kadry"
-    ],
+    "category_ids": ["personal-i-kadry"],
     "is_popular": false,
     "is_new": false,
     "icon": "plane",
     "title": "Smartway",
     "headline": "Командировка организуется за 15 минут, а билеты и авансовые отчёты попадают в 1С сами",
     "description": "Планирование и согласование командировок с интеграцией в 1С: бронирование билетов и отелей без комиссий, автоматическое создание документов.",
-    "related_ids": [
-      "1s-kabinet-sotrudnika",
-      "1c-edo",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["1s-kabinet-sotrudnika", "1c-edo", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Компаниям, где сотрудники регулярно ездят в командировки, а бухгалтерия вручную заводит билеты и авансовые отчёты",
@@ -857,19 +744,14 @@
   {
     "id": "1s-biznes-obuchenie",
     "slug_1c": "1s-biznes-obuchenie",
-    "category_ids": [
-      "personal-i-kadry"
-    ],
+    "category_ids": ["personal-i-kadry"],
     "is_popular": false,
     "is_new": false,
     "icon": "book",
     "title": "1С:Бизнес-обучение",
     "headline": "Управленческие курсы от практиков — в любое время, без отрыва от работы",
     "description": "Видеокурсы для руководителей: стратегия, финансы, маркетинг, управление персоналом, личная эффективность.",
-    "related_ids": [
-      "1s-kabinet-sotrudnika",
-      "1c-lektoriy"
-    ],
+    "related_ids": ["1s-kabinet-sotrudnika", "1c-lektoriy"],
     "popup": {
       "who_needs_it": [
         "Генеральным директорам и руководителям первого уровня, которым нужны практические управленческие знания без отрыва от работы",
@@ -903,20 +785,14 @@
   {
     "id": "1s-markirovka",
     "slug_1c": "1s-markirovka",
-    "category_ids": [
-      "markirovka"
-    ],
+    "category_ids": ["markirovka"],
     "is_popular": false,
     "is_new": false,
     "icon": "barcode",
     "title": "1С:Маркировка",
     "headline": "Все операции с маркированным товаром — в одном окне программы 1С",
     "description": "Работа с маркированными товарами в программах 1С для всех участников оборота. Полный цикл — от ввода товара в оборот до продажи и вывода.",
-    "related_ids": [
-      "1c-edo",
-      "1c-ofd",
-      "1c-podpis"
-    ],
+    "related_ids": ["1c-edo", "1c-ofd", "1c-podpis"],
     "popup": {
       "who_needs_it": [
         "Производителям и импортёрам, которые маркируют продукцию и вводят её в оборот",
@@ -958,20 +834,14 @@
   {
     "id": "1c-ofd",
     "slug_1c": "1c-ofd",
-    "category_ids": [
-      "markirovka"
-    ],
+    "category_ids": ["markirovka"],
     "is_popular": false,
     "is_new": false,
     "icon": "receipt",
     "title": "1С-ОФД",
     "headline": "Касса подключается к оператору фискальных данных без наценок — чеки уходят в ФНС сами",
     "description": "Подключение онлайн-касс к операторам фискальных данных по 54-ФЗ: передача продаж в ФНС, а по маркированным товарам — в «Честный знак».",
-    "related_ids": [
-      "1s-markirovka",
-      "1s-cheki-ofd",
-      "1c-podpis"
-    ],
+    "related_ids": ["1s-markirovka", "1s-cheki-ofd", "1c-podpis"],
     "popup": {
       "who_needs_it": [
         "Организациям и ИП, которые начинают принимать оплату от физических лиц: по 54-ФЗ такие расчёты требуют онлайн-кассы и договора с ОФД",
@@ -1013,20 +883,14 @@
   {
     "id": "1s-cheki-ofd",
     "slug_1c": "1s-cheki-ofd",
-    "category_ids": [
-      "markirovka"
-    ],
+    "category_ids": ["markirovka"],
     "is_popular": false,
     "is_new": false,
     "icon": "receipt",
     "title": "1С-Чеки ОФД",
     "headline": "Чеки из кассы попадают в 1С сами — без ручного ввода отчётов о розничных продажах",
     "description": "Загрузка фискальных данных в 1С напрямую из облака оператора. Программа сама формирует «Отчёт о розничных продажах» и делает проводки.",
-    "related_ids": [
-      "1c-ofd",
-      "1s-markirovka",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["1c-ofd", "1s-markirovka", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Магазинам и точкам услуг, где данные о продажах сейчас вбивают в учётную программу вручную",
@@ -1067,20 +931,14 @@
   {
     "id": "1s-mdlp",
     "slug_1c": "1s-mdlp",
-    "category_ids": [
-      "markirovka"
-    ],
+    "category_ids": ["markirovka"],
     "is_popular": false,
     "is_new": false,
     "icon": "barcode",
     "title": "1С:МДЛП",
     "headline": "Движение лекарств регистрируется в «Честном знаке» — без ручного ввода в кабинет ФГИС",
     "description": "Регистрация приёмки, отгрузки и вывода из оборота лекарств в системе «Честный знак» — через регистратор выбытия или электронную подпись.",
-    "related_ids": [
-      "1c-podpis",
-      "1s-markirovka",
-      "1c-edo"
-    ],
+    "related_ids": ["1c-podpis", "1s-markirovka", "1c-edo"],
     "popup": {
       "who_needs_it": [
         "Медицинским организациям, оказывающим медицинскую помощь, включая филиалы и обособленные подразделения",
@@ -1114,27 +972,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://1cfresh.com/solutions/mdlp"
-    ]
+    "source_urls": ["https://1cfresh.com/solutions/mdlp"]
   },
   {
     "id": "1c-direktbank",
     "slug_1c": "1c-direktbank",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "bank",
     "title": "1С:ДиректБанк",
     "headline": "Платёжки и выписки — одной кнопкой из 1С, без переключения в «Клиент-банк»",
     "description": "Прямой обмен с банком из программ 1С: отправка платёжных поручений и получение выписок без отдельной программы «Клиент-банк».",
-    "related_ids": [
-      "1c-otchetnost",
-      "1s-depozit",
-      "1s-sbp-b2b"
-    ],
+    "related_ids": ["1c-otchetnost", "1s-depozit", "1s-sbp-b2b"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам, которые сейчас выгружают платёжки из 1С, загружают их в «Клиент-банк», а потом переносят выписки обратно",
@@ -1175,20 +1025,14 @@
   {
     "id": "yukassa",
     "slug_1c": "yukassa",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "wallet",
     "title": "ЮKassa",
     "headline": "Клиент оплачивает счёт по ссылке любым из 20+ способов — статус оплаты виден в 1С",
     "description": "Приём онлайн-платежей через ЮKassa в программах 1С: выставление счетов, отправка платёжных ссылок и автоматические уведомления об оплатах.",
-    "related_ids": [
-      "sistema-bystrykh-platezhey",
-      "1s-onlayn-zakazy",
-      "1s-oblachnaya-kassa"
-    ],
+    "related_ids": ["sistema-bystrykh-platezhey", "1s-onlayn-zakazy", "1s-oblachnaya-kassa"],
     "popup": {
       "who_needs_it": [
         "Компаниям, чьи клиенты платят по-разному: ЮKassa поддерживает более 20 вариантов оплаты — карты, интернет-банки, электронные кошельки — без подключения каждого платёжного сервиса отдельно",
@@ -1221,27 +1065,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/yukassa/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/yukassa/"]
   },
   {
     "id": "sistema-bystrykh-platezhey",
     "slug_1c": "sistema-bystrykh-platezhey",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "wallet",
     "title": "1С:СБП C2B",
     "headline": "Покупатель платит по QR-коду с телефона — деньги на счёте за секунды, без эквайринга",
     "description": "Приём безналичной оплаты через Систему быстрых платежей Банка России. Покупатель платит в приложении своего банка, деньги приходят сразу.",
-    "related_ids": [
-      "1s-sbp-b2b",
-      "1s-onlayn-zakazy",
-      "1s-oblachnaya-kassa"
-    ],
+    "related_ids": ["1s-sbp-b2b", "1s-onlayn-zakazy", "1s-oblachnaya-kassa"],
     "popup": {
       "who_needs_it": [
         "Магазинам и точкам услуг, которые не хотят покупать и обслуживать эквайринговый терминал",
@@ -1274,27 +1110,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/sistema-bystrykh-platezhey/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/sistema-bystrykh-platezhey/"]
   },
   {
     "id": "1s-sbp-b2b",
     "slug_1c": "1s-sbp-b2b",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "wallet",
     "title": "1С:СБП B2B",
     "headline": "Счёт юрлицу оплачивается за 15 секунд — статус оплаты сам загружается в 1С",
     "description": "Мгновенные платежи между юридическими лицами через Систему быстрых платежей прямо из программы 1С.",
-    "related_ids": [
-      "sistema-bystrykh-platezhey",
-      "1s-onlayn-zakazy",
-      "1c-direktbank"
-    ],
+    "related_ids": ["sistema-bystrykh-platezhey", "1s-onlayn-zakazy", "1c-direktbank"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которые отгружают товар только после оплаты и теряют время на ожидание банковского перевода и проверку поступлений",
@@ -1326,27 +1154,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1s-sbp-b2b/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1s-sbp-b2b/"]
   },
   {
     "id": "1s-oblachnaya-kassa",
     "slug_1c": "1s-oblachnaya-kassa",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "cash-register",
     "title": "1С-Облачная касса",
     "headline": "Чеки пробиваются без покупки кассы — аппарат стоит в дата-центре поставщика",
     "description": "Приём платежей и формирование чеков без покупки онлайн-кассы: касса арендуется в дата-центре поставщика, данные уходят в ОФД по 54-ФЗ.",
-    "related_ids": [
-      "sistema-bystrykh-platezhey",
-      "1s-onlayn-zakazy",
-      "1c-ofd"
-    ],
+    "related_ids": ["sistema-bystrykh-platezhey", "1s-onlayn-zakazy", "1c-ofd"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которые продают товары и оказывают услуги дистанционно или на выезде и работают с электронными чеками",
@@ -1387,20 +1207,14 @@
   {
     "id": "1s-kassa-oblachnoe-prilozhenie",
     "slug_1c": "1s-kassa-oblachnoe-prilozhenie",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "cash-register",
     "title": "1С:Касса (облачное приложение)",
     "headline": "Магазин под контролем из браузера — продажи, остатки и цены в одном месте",
     "description": "Облачное приложение связывает торговые точки, кассы, учёт товаров и денег, интернет-магазины и бухгалтерию. Работает из браузера.",
-    "related_ids": [
-      "1c-ofd",
-      "1s-markirovka",
-      "sistema-bystrykh-platezhey"
-    ],
+    "related_ids": ["1c-ofd", "1s-markirovka", "sistema-bystrykh-platezhey"],
     "popup": {
       "who_needs_it": [
         "Небольшому розничному бизнесу, которому нужно связать кассы, товарный учёт, ЕГАИС, маркировку и выгрузку данных в бухгалтерию в одну систему без сложного внедрения",
@@ -1441,20 +1255,14 @@
   {
     "id": "1s-onlayn-zakazy",
     "slug_1c": "1s-onlayn-zakazy",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "cart",
     "title": "1С:Онлайн-заказы",
     "headline": "Заказ превращается в страницу с оплатой — клиент сам выбирает удобный способ",
     "description": "Публикация заказа веб-страницей для приёма оплат. Клиент проверяет заказ и платит через СБП, интернет-эквайринг или по банковским реквизитам.",
-    "related_ids": [
-      "sistema-bystrykh-platezhey",
-      "1s-oblachnaya-kassa",
-      "yukassa"
-    ],
+    "related_ids": ["sistema-bystrykh-platezhey", "1s-oblachnaya-kassa", "yukassa"],
     "popup": {
       "who_needs_it": [
         "Менеджерам, которые тратят время на согласование способа оплаты: одному клиенту удобна карта, другому — СБП, корпоративным — счёт по реквизитам, а страница заказа даёт все варианты сразу",
@@ -1487,27 +1295,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/1C-Online-Orders"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/1C-Online-Orders"]
   },
   {
     "id": "1s-kredit",
     "slug_1c": "1s-kredit",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "bank",
     "title": "1С:Кредит",
     "headline": "Заявка на кредит с пакетом документов уходит сразу в несколько банков прямо из 1С",
     "description": "Поиск кредитных предложений банков в программах 1С. Сервис формирует заявку и пакет документов, подписывает и отправляет в выбранные банки.",
-    "related_ids": [
-      "1s-lizing",
-      "1s-finotchetnost",
-      "1c-direktbank"
-    ],
+    "related_ids": ["1s-lizing", "1s-finotchetnost", "1c-direktbank"],
     "popup": {
       "who_needs_it": [
         "Компаниям и ИП, которым нужны оборотные средства, но нет времени объезжать банки и собирать пакеты документов вручную",
@@ -1547,20 +1347,14 @@
   {
     "id": "1s-lizing",
     "slug_1c": "1s-lizing",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "bank",
     "title": "1С:Лизинг",
     "headline": "Заявка на лизинг с документами уходит лизинговым компаниям в несколько кликов из 1С",
     "description": "Поиск предложений лизинговых компаний в 1С. Сервис готовит заявку под требования каждой компании, подписывает и отправляет лизингодателям.",
-    "related_ids": [
-      "1s-kredit",
-      "1s-finotchetnost",
-      "1c-direktbank"
-    ],
+    "related_ids": ["1s-kredit", "1s-finotchetnost", "1c-direktbank"],
     "popup": {
       "who_needs_it": [
         "Компаниям, планирующим взять в лизинг транспорт, оборудование или технику и желающим сравнить условия нескольких лизингодателей",
@@ -1600,20 +1394,14 @@
   {
     "id": "1s-depozit",
     "slug_1c": "1s-depozit",
-    "category_ids": [
-      "finansy-i-platezhi"
-    ],
+    "category_ids": ["finansy-i-platezhi"],
     "is_popular": false,
     "is_new": false,
     "icon": "bank",
     "title": "1С:Депозит",
     "headline": "Свободные деньги уходят на депозит в несколько кликов — доход виден до размещения",
     "description": "Поиск и сравнение депозитных предложений банков в 1С: калькулятор показывает доход от размещения, заявка отправляется в несколько кликов.",
-    "related_ids": [
-      "1c-direktbank",
-      "1s-kredit",
-      "1s-sbp-b2b"
-    ],
+    "related_ids": ["1c-direktbank", "1s-kredit", "1s-sbp-b2b"],
     "popup": {
       "who_needs_it": [
         "Компаниям, у которых деньги неделями лежат на счёте в ожидании поставки или завершения работ — вынужденный простой средств можно превратить в доход",
@@ -1652,20 +1440,14 @@
   {
     "id": "mag1c",
     "slug_1c": "mag1c",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "cart",
     "title": "mag1c",
     "headline": "Веб-витрина магазина создаётся из 1С за несколько минут — без программиста и хостинга",
     "description": "Создание веб-витрины из программы 1С: каталог, корзина и приём заказов. Товары выгружаются из учёта, заказы загружаются обратно в 1С.",
-    "related_ids": [
-      "yukassa",
-      "sistema-bystrykh-platezhey",
-      "1c-umi"
-    ],
+    "related_ids": ["yukassa", "sistema-bystrykh-platezhey", "1c-umi"],
     "popup": {
       "who_needs_it": [
         "Малому бизнесу и ИП, которым нужен канал онлайн-продаж без затрат на веб-разработчика, домен, хостинг и поддержку сайта",
@@ -1706,20 +1488,14 @@
   {
     "id": "1c-umi",
     "slug_1c": "1c-umi",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "globe",
     "title": "1C-UMI",
     "headline": "Сайт компании запускается за пять минут — из 550+ готовых шаблонов с интеграцией 1С",
     "description": "Готовые сайты для любого бизнеса: сайты компаний, лендинги и интернет-магазины. Хостинг и система управления включены, магазины связаны с 1С.",
-    "related_ids": [
-      "mag1c",
-      "yukassa",
-      "1c-edo"
-    ],
+    "related_ids": ["mag1c", "yukassa", "1c-edo"],
     "popup": {
       "who_needs_it": [
         "Новому бизнесу, у которого нет средств и двух-трёх месяцев на разработку сайта в веб-студии",
@@ -1760,9 +1536,7 @@
   {
     "id": "1c-biznes-set-torgovaya-ploshchadka",
     "slug_1c": "1c-biznes-set-torgovaya-ploshchadka",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "network",
@@ -1814,20 +1588,14 @@
   {
     "id": "1c-tovary",
     "slug_1c": "1c-tovary",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "cart",
     "title": "1С-Товары",
     "headline": "Ходовой товар не заканчивается на полке — сервис сам прогнозирует спрос и делает заказ",
     "description": "Прогноз спроса, автозаказ и управление ассортиментом розничного магазина с контролем остатков.",
-    "related_ids": [
-      "1c-riteyl-cheker",
-      "1s-prognozirovanie-prodazh",
-      "1c-ofd"
-    ],
+    "related_ids": ["1c-riteyl-cheker", "1s-prognozirovanie-prodazh", "1c-ofd"],
     "popup": {
       "who_needs_it": [
         "Розничным магазинам, где ходовой товар периодически заканчивается, а неходовой замораживает деньги в остатках",
@@ -1868,20 +1636,14 @@
   {
     "id": "1c-riteyl-cheker",
     "slug_1c": "1c-riteyl-cheker",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "chart",
     "title": "1C-Ритейл Чекер",
     "headline": "Раз в неделю на почту приходит, что докупить, что распродать и что пересчитать",
     "description": "Помощник-эксперт по управлению ассортиментом для директора, управляющего и товароведа. Рекомендации строятся на статистике продаж и прогнозе спроса.",
-    "related_ids": [
-      "1c-tovary",
-      "1s-prognozirovanie-prodazh",
-      "1s-cheki-ofd"
-    ],
+    "related_ids": ["1c-tovary", "1s-prognozirovanie-prodazh", "1s-cheki-ofd"],
     "popup": {
       "who_needs_it": [
         "Директорам и управляющим магазинов, которым нужен взгляд эксперта на ассортимент без найма аналитика",
@@ -1914,27 +1676,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://torg.1c.ru/services/1c-riteyl-cheker/"
-    ]
+    "source_urls": ["https://torg.1c.ru/services/1c-riteyl-cheker/"]
   },
   {
     "id": "sellmonitor",
     "slug_1c": "sellmonitor",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "chart",
     "title": "Sellmonitor",
     "headline": "Прибыль на маркетплейсах видна по каждому товару — с учётом комиссий",
     "description": "Аналитика для продавцов на Wildberries, Ozon и Яндекс Маркете: выручка, прибыль и комиссии в дашбордах, юнит-экономика, планирование поставок.",
-    "related_ids": [
-      "1c-edo",
-      "1s-prognozirovanie-prodazh",
-      "1c-tovary"
-    ],
+    "related_ids": ["1c-edo", "1s-prognozirovanie-prodazh", "1c-tovary"],
     "popup": {
       "who_needs_it": [
         "Селлерам, которые видят в кабинете маркетплейса оборот, но не понимают реальную прибыль по каждому товару с учётом комиссий, штрафов и скидок",
@@ -1974,20 +1728,14 @@
   {
     "id": "1s-prognozirovanie-prodazh",
     "slug_1c": "1s-prognozirovanie-prodazh",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "chart",
     "title": "1С:Прогнозирование продаж",
     "headline": "Прогноз продаж считается в облаке 1С — без Excel и своих серверов",
     "description": "Прогнозы продаж товаров и услуг по историческим данным. Расчёты идут на облачном оборудовании 1С, результаты доступны прямо в программе.",
-    "related_ids": [
-      "1s-universalnoe-prognozirovanie",
-      "1c-tovary",
-      "1c-riteyl-cheker"
-    ],
+    "related_ids": ["1s-universalnoe-prognozirovanie", "1c-tovary", "1c-riteyl-cheker"],
     "popup": {
       "who_needs_it": [
         "Ритейлерам, оптовикам и производителям, которые сейчас прогнозируют продажи в Excel или «на глаз»",
@@ -2028,20 +1776,14 @@
   {
     "id": "1s-universalnoe-prognozirovanie",
     "slug_1c": "1s-universalnoe-prognozirovanie",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "chart",
     "title": "1С:Универсальное прогнозирование",
     "headline": "Любой показатель бизнеса прогнозируется нейросетями — прямо из вашей программы 1С",
     "description": "Облачные прогнозы не только по продажам, но и по другим показателям бизнеса — из встроенного языка 1С.",
-    "related_ids": [
-      "1s-prognozirovanie-prodazh",
-      "1c-tovary",
-      "sellmonitor"
-    ],
+    "related_ids": ["1s-prognozirovanie-prodazh", "1c-tovary", "sellmonitor"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которым нужен прогноз не только продаж, но и других показателей — количества обращений, нагрузки, расхода ресурсов",
@@ -2081,20 +1823,14 @@
   {
     "id": "bidzaar",
     "slug_1c": "bidzaar",
-    "category_ids": [
-      "internet-torgovlya"
-    ],
+    "category_ids": ["internet-torgovlya"],
     "is_popular": false,
     "is_new": false,
     "icon": "network",
     "title": "Bidzaar",
     "headline": "Тендер на закупку публикуется из 1С — предложения поставщиков приходят туда же",
     "description": "Электронная торговая площадка для закупок частных компаний: планирование, поиск поставщиков и тендеры. Заявки размещаются прямо из 1С.",
-    "related_ids": [
-      "1c-biznes-set-torgovaya-ploshchadka",
-      "1c-edo",
-      "1spark-riski"
-    ],
+    "related_ids": ["1c-biznes-set-torgovaya-ploshchadka", "1c-edo", "1spark-riski"],
     "popup": {
       "who_needs_it": [
         "Компаниям-заказчикам, которые хотят снизить бюджет закупок: автоматизированный сбор предложений и прозрачные переговоры о цене экономят до 20% расходов",
@@ -2135,20 +1871,14 @@
   {
     "id": "1s-epd",
     "slug_1c": "1s-epd",
-    "category_ids": [
-      "logistika-i-dostavka"
-    ],
+    "category_ids": ["logistika-i-dostavka"],
     "is_popular": true,
     "is_new": false,
     "icon": "truck",
     "title": "1С-ЭПД",
     "headline": "Транспортные накладные и путевые листы оформляются без бумаги — прямо в программе 1С",
     "description": "Обмен электронными перевозочными документами для автотранспорта: транспортная накладная, путевой лист, заказ-наряд и другие форматы.",
-    "related_ids": [
-      "1c-edo",
-      "1c-podpis",
-      "1s-dostavka"
-    ],
+    "related_ids": ["1c-edo", "1c-podpis", "1s-dostavka"],
     "popup": {
       "who_needs_it": [
         "Грузоотправителям, перевозчикам и грузополучателям, которые оформляют перевозочные документы на бумаге и возят их с водителями",
@@ -2181,27 +1911,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://v8.1c.ru/its/services/1s-epd/"
-    ]
+    "source_urls": ["https://v8.1c.ru/its/services/1s-epd/"]
   },
   {
     "id": "1s-kurer",
     "slug_1c": "1s-kurer",
-    "category_ids": [
-      "logistika-i-dostavka"
-    ],
+    "category_ids": ["logistika-i-dostavka"],
     "is_popular": false,
     "is_new": false,
     "icon": "truck",
     "title": "1С:Курьер",
     "headline": "Курьерская доставка по городу заказывается из 1С — форма заявки заполняется сама",
     "description": "Оформление курьерской доставки посылок по городу из программ 1С: тарифы служб доставки, заказ по данным документов и печать сопроводительных форм.",
-    "related_ids": [
-      "1s-dostavka",
-      "1s-kurerika",
-      "mag1c"
-    ],
+    "related_ids": ["1s-dostavka", "1s-kurerika", "mag1c"],
     "popup": {
       "who_needs_it": [
         "Интернет-магазинам и компаниям, доставляющим заказы клиентам по городу через внешние курьерские службы",
@@ -2241,20 +1963,14 @@
   {
     "id": "1s-dostavka",
     "slug_1c": "1s-dostavka",
-    "category_ids": [
-      "logistika-i-dostavka"
-    ],
+    "category_ids": ["logistika-i-dostavka"],
     "is_popular": false,
     "is_new": false,
     "icon": "truck",
     "title": "1С:Доставка",
     "headline": "Груз в «Деловые линии» или СДЭК отправляется из 1С — без сайтов перевозчиков",
     "description": "Заказы на доставку грузов по России и за границу через «Деловые линии» и СДЭК из 1С: подбор условий, оформление, отслеживание груза.",
-    "related_ids": [
-      "1s-kurer",
-      "1s-epd",
-      "1c-biznes-set-torgovaya-ploshchadka"
-    ],
+    "related_ids": ["1s-kurer", "1s-epd", "1c-biznes-set-torgovaya-ploshchadka"],
     "popup": {
       "who_needs_it": [
         "Компаниям, которые регулярно отправляют грузы транспортными компаниями и вручную заполняют заявки на их сайтах",
@@ -2295,20 +2011,14 @@
   {
     "id": "1s-kurerika",
     "slug_1c": "1s-kurerika",
-    "category_ids": [
-      "logistika-i-dostavka"
-    ],
+    "category_ids": ["logistika-i-dostavka"],
     "is_popular": false,
     "is_new": false,
     "icon": "truck",
     "title": "1С-Курьерика",
     "headline": "Собственные курьеры под контролем на карте — заказы приходят из 1С",
     "description": "Облачный сервис для управления собственной курьерской службой: веб-интерфейс логиста и мобильное приложение курьера с интеграцией в 1С.",
-    "related_ids": [
-      "1s-kurer",
-      "1s-dostavka",
-      "mag1c"
-    ],
+    "related_ids": ["1s-kurer", "1s-dostavka", "mag1c"],
     "popup": {
       "who_needs_it": [
         "Компаниям с собственными курьерами: магазинам, общепиту, сервисам — для любого вида бизнеса с доставкой «последней мили»",
@@ -2348,20 +2058,14 @@
   {
     "id": "modul-1c-edi",
     "slug_1c": "modul-1c-edi",
-    "category_ids": [
-      "logistika-i-dostavka"
-    ],
+    "category_ids": ["logistika-i-dostavka"],
     "is_popular": false,
     "is_new": false,
     "icon": "exchange",
     "title": "Модуль 1C:EDI",
     "headline": "Заказы торговых сетей загружаются в 1С автоматически — без ошибок",
     "description": "EDI-обмен с торговыми сетями из программ 1С: приём заказов, уведомления об отгрузке и приёмке, автоматизация цепочки заказов и поставок.",
-    "related_ids": [
-      "1c-edo",
-      "1s-epd",
-      "1c-biznes-set-torgovaya-ploshchadka"
-    ],
+    "related_ids": ["1c-edo", "1s-epd", "1c-biznes-set-torgovaya-ploshchadka"],
     "popup": {
       "who_needs_it": [
         "Поставщикам, производителям и дистрибьюторам, работающим с торговыми сетями — «Магнит», «Лента», X5 Group, «Леруа», Ozon и другими",
@@ -2402,20 +2106,14 @@
   {
     "id": "1s-raspoznavanie-pervichnykh-dokumentov",
     "slug_1c": "1s-raspoznavanie-pervichnykh-dokumentov",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": true,
     "is_new": false,
     "icon": "scan",
     "title": "1С:Распознавание первичных документов",
     "headline": "Кипа бумажной первички превращается в документы 1С — по скану или фотографии",
     "description": "Распознавание сканов и фотографий первичных документов и создание по ним документов 1С: счета, накладные, акты, счета-фактуры, УПД и чеки.",
-    "related_ids": [
-      "1s-skaner-chekov",
-      "1c-edo",
-      "1c-kontragent"
-    ],
+    "related_ids": ["1s-skaner-chekov", "1c-edo", "1c-kontragent"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам, которые часами вносят в 1С присланные контрагентами документы с десятками строк номенклатуры",
@@ -2456,20 +2154,14 @@
   {
     "id": "1c-nomenklatura",
     "slug_1c": "1c-nomenklatura",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": false,
     "is_new": false,
     "icon": "book",
     "title": "1С:Номенклатура",
     "headline": "Карточки товаров заполняются из единого каталога — без ручного ввода",
     "description": "Единый каталог описаний товаров и услуг: миллионы готовых карточек с наименованием, штрихкодом, производителем, характеристиками и фото.",
-    "related_ids": [
-      "1s-markirovka",
-      "1c-edo",
-      "1c-biznes-set-torgovaya-ploshchadka"
-    ],
+    "related_ids": ["1s-markirovka", "1c-edo", "1c-biznes-set-torgovaya-ploshchadka"],
     "popup": {
       "who_needs_it": [
         "Компаниям с беспорядком в справочнике номенклатуры: одинаковые товары под разными названиями, дубли, пропущенные характеристики",
@@ -2509,20 +2201,14 @@
   {
     "id": "1s-skaner-chekov",
     "slug_1c": "1s-skaner-chekov",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": false,
     "is_new": false,
     "icon": "receipt",
     "title": "1С:Сканер чеков",
     "headline": "Авансовый отчёт заполняется по QR-коду чека — данные проходят проверку в ФНС",
     "description": "Заполнение авансовых отчётов, путевых листов и расходов предпринимателя данными из кассовых чеков — по QR-коду с проверкой в системе ФНС.",
-    "related_ids": [
-      "1s-raspoznavanie-pervichnykh-dokumentov",
-      "1c-otchetnost",
-      "1s-ens"
-    ],
+    "related_ids": ["1s-raspoznavanie-pervichnykh-dokumentov", "1c-otchetnost", "1s-ens"],
     "popup": {
       "who_needs_it": [
         "Компаниям, чьи сотрудники часто покупают для бизнеса в розничных магазинах и ездят в командировки",
@@ -2563,20 +2249,14 @@
   {
     "id": "1s-izmenenie-svedeniy",
     "slug_1c": "1s-izmenenie-svedeniy",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": false,
     "is_new": false,
     "icon": "report",
     "title": "1С:Изменение сведений",
     "headline": "Изменения в ЕГРЮЛ подаются прямо из 1С — без нотариуса и визита в налоговую",
     "description": "Подготовка и отправка в ФНС документов для изменений в ЕГРЮЛ и ЕГРИП: смена ОКВЭД, адреса, руководителя, операции с уставным капиталом.",
-    "related_ids": [
-      "1c-otchetnost",
-      "1c-kontragent",
-      "1c-podpis"
-    ],
+    "related_ids": ["1c-otchetnost", "1c-kontragent", "1c-podpis"],
     "popup": {
       "who_needs_it": [
         "Организациям и ИП, которым нужно обновить коды ОКВЭД, сменить руководителя или юридический адрес",
@@ -2616,20 +2296,14 @@
   {
     "id": "1s-raspoznavanie-rechi",
     "slug_1c": "1s-raspoznavanie-rechi",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": false,
     "is_new": false,
     "icon": "mic",
     "title": "1С:Распознавание речи",
     "headline": "Речь превращается в текст прямо в 1С — от диктовки писем до расшифровки записей",
     "description": "Облачное преобразование речи в текст: потоковое распознавание, расшифровка аудиофайлов с разделением по спикерам, голосовой ввод данных.",
-    "related_ids": [
-      "1s-sintez-rechi",
-      "1s-raspoznavanie-pervichnykh-dokumentov",
-      "1c-konnekt"
-    ],
+    "related_ids": ["1s-sintez-rechi", "1s-raspoznavanie-pervichnykh-dokumentov", "1c-konnekt"],
     "popup": {
       "who_needs_it": [
         "Сотрудникам, которым удобнее диктовать: голосом вводятся электронные письма, текстовые блоки документов, реквизиты и другие данные",
@@ -2671,19 +2345,14 @@
   {
     "id": "1s-sintez-rechi",
     "slug_1c": "1s-sintez-rechi",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": false,
     "is_new": false,
     "icon": "mic",
     "title": "1С:Синтез речи",
     "headline": "Программа 1С отвечает голосом — текст озвучивает облачный сервис",
     "description": "Облачное преобразование текста в речь: потоковый синтез с минимальной задержкой, выбор голоса из коллекции, сохранение в аудиофайл.",
-    "related_ids": [
-      "1s-raspoznavanie-rechi",
-      "1c-konnekt"
-    ],
+    "related_ids": ["1s-raspoznavanie-rechi", "1c-konnekt"],
     "popup": {
       "who_needs_it": [
         "Компаниям, строящим голосовые интерфейсы в решениях 1С: вместе с распознаванием речи синтез даёт полный цикл — ввод информации голосом и ответ звуковым сообщением",
@@ -2723,20 +2392,14 @@
   {
     "id": "1s-egisz",
     "slug_1c": "1s-egisz",
-    "category_ids": [
-      "avtomatizatsiya-ucheta"
-    ],
+    "category_ids": ["avtomatizatsiya-ucheta"],
     "is_popular": false,
     "is_new": false,
     "icon": "health",
     "title": "1С:ЕГИСЗ",
     "headline": "Клиника подключается к ЕГИСЗ без собственной аттестации — через защищённый сегмент 1С",
     "description": "Подключение медицинских организаций к сервисам ЕГИСЗ — для выполнения лицензионных требований и доступа пациентов к документам на Госуслугах.",
-    "related_ids": [
-      "1c-podpis",
-      "1s-mdlp",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["1c-podpis", "1s-mdlp", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Частным клиникам, медицинским центрам и кабинетам: передача данных в ЕГИСЗ — лицензионное требование по постановлению Правительства РФ № 852 от 01.06.2021",
@@ -2778,20 +2441,14 @@
   {
     "id": "1c-oblachnyy-arkhiv",
     "slug_1c": "1c-oblachnyy-arkhiv",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "cloud",
     "title": "1С:Облачный архив",
     "headline": "Резервные копии баз создаются сами по расписанию — и хранятся в дата-центре 1С",
     "description": "Автоматическое резервное копирование информационных баз 1С в дата-центр фирмы 1С. При поломке или сбое базу можно быстро восстановить.",
-    "related_ids": [
-      "1c-link",
-      "informatsionnaya-sistema-1c-its",
-      "1c-konnekt"
-    ],
+    "related_ids": ["1c-link", "informatsionnaya-sistema-1c-its", "1c-konnekt"],
     "popup": {
       "who_needs_it": [
         "Компаниям без своего сисадмина, где резервные копии «делаются иногда» или не делаются вовсе",
@@ -2831,20 +2488,14 @@
   {
     "id": "1c-link",
     "slug_1c": "1c-link",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "cloud",
     "title": "1С:Линк",
     "headline": "Офисная 1С доступна из любой точки мира — а база остаётся на вашем компьютере",
     "description": "Безопасный удалённый доступ к программам 1С на вашем компьютере. Базы остаются у вас, доступ идёт через шифрованный туннель.",
-    "related_ids": [
-      "1c-oblachnyy-arkhiv",
-      "1c-konnekt",
-      "informatsionnaya-sistema-1c-its"
-    ],
+    "related_ids": ["1c-oblachnyy-arkhiv", "1c-konnekt", "informatsionnaya-sistema-1c-its"],
     "popup": {
       "who_needs_it": [
         "Руководителям и бухгалтерам, которым нужен доступ к офисной 1С из дома, командировки или с дачи",
@@ -2886,20 +2537,14 @@
   {
     "id": "1c-konnekt",
     "slug_1c": "1c-konnekt",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "headset",
     "title": "1С-Коннект",
     "headline": "Вопрос специалисту поддержки уходит в один клик — из чата, без звонков и ожидания писем",
     "description": "Корпоративный чат и поддержка пользователей 1С: линии партнёра и операторов сервисов ИТС, звонки, обмен файлами, удалённое подключение.",
-    "related_ids": [
-      "informatsionnaya-sistema-1c-its",
-      "1c-otchetnost",
-      "1c-edo"
-    ],
+    "related_ids": ["informatsionnaya-sistema-1c-its", "1c-otchetnost", "1c-edo"],
     "popup": {
       "who_needs_it": [
         "Пользователям 1С, которые при каждой проблеме ищут телефон поддержки и ждут ответа на почту — в чате обращение автоматически регистрируется и уходит специалисту",
@@ -2931,28 +2576,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://torg.1c.ru/services/1s-konnekt/",
-      "https://rarus.ru/1c/1c-connect/"
-    ]
+    "source_urls": ["https://torg.1c.ru/services/1s-konnekt/", "https://rarus.ru/1c/1c-connect/"]
   },
   {
     "id": "informatsionnaya-sistema-1c-its",
     "slug_1c": "informatsionnaya-sistema-1c-its",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "book",
     "title": "Информационная система 1С:ИТС",
     "headline": "Ответы на вопросы учёта — от разработчиков 1С, аудиторов и юристов, в одном месте",
     "description": "Справочная система its.1c.ru: инструкции по учёту и работе в программах, консультации по законодательству, нормативные документы, календарь.",
-    "related_ids": [
-      "1c-lektoriy",
-      "otvechaet-auditor",
-      "1c-konnekt"
-    ],
+    "related_ids": ["1c-lektoriy", "otvechaet-auditor", "1c-konnekt"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам, которым нужен надёжный источник вместо противоречивых советов с форумов: авторы материалов — разработчики 1С, профессиональные аудиторы, юристы и методисты",
@@ -2987,20 +2623,14 @@
   {
     "id": "1c-lektoriy",
     "slug_1c": "1c-lektoriy",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "video",
     "title": "1С:Лекторий",
     "headline": "Изменения законодательства разбирают эксперты 1С — в прямом эфире и в записи",
     "description": "Семинары по законодательству и его отражению в программах 1С — онлайн-трансляции и видеозаписи. Вопросы лекторам можно задавать в эфире.",
-    "related_ids": [
-      "informatsionnaya-sistema-1c-its",
-      "otvechaet-auditor",
-      "1s-biznes-obuchenie"
-    ],
+    "related_ids": ["informatsionnaya-sistema-1c-its", "otvechaet-auditor", "1s-biznes-obuchenie"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам и кадровикам, которым важно вовремя узнавать об изменениях законодательства и о том, как они реализованы в программах 1С",
@@ -3034,20 +2664,14 @@
   {
     "id": "otvechaet-auditor",
     "slug_1c": "otvechaet-auditor",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "headset",
     "title": "Отвечает аудитор",
     "headline": "Персональный письменный ответ аудитора — по вашей ситуации",
     "description": "Персональные письменные консультации экспертов, аудиторов и методистов 1С по бухгалтерскому, налоговому и кадровому учёту.",
-    "related_ids": [
-      "informatsionnaya-sistema-1c-its",
-      "1c-lektoriy",
-      "1c-otchetnost"
-    ],
+    "related_ids": ["informatsionnaya-sistema-1c-its", "1c-lektoriy", "1c-otchetnost"],
     "popup": {
       "who_needs_it": [
         "Бухгалтерам, столкнувшимся с нестандартной ситуацией, по которой в справочниках нет однозначного ответа",
@@ -3081,20 +2705,14 @@
   {
     "id": "1c-store",
     "slug_1c": "1c-store",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "gear",
     "title": "1C-Store",
     "headline": "Проверенные отчёты и обработки подключаются в один клик — прямо из вашей базы 1С",
     "description": "Каталог проверенных отчётов и обработок для локальных программ на платформе «1С:Предприятие 8». Решения проходят проверку перед публикацией.",
-    "related_ids": [
-      "1s-administrator",
-      "informatsionnaya-sistema-1c-its",
-      "1c-konnekt"
-    ],
+    "related_ids": ["1s-administrator", "informatsionnaya-sistema-1c-its", "1c-konnekt"],
     "popup": {
       "who_needs_it": [
         "Пользователям локальных программ 1С, которым не хватает типового отчёта или обработки под конкретную задачу",
@@ -3128,20 +2746,14 @@
   {
     "id": "1s-administrator",
     "slug_1c": "1s-administrator",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "gear",
     "title": "1С-Администратор",
     "headline": "50 000+ готовых обработок Инфостарта — адаптировать быстрее, чем написать с нуля",
     "description": "Доступ к базе знаний Инфостарта: отчёты и обработки с открытым кодом, статьи с методическими рекомендациями. База пополняется ежедневно.",
-    "related_ids": [
-      "1c-store",
-      "1c-konnekt",
-      "informatsionnaya-sistema-1c-its"
-    ],
+    "related_ids": ["1c-store", "1c-konnekt", "informatsionnaya-sistema-1c-its"],
     "popup": {
       "who_needs_it": [
         "IT-специалистам, программистам и администраторам баз 1С: обработка, которую нужно написать, скорее всего уже создана кем-то раньше",
@@ -3172,27 +2784,19 @@
       "cta_text": "Подключить сервис",
       "cta_phone": "+7 (831) 282-31-99"
     },
-    "source_urls": [
-      "https://portal.1c.ru/applications/1C-Administrator"
-    ]
+    "source_urls": ["https://portal.1c.ru/applications/1C-Administrator"]
   },
   {
     "id": "premialnaya-podderzhka-korporativnykh-klientov",
     "slug_1c": "premialnaya-podderzhka-korporativnykh-klientov",
-    "category_ids": [
-      "infrastruktura-i-podderzhka"
-    ],
+    "category_ids": ["infrastruktura-i-podderzhka"],
     "is_popular": false,
     "is_new": false,
     "icon": "headset",
     "title": "Премиальная поддержка корпоративных клиентов",
     "headline": "Выделенная команда 1С сопровождает сложные ИТ-ландшафты",
     "description": "Постоянное взаимодействие с корпоративными заказчиками для эксплуатации и развития решений 1С. Услугу оказывает компания «1С-Премиум».",
-    "related_ids": [
-      "1c-konnekt",
-      "informatsionnaya-sistema-1c-its",
-      "1c-oblachnyy-arkhiv"
-    ],
+    "related_ids": ["1c-konnekt", "informatsionnaya-sistema-1c-its", "1c-oblachnyy-arkhiv"],
     "popup": {
       "who_needs_it": [
         "Крупным компаниям со сложными ИТ-ландшафтами и критически важными бизнес-процессами, где значимы корректная интеграция систем, непрерывность работы, производительность и большие массивы данных",

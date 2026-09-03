@@ -114,7 +114,6 @@ export function LeadModal({ source, onClose }: Props) {
             <p className={styles.successText}>
               Мы свяжемся с вами в рабочее время: пн–пт, с 9:00 до 18:00.
             </p>
-
           </div>
         ) : (
           <>

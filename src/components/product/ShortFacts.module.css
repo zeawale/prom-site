@@ -2,11 +2,7 @@
   /* Градиент из Figma: 0E4CB9 → 062253.
      Направление 135deg — светлый угол сверху слева. Если в макете зеркально,
      менять на 315deg: одна цифра, перекрашивать ничего не нужно. */
-  background: linear-gradient(
-    135deg,
-    var(--surface-brand) 0%,
-    var(--surface-brand-deep) 100%
-  );
+  background: linear-gradient(135deg, var(--surface-brand) 0%, var(--surface-brand-deep) 100%);
   border-radius: 12px;
   padding: var(--space-6);
   block-size: 100%;

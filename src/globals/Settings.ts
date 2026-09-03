@@ -2,15 +2,14 @@ import type { GlobalConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 
 /** Убирает из телефона всё, кроме плюса и цифр: для href="tel:" */
-const toRaw = (value?: string | null) =>
-  value ? value.replace(/[^\d+]/g, '') : value
+const toRaw = (value?: string | null) => (value ? value.replace(/[^\d+]/g, '') : value)
 
 export const Settings: GlobalConfig = {
   slug: 'settings',
   label: 'Реквизиты и контакты',
   admin: { group: 'Настройки' },
   access: { read: () => true },
-    hooks: {
+  hooks: {
     afterChange: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
