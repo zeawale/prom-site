@@ -12,13 +12,14 @@ import { Media } from './collections/Media'
 import { Leads } from './collections/Leads'
 import { Programs } from './collections/Programs'
 import { ProgramsSection } from './globals/ProgramsSection'
+import { ITS } from './globals/ITS'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   collections: [Users, Media, Categories, Services, Leads, Programs],
-  globals: [Settings, ProgramsSection],
+  globals: [Settings, ProgramsSection, ITS],
   admin: {
     user: Users.slug,
     importMap: {

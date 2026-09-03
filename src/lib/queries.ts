@@ -69,9 +69,7 @@ export async function getSidebar(services?: Service[]): Promise<{
     slug: c.slug,
     title: c.title,
     icon: c.icon,
-    count: countBy(
-      (s) => typeof s.category === 'object' && s.category?.slug === c.slug,
-    ),
+    count: countBy((s) => typeof s.category === 'object' && s.category?.slug === c.slug),
     href: `/services/${c.slug}`,
   }))
 
@@ -89,7 +87,7 @@ export const getPrograms = async (): Promise<Program[]> => {
   })
   return docs
 }
- 
+
 /** Одна программа по слагу. undefined, если такой нет */
 export const getProgram = async (slug: string): Promise<Program | undefined> => {
   const payload = await getPayload({ config })
@@ -101,9 +99,17 @@ export const getProgram = async (slug: string): Promise<Program | undefined> => 
   })
   return docs[0]
 }
- 
+
 /** Общая шапка раздела и дисклеймер */
 export const getProgramsSection = async () => {
   const payload = await getPayload({ config })
   return payload.findGlobal({ slug: 'programs-section', depth: 0 })
+}
+
+/** Страница /its целиком */
+export const getITS = async () => {
+  const payload = await getPayload({ config })
+  // depth: 1, в отличие от соседей: строки таблицы ссылаются на карточки
+  // каталога, и нужен документ, а не число
+  return payload.findGlobal({ slug: 'its', depth: 2 })
 }

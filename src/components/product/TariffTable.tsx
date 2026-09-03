@@ -1,5 +1,6 @@
 import type { TariffCell, TariffRow } from '@/lib/programs'
 import TariffDetails from './TariffDetails'
+import { TariffServiceLink } from './TariffServiceLink'
 import styles from './TariffTable.module.css'
 
 export type TariffTableProps = {
@@ -53,7 +54,15 @@ function Rows({ rows }: { rows: TariffRow[] }) {
       {rows.map((row, i) => (
         <tr key={i}>
           <th scope="row" className={styles.rowLabel}>
-            {row.label}
+            {/* Связь с каталогом есть только у строк /its — у программ
+                первая колонка остаётся обычным текстом */}
+            {row.service ? (
+              <TariffServiceLink slug={row.service.slug} categorySlug={row.service.categorySlug}>
+                {row.label}
+              </TariffServiceLink>
+            ) : (
+              row.label
+            )}
           </th>
           {row.cells.map((cell, j) => (
             <Cell key={j} cell={cell} />

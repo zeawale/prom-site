@@ -1,0 +1,64 @@
+.section {
+  background: var(--surface-brand);
+  color: var(--text-inverse);
+  margin-top: 32px;
+  margin-inline: calc((100% - 100vw) / 2);
+  padding: var(--space-6);
+  /*
+    Белая полоса под баннером — это padding: var(--space-5) у .container.
+    Баннер всегда последний блок страницы и должен смыкаться с футером,
+    поэтому гасим ровно нижнюю часть этого отступа. Значение не выдумано:
+    оно завязано на тот же токен, что и сам padding контейнера
+  */
+  margin-block-end: calc(-1 * var(--space-6));
+}
+
+.inner {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: 0 var(--space-6);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  margin: 0 0 var(--space-4);
+}
+
+.text {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  margin: 0 0 var(--space-5);
+  /* Строка обрывается там, где задумано, а не по краю экрана 1440 */
+  color: rgb(255 255 255 / 0.85);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /*
+    Заливка — базовый оранжевый из макета. Белый на нём даёт 2.87:1
+    и порог ГОСТ не проходит; лечится в общем проходе по оранжевому
+    вместе с кнопками формы заявки, а не точечно здесь
+  */
+  background: var(--surface-accent);
+  color: var(--text-inverse);
+  font-size: var(--fs-label-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-none);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: filter 0.15s ease;
+}
+
+.button:hover {
+  filter: brightness(0.92);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--border-inverse);
+  outline-offset: 2px;
+}
