@@ -37,7 +37,12 @@ export const Fresh: GlobalConfig = {
       required: true,
       admin: { description: 'Выводится полужирным, в том же абзаце' },
     },
-    { name: 'bodyIntro', type: 'textarea', label: 'Продолжение первого предложения', required: true },
+    {
+      name: 'bodyIntro',
+      type: 'textarea',
+      label: 'Продолжение первого предложения',
+      required: true,
+    },
     {
       name: 'body',
       type: 'textarea',

@@ -26,7 +26,6 @@ type Props = {
   children?: ReactNode
 }
 
-
 export default function TariffCards({ title, lead, cards, disclaimer, children }: Props) {
   if (!cards.length) return null
 
@@ -101,7 +100,7 @@ export default function TariffCards({ title, lead, cards, disclaimer, children }
       </div>
 
       {children}
-    {disclaimer && <p className={styles.disclaimer}>{disclaimer}</p>}
+      {disclaimer && <p className={styles.disclaimer}>{disclaimer}</p>}
     </section>
   )
 }

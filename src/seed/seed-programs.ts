@@ -152,7 +152,6 @@ const run = async () => {
         text: data.section.cloud_banner.text,
         buttons: data.section.cloud_banner.buttons,
       },
-      tariffDisclaimer: data.section.tariff_disclaimer,
     },
     context: { disableRevalidate: true },
   })

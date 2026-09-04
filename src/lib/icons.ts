@@ -47,6 +47,7 @@ export const ICONS = [
   { value: 'barcode', label: 'Штрихкод', symbol: 'barcode' },
   { value: 'scan', label: 'Сканирование', symbol: 'document-scanner' },
   { value: 'storefront', label: 'Магазин', symbol: 'storefront' },
+  { value: 'no-cost', label: 'Без затрат', symbol: 'money-off' },
 
   // Логистика
   { value: 'truck', label: 'Грузовик', symbol: 'local-shipping' },
@@ -81,6 +82,8 @@ export const ICONS = [
   { value: 'gear', label: 'Шестерёнка', symbol: 'settings' },
   { value: 'tools', label: 'Инструменты', symbol: 'build' },
   { value: 'search', label: 'Поиск', symbol: 'search' },
+  { value: 'plus', label: 'Плюс', symbol: 'add' },
+  { value: 'edit', label: 'Карандаш', symbol: 'edit' },
 ] as const satisfies { value: string; label: string; symbol: string }[]
 
 export type IconName = (typeof ICONS)[number]['value']

@@ -38,7 +38,11 @@ export default function CompareBlock({ title, lead, fresh, grm, current }: Props
 
       <div className={styles.grid}>
         {columns.map(({ key, data }) => (
-          <article key={key} className={styles.card} data-current={key === current ? '' : undefined}>
+          <article
+            key={key}
+            className={styles.card}
+            data-current={key === current ? '' : undefined}
+          >
             <div className={styles.titleRow}>
               <h3 className={styles.name}>{data.title}</h3>
               {data.badge && <span className={styles.badge}>{data.badge}</span>}

@@ -20,11 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function FreshPage() {
-  const [fresh, compare, settings] = await Promise.all([
-    getFresh(),
-    getFreshVsGrm(),
-    getSettings(),
-  ])
+  const [fresh, compare, settings] = await Promise.all([getFresh(), getFreshVsGrm(), getSettings()])
 
   // Payload хранит строки массива записями с id, компоненту нужен плоский текст
   const cards = (fresh.cards ?? []).map((card) => ({

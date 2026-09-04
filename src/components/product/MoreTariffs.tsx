@@ -78,7 +78,7 @@ export default function MoreTariffs({ title, items, bannerText, buttonLabel }: P
 
         <div className={styles.banner}>
           <p className={styles.bannerText}>{bannerText}</p>
-                    <RequestButton source="fresh" className={styles.bannerButton}>
+          <RequestButton source="fresh" className={styles.bannerButton}>
             {buttonLabel}
           </RequestButton>
         </div>

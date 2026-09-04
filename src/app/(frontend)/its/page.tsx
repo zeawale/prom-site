@@ -21,7 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ITSPage() {
-    const [its, section, settings] = await Promise.all([getITS(), getProgramsSection(), getSettings()])
+  const [its, section, settings] = await Promise.all([
+    getITS(),
+    getProgramsSection(),
+    getSettings(),
+  ])
 
   const cards = (its.cards ?? []).map((card) => ({
     icon: card.icon ?? null,

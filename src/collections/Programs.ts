@@ -1,4 +1,4 @@
-import type { CollectionConfig, Field } from 'payload'
+import type { CollectionConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 import { iconField } from './fields/iconField'
 import { tariffRowFields } from './fields/tariffRowFields'
@@ -23,6 +23,12 @@ export const Programs: CollectionConfig = {
    * Проверка disableRevalidate обязательна: revalidatePath живёт только внутри
    * запроса Next, а сид — обычный процесс Node. Без флага `pnpm seed:programs`
    * падает на первом же создании документа.
+   *
+   * ВНИМАНИЕ (04.09.2026): локально этот хук вызывается и отрабатывает без
+   * исключения, но страница остаётся с заголовком x-nextjs-cache: HIT.
+   * Проверено на обоих сборщиках и на чистом Next мимо Payload — то есть
+   * дело не в этом коде. Разбираться на проде. Здесь ничего не «чинить»
+   * наугад: за час перебора вариантов ни один не дал результата.
    */
   hooks: {
     afterChange: [

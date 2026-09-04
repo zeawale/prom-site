@@ -18,7 +18,14 @@ export type FeatureCardsProps = {
   headingLevel?: 2 | 3
 }
 
-export default function FeatureCards({ id, title, layout, columns = 2, headingLevel = 2, cards }: FeatureCardsProps) {
+export default function FeatureCards({
+  id,
+  title,
+  layout,
+  columns = 2,
+  headingLevel = 2,
+  cards,
+}: FeatureCardsProps) {
   if (!cards.length) return null
   const Heading = `h${headingLevel}` as const
   const headingId = `features-${id}`

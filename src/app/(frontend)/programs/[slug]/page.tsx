@@ -33,7 +33,11 @@ export async function generateMetadata({
 
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [program, section, settings] = await Promise.all([getProgram(slug), getProgramsSection(), getSettings()])
+  const [program, section, settings] = await Promise.all([
+    getProgram(slug),
+    getProgramsSection(),
+    getSettings(),
+  ])
 
   if (!program) notFound()
 
@@ -96,7 +100,6 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                 }
               : null
           }
-          
         />
       )}
     </>
