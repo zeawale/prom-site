@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getITS, getProgramsSection } from '@/lib/queries'
+import { getITS, getProgramsSection, getSettings } from '@/lib/queries'
 import { toRows } from '@/lib/programs'
 import { RequestButton } from '@/components/layout/RequestButton'
 import PageHero from '@/components/product/PageHero'
@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ITSPage() {
-  const [its, section] = await Promise.all([getITS(), getProgramsSection()])
+    const [its, section, settings] = await Promise.all([getITS(), getProgramsSection(), getSettings()])
 
   const cards = (its.cards ?? []).map((card) => ({
     icon: card.icon ?? null,
@@ -69,7 +69,7 @@ export default async function ITSPage() {
           columns={columns}
           rows={toRows(table.rows ?? [], columns.length)}
           details={null}
-          disclaimer={section.tariffDisclaimer}
+          disclaimer={settings.tariffDisclaimer}
         />
       )}
 

@@ -1,0 +1,141 @@
+.wrap {
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  margin-block-start: var(--space-5);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  inline-size: 100%;
+  padding: var(--space-6);
+  background: none;
+  border: 0;
+  /* Браузерные дефолты кнопки ломают вёрстку — тот же случай,
+     что у карточки каталога и TariffServiceLink */
+  font-family: inherit;
+  text-align: start;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.triggerTitle {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.chevron {
+  flex: none;
+  color: var(--icon-brand);
+  transition: transform 0.15s ease;
+}
+
+.chevron[data-open] {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}
+
+.body {
+  padding: 0 var(--space-6) var(--space-6);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  border: 1px solid var(--border-brand);
+  border-radius: 12px;
+  padding: var(--space-5);
+}
+
+.name {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.specs {
+  font-size: var(--fs-body-s);
+  color: var(--text-muted);
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.text {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.note {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  font-style: italic;
+  margin: var(--space-4) 0 0;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  background: var(--surface-brand-soft);
+  border-radius: 10px;
+  padding: var(--space-5) var(--space-6);
+  margin-block-start: var(--space-5);
+}
+
+.bannerText {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-base);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.bannerButton {
+  flex: none;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--border-brand);
+  border-radius: 8px;
+  background: var(--surface-brand-soft);
+  color: var(--text-link);
+  font-family: inherit;
+  font-size: var(--fs-body-m);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-base);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.bannerButton:hover {
+  background: var(--surface-brand-soft);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

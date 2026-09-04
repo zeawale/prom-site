@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { getProgram, getPrograms, getProgramsSection } from '@/lib/queries'
+import { getProgram, getPrograms, getProgramsSection, getSettings } from '@/lib/queries'
 import { toRows } from '@/lib/programs'
 import { RequestButton } from '@/components/layout/RequestButton'
 import PageHero from '@/components/product/PageHero'
@@ -33,7 +33,7 @@ export async function generateMetadata({
 
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [program, section] = await Promise.all([getProgram(slug), getProgramsSection()])
+  const [program, section, settings] = await Promise.all([getProgram(slug), getProgramsSection(), getSettings()])
 
   if (!program) notFound()
 
@@ -87,6 +87,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           firstColumnLabel={table.firstColumnLabel ?? ''}
           columns={columns}
           rows={toRows(table.rows ?? [], columns.length)}
+          disclaimer={settings.tariffDisclaimer}
           details={
             table.hasDetails
               ? {
@@ -95,7 +96,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                 }
               : null
           }
-          disclaimer={section.tariffDisclaimer}
+          
         />
       )}
     </>

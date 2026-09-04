@@ -1,0 +1,190 @@
+.section {
+  margin: var(--space-6) 0 0;
+}
+
+.heading {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.lead {
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-base);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5);
+}
+
+/* ---------- Сетка ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: var(--space-6);
+}
+
+/* Выделенный тариф. Внутренняя тень вместо толстой рамки: border-width
+   сдвинул бы содержимое на пиксель и карточки перестали бы совпадать
+   по базовой линии с соседней */
+.card[data-featured] {
+  border-color: var(--border-brand);
+  box-shadow: inset 0 0 0 1px var(--border-brand);
+}
+
+/* ---------- Шапка карточки ---------- */
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.name {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--surface-brand);
+  color: var(--text-inverse);
+  font-size: var(--fs-label-12);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-base);
+  /* Капс делает вёрстка: в CMS текст лежит обычным регистром, иначе
+     скринридер читает его по буквам */
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.whoFits {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin: var(--space-3) 0 0;
+}
+
+/* ---------- Метрики ---------- */
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  margin: var(--space-5) 0;
+  padding: var(--space-4) 0;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.metric + .metric {
+  border-inline-start: 1px solid var(--border-default);
+}
+
+.metricValue {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--text-link);
+}
+
+.metricLabel {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+}
+
+/* ---------- Пункты ---------- */
+
+.features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.feature {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+.feature[data-kind='note'] {
+  color: var(--text-muted);
+  font-size: var(--fs-body-s);
+  /* Сноска прижимается к низу карточки: у соседнего тарифа на её месте
+     обычный пункт, и без этого подвалы карточек разъедутся */
+  margin-block-start: auto;
+  padding-block-start: var(--space-3);
+}
+
+.check {
+  flex: none;
+  color: var(--icon-brand);
+  margin-block-start: 2px;
+}
+
+.featureBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.subList {
+  margin: 0;
+  padding-inline-start: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-body-s);
+  color: var(--text-secondary);
+}
+
+.subList li::marker {
+  color: var(--text-muted);
+}
+
+.disclaimer {
+  font-size: var(--fs-body-xs);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin: var(--space-5) 0 0;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature[data-kind='note'] {
+    margin-block-start: 0;
+  }
+}

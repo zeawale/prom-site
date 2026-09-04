@@ -6,21 +6,21 @@ export type FeatureCard = {
   icon?: IconName | null
   title?: string | null
   text: string
-  /** Маркированный список внутри карточки. Есть только у двух карточек КА */
   list?: string[]
 }
 
 export type FeatureCardsProps = {
   id: string
   title?: string | null
-  /** icon — иконка + текст, title — заголовок + текст, icon-title — всё сразу */
   layout: 'icon' | 'title' | 'icon-title'
+  columns?: 2 | 4
   cards: FeatureCard[]
+  headingLevel?: 2 | 3
 }
 
-export default function FeatureCards({ id, title, layout, cards }: FeatureCardsProps) {
+export default function FeatureCards({ id, title, layout, columns = 2, headingLevel = 2, cards }: FeatureCardsProps) {
   if (!cards.length) return null
-
+  const Heading = `h${headingLevel}` as const
   const headingId = `features-${id}`
   const showIcon = layout === 'icon' || layout === 'icon-title'
   const showTitle = layout === 'title' || layout === 'icon-title'
@@ -28,12 +28,12 @@ export default function FeatureCards({ id, title, layout, cards }: FeatureCardsP
   return (
     <section className={styles.section} aria-labelledby={title ? headingId : undefined}>
       {title && (
-        <h2 id={headingId} className={styles.heading}>
+        <Heading id={headingId} className={headingLevel === 3 ? styles.subheading : styles.heading}>
           {title}
-        </h2>
+        </Heading>
       )}
 
-      <ul className={styles.grid}>
+      <ul className={styles.grid} data-columns={columns}>
         {cards.map((card, i) => (
           <li key={i} className={styles.card}>
             {showIcon && card.icon && (

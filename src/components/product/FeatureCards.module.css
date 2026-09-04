@@ -14,18 +14,21 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
   gap: var(--space-5);
-  /* ul по умолчанию с маркерами и отступом — снимаем, семантика списка нужна,
-     оформление нет */
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Последняя карточка в нечётном наборе занимает обе колонки.
-   Только CSS: компоненту не нужно знать, сколько карточек ему передали,
-   и при добавлении шестой карточки в CMS правило перестанет срабатывать само. */
+.grid[data-columns='4'] {
+  --cols: 4;
+}
+
+.grid:not([data-columns='4']) .card:nth-child(odd):last-child {
+  grid-column: 1 / -1;
+}
+
 .card:nth-child(odd):last-child {
   grid-column: 1 / -1;
 }
@@ -57,7 +60,7 @@
 }
 
 .cardTitle {
-  font-size: var(--fs-h5);
+  font-size: var(--fs-h4);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-heading);
   color: var(--text-primary);
@@ -66,7 +69,7 @@
 
 .text {
   margin: 0;
-  font-size: var(--fs-body-m);
+  font-size: var(--fs-body-l);
   line-height: var(--lh-relaxed);
   color: var(--text-secondary);
 }
@@ -79,7 +82,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  font-size: var(--fs-body-m);
+  font-size: var(--fs-body-l);
   line-height: var(--lh-relaxed);
   color: var(--text-secondary);
 }
@@ -88,10 +91,44 @@
   color: var(--text-muted);
 }
 
+.subheading {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+}
+
+/* Компактный вариант: карточки «Одинаково во всех тарифах» вчетверо уже
+   обычных, и текст в них при том же кегле встаёт в пять строк вместо двух.
+   Привязано к раскладке, а не к отдельному пропу: четыре в ряд — это и есть
+   единственный случай, когда карточка узкая */
+
+.grid[data-columns='4'] .card {
+  padding: var(--space-5);
+}
+
+.grid[data-columns='4'] .iconBox {
+  inline-size: 40px;
+  block-size: 40px;
+  margin-block-end: var(--space-4);
+}
+
+.grid[data-columns='4'] .cardTitle {
+  font-size: var(--fs-h6);
+  margin-block-end: var(--space-2);
+}
+
+.grid[data-columns='4'] .text {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+}
+
 /* ---------- Мобильный ---------- */
 
 @media (max-width: 1023px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .grid,
+  .grid[data-columns='4'] {
+    --cols: 1;
   }
 }

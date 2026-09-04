@@ -113,3 +113,16 @@ export const getITS = async () => {
   // каталога, и нужен документ, а не число
   return payload.findGlobal({ slug: 'its', depth: 2 })
 }
+
+/** Страница /fresh целиком */
+export const getFresh = async () => {
+  const payload = await getPayload({ config })
+  // depth: 0 — связей внутри нет, в отличие от ITS с его ссылками на каталог
+  return payload.findGlobal({ slug: 'fresh', depth: 0 })
+}
+
+/** Блок сравнения. Один и тот же на /fresh и на /grm */
+export const getFreshVsGrm = async () => {
+  const payload = await getPayload({ config })
+  return payload.findGlobal({ slug: 'fresh-vs-grm', depth: 0 })
+}

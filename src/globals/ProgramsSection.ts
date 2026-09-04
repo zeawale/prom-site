@@ -60,12 +60,5 @@ export const ProgramsSection: GlobalConfig = {
         },
       ],
     },
-    {
-      name: 'tariffDisclaimer',
-      type: 'textarea',
-      label: 'Дисклеймер под таблицами',
-      required: true,
-      admin: { description: 'Общий текст, выводится под каждой таблицей тарифов' },
-    },
   ],
 }
