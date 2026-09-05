@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Leads } from './collections/Leads'
 import { Programs } from './collections/Programs'
+import { LegalPages } from './collections/LegalPages'
 import { ProgramsSection } from './globals/ProgramsSection'
 import { ITS } from './globals/ITS'
 import { Fresh } from './globals/Fresh'
@@ -21,7 +22,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  collections: [Users, Media, Categories, Services, Leads, Programs],
+  collections: [Users, Media, Categories, Services, Leads, Programs, LegalPages],
   globals: [Settings, ProgramsSection, ITS, Fresh, GRM, FreshVsGrm],
   admin: {
     user: Users.slug,

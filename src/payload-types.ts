@@ -73,6 +73,7 @@ export interface Config {
     services: Service;
     leads: Lead;
     programs: Program;
+    'legal-pages': LegalPage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
     programs: ProgramsSelect<false> | ProgramsSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -590,6 +592,52 @@ export interface Program {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: number;
+  slug: 'privacy' | 'cookie' | 'consent';
+  title: string;
+  /**
+   * Необязательный
+   */
+  lead?: string | null;
+  /**
+   * Показывается на странице. Обязательный реквизит документа
+   */
+  effectiveDate: string;
+  /**
+   * Пишется в каждую заявку. Менять при любой правке текста, иначе в базе останется ссылка на редакцию, которой человек не видел. Формат — дата: 2026-09-05
+   */
+  version?: string | null;
+  sections: {
+    /**
+     * Номер раздела пишется прямо в заголовке («1. Общие положения»). Автонумерации нет намеренно: на пункты юридического документа ссылаются по номерам, и сдвиг после удаления раздела ломал бы ссылки
+     */
+    heading?: string | null;
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Нумерацию рисует браузер. Для сквозных пунктов вида «3.2» — абзацы
+     */
+    listType?: ('unordered' | 'ordered') | null;
+    list?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -635,6 +683,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'programs';
         value: number | Program;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: number | LegalPage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -872,6 +924,38 @@ export interface ProgramsSelect<T extends boolean = true> {
               col3Text?: T;
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  lead?: T;
+  effectiveDate?: T;
+  version?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        listType?: T;
+        list?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

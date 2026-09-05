@@ -128,6 +128,29 @@ export const getGrm = async () => {
   return payload.findGlobal({ slug: 'grm', depth: 0 })
 }
 
+/** Один юридический документ по слагу. undefined, если его нет в базе */
+export const getLegalPage = async (slug: 'privacy' | 'cookie' | 'consent') => {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'legal-pages',
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 0,
+  })
+  return docs[0]
+}
+
+/**
+ * Версия согласия для записи в заявку.
+ * Живёт в документе, а не в константе: текст согласия правится в админке,
+ * и версия обязана меняться вместе с ним. Константа в lib/consent.ts
+ * осталась запасным значением на случай, когда документа ещё нет.
+ */
+export const getConsentVersion = async (): Promise<string | undefined> => {
+  const doc = await getLegalPage('consent')
+  return doc?.version ?? undefined
+}
+
 /** Блок сравнения. Один и тот же на /fresh и на /grm */
 export const getFreshVsGrm = async () => {
   const payload = await getPayload({ config })

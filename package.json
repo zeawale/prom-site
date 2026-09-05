@@ -20,7 +20,8 @@
     "seed:programs": "tsx --env-file=.env src/seed/seed-programs.ts",
     "seed:its": "tsx --env-file=.env src/seed/seed-its.ts",
     "seed:fresh": "tsx --env-file=.env src/seed/seed-fresh.ts",
-    "seed:grm": "tsx --env-file=.env src/seed/seed-grm.ts"
+    "seed:grm": "tsx --env-file=.env src/seed/seed-grm.ts",
+    "seed:legal": "tsx --env-file=.env src/seed/seed-legal.ts"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",
