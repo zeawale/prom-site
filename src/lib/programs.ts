@@ -29,6 +29,12 @@ export type TariffRow = {
   label: string
   cells: TariffCell[]
   service?: TariffService
+  /**
+   * Обычная ссылка на страницу сайта. Альтернатива service для строк,
+   * которых нет в каталоге: 1С:Фреш живёт на собственной странице.
+   * Если заполнены оба — выигрывает service, попап информативнее.
+   */
+  href?: string
 }
 
 /**
@@ -56,6 +62,7 @@ export type StoredRow = {
   col3_text?: string | null
   /** Число при depth 0, документ при depth >= 1. Ссылка строится только из документа */
   service?: StoredService | number | null
+  href?: string | null
 }
 
 /**
@@ -98,4 +105,7 @@ export const toRows = (rows: StoredRow[], columnCount: number): TariffRow[] =>
     label: row.label,
     cells: toCells(row, columnCount),
     service: toService(row.service),
+    // Пустую строку из текстового поля Payload приводим к undefined:
+    // иначе href === '' считается заполненным и даёт ссылку в никуда
+    href: row.href || undefined,
   }))

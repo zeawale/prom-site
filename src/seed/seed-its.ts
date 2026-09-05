@@ -13,10 +13,15 @@ import config from '../payload.config'
  *  — убран пробел перед точкой в пункте 06.
  */
 
-/** Строка таблицы: title сервиса в каталоге, если строка кликабельная */
+/**
+ * Строка таблицы. Кликабельной её делает одно из двух:
+ * service — точное title карточки каталога, клик открывает попап;
+ * href — адрес страницы сайта для того, чего в каталоге нет.
+ */
 type Row = {
   label: string
   service?: string
+  href?: string
   col1: 'yes' | 'no' | 'text'
   col2: 'yes' | 'no' | 'text'
   col1Text?: string
@@ -33,9 +38,8 @@ const ROWS: Row[] = [
   },
   { label: '1С-Отчётность', service: '1С-Отчётность', col1: 'yes', col2: 'no' },
   { label: '1С:Контрагент', service: '1С:Контрагент', col1: 'yes', col2: 'no' },
-  // Фреша в каталоге нет — у него отдельная страница. Ссылку поставим,
-  // когда появится /fresh
-  { label: '1С:Фреш (1С через Интернет)', col1: 'yes', col2: 'no' },
+  // Фреша в каталоге нет — у него отдельная страница, поэтому href, а не service
+  { label: '1С:Фреш (1С через Интернет)', href: '/fresh', col1: 'yes', col2: 'no' },
   {
     label: 'Сервисы 1С-ЭДО / 1С-Такском',
     service: '1С-ЭДО',
@@ -194,6 +198,7 @@ const seed = async () => {
   console.log(
     `Из них со ссылкой на каталог: ${ROWS.filter((r) => r.service && idByTitle.get(r.service)).length}`,
   )
+  console.log(`Со ссылкой на страницу сайта: ${ROWS.filter((r) => r.href).length}`)
   process.exit(0)
 }
 

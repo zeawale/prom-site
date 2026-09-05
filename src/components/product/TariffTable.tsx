@@ -54,10 +54,12 @@ function Rows({ rows }: { rows: TariffRow[] }) {
       {rows.map((row, i) => (
         <tr key={i}>
           <th scope="row" className={styles.rowLabel}>
-            {/* Связь с каталогом есть только у строк /its — у программ
-                первая колонка остаётся обычным текстом */}
-            {row.service ? (
-              <TariffServiceLink slug={row.service.slug} categorySlug={row.service.categorySlug}>
+            {/* Ссылки есть только у строк /its: либо попап карточки каталога,
+                либо адрес страницы сайта. У программ первая колонка — это
+                возможности, ссылаться не на что, и клиентский компонент
+                на такие строки не вешается вовсе */}
+            {row.service || row.href ? (
+              <TariffServiceLink service={row.service} href={row.href}>
                 {row.label}
               </TariffServiceLink>
             ) : (
