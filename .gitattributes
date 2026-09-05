@@ -1,0 +1,20 @@
+# Единый перевод строки в репозитории — LF, включая рабочую копию на Windows.
+# Без этого файла normalize line endings держится ровно до следующего коммита
+# с другой машины: CRLF приезжает обратно и топит дифф.
+# endOfLine у prettier по умолчанию "lf" — настройки согласованы.
+* text=auto eol=lf
+
+# Бинарные файлы git не нормализует и не диффит
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.pdf   binary
+*.db    binary
+
+# Лок-файл сгенерирован — не показывать в диффе и не считать за код
+pnpm-lock.yaml -diff linguist-generated
