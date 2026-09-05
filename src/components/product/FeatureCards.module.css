@@ -10,6 +10,19 @@
   margin: 0 0 var(--space-5);
 }
 
+/* Лид съедает нижний отступ заголовка: без этого между ними два интервала
+   подряд, и блок отрывается от собственной шапки */
+.heading:has(+ .lead) {
+  margin-block-end: var(--space-3);
+}
+
+.lead {
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5);
+}
+
 /* ---------- Сетка ---------- */
 
 .grid {

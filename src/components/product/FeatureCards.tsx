@@ -12,6 +12,12 @@ export type FeatureCard = {
 export type FeatureCardsProps = {
   id: string
   title?: string | null
+  /**
+   * Абзац под заголовком блока. Появился ради /grm: там «Преимущества»
+   * вводятся фразой про то, кому сервис подходит. Необязательный —
+   * у остальных страниц карточки идут сразу под заголовком.
+   */
+  lead?: string | null
   layout: 'icon' | 'title' | 'icon-title'
   columns?: 2 | 4
   cards: FeatureCard[]
@@ -21,6 +27,7 @@ export type FeatureCardsProps = {
 export default function FeatureCards({
   id,
   title,
+  lead,
   layout,
   columns = 2,
   headingLevel = 2,
@@ -39,6 +46,8 @@ export default function FeatureCards({
           {title}
         </Heading>
       )}
+
+      {lead && <p className={styles.lead}>{lead}</p>}
 
       <ul className={styles.grid} data-columns={columns}>
         {cards.map((card, i) => (

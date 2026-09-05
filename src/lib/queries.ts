@@ -121,6 +121,13 @@ export const getFresh = async () => {
   return payload.findGlobal({ slug: 'fresh', depth: 0 })
 }
 
+/** Страница /grm целиком */
+export const getGrm = async () => {
+  const payload = await getPayload({ config })
+  // depth: 0 — как у Fresh, связей внутри нет
+  return payload.findGlobal({ slug: 'grm', depth: 0 })
+}
+
 /** Блок сравнения. Один и тот же на /fresh и на /grm */
 export const getFreshVsGrm = async () => {
   const payload = await getPayload({ config })

@@ -100,6 +100,21 @@
   text-align: end;
 }
 
+.note {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin: var(--space-6) 0 0;
+}
+
+/* У своей колонки ссылки нет, и сноска остаётся последней — тогда низ
+   прижимает она. Если ссылка есть, auto стоит на ней, и два auto подряд
+   отдали бы весь свободный зазор первому */
+.note:last-child {
+  margin-block-start: auto;
+  padding-block-start: var(--space-6);
+}
+
 .link {
   /* auto прижимает ссылку к низу: у соседней колонки на строку параметров
      больше, и без этого ссылки встанут на разной высоте */

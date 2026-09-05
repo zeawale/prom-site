@@ -59,140 +59,141 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
-  blocks: {}
+    users: UserAuthOperations;
+  };
+  blocks: {};
   collections: {
-    users: User
-    media: Media
-    categories: Category
-    services: Service
-    leads: Lead
-    programs: Program
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    users: User;
+    media: Media;
+    categories: Category;
+    services: Service;
+    leads: Lead;
+    programs: Program;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>
-    media: MediaSelect<false> | MediaSelect<true>
-    categories: CategoriesSelect<false> | CategoriesSelect<true>
-    services: ServicesSelect<false> | ServicesSelect<true>
-    leads: LeadsSelect<false> | LeadsSelect<true>
-    programs: ProgramsSelect<false> | ProgramsSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
-  }
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    leads: LeadsSelect<false> | LeadsSelect<true>;
+    programs: ProgramsSelect<false> | ProgramsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: number
-  }
-  fallbackLocale: null
+    defaultIDType: number;
+  };
+  fallbackLocale: null;
   globals: {
-    settings: Setting
-    'programs-section': ProgramsSection
-    its: It
-    fresh: Fresh
-    'fresh-vs-grm': FreshVsGrm
-  }
+    settings: Setting;
+    'programs-section': ProgramsSection;
+    its: It;
+    fresh: Fresh;
+    grm: Grm;
+    'fresh-vs-grm': FreshVsGrm;
+  };
   globalsSelect: {
-    settings: SettingsSelect<false> | SettingsSelect<true>
-    'programs-section': ProgramsSectionSelect<false> | ProgramsSectionSelect<true>
-    its: ItsSelect<false> | ItsSelect<true>
-    fresh: FreshSelect<false> | FreshSelect<true>
-    'fresh-vs-grm': FreshVsGrmSelect<false> | FreshVsGrmSelect<true>
-  }
-  locale: null
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+    'programs-section': ProgramsSectionSelect<false> | ProgramsSectionSelect<true>;
+    its: ItsSelect<false> | ItsSelect<true>;
+    fresh: FreshSelect<false> | FreshSelect<true>;
+    grm: GrmSelect<false> | GrmSelect<true>;
+    'fresh-vs-grm': FreshVsGrmSelect<false> | FreshVsGrmSelect<true>;
+  };
+  locale: null;
   widgets: {
-    collections: CollectionsWidget
-  }
-  user: User
+    collections: CollectionsWidget;
+  };
+  user: User;
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
   sessions?:
     | {
-        id: string
-        createdAt?: string | null
-        expiresAt: string
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
-    | null
-  password?: string | null
-  collection: 'users'
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: number
-  alt: string
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number
-  title: string
+  id: number;
+  title: string;
   /**
    * Латиницей, через дефис: otchetnost-i-nalogi
    */
-  slug: string
+  slug: string;
   icon:
     | 'report'
     | 'calculator'
@@ -257,28 +258,28 @@ export interface Category {
     | 'tools'
     | 'search'
     | 'plus'
-    | 'edit'
-  order?: number | null
-  updatedAt: string
-  createdAt: string
+    | 'edit';
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
-  id: number
-  title: string
-  slug: string
+  id: number;
+  title: string;
+  slug: string;
   /**
    * Крупный текст в карточке. Тире — длинное «—»
    */
-  headline: string
+  headline: string;
   /**
    * До 130 символов
    */
-  description: string
-  category: number | Category
+  description: string;
+  category: number | Category;
   icon:
     | 'report'
     | 'calculator'
@@ -343,123 +344,123 @@ export interface Service {
     | 'tools'
     | 'search'
     | 'plus'
-    | 'edit'
-  isPopular?: boolean | null
-  isNew?: boolean | null
+    | 'edit';
+  isPopular?: boolean | null;
+  isNew?: boolean | null;
   /**
    * Карточка останется в CMS, но не будет показана на сайте
    */
-  isHidden?: boolean | null
-  related?: (number | Service)[] | null
+  isHidden?: boolean | null;
+  related?: (number | Service)[] | null;
   popup?: {
     whoNeedsIt?:
       | {
-          text: string
-          id?: string | null
+          text: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
     /**
      * Пусто — блок не рендерится. Шаги не выдумывать
      */
     howItWorks?:
       | {
-          title: string
-          description: string
-          id?: string | null
+          title: string;
+          description: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
     requirements?:
       | {
-          text: string
-          id?: string | null
+          text: string;
+          id?: string | null;
         }[]
-      | null
-    ctaText?: string | null
-  }
+      | null;
+    ctaText?: string | null;
+  };
   sourceUrls?:
     | {
-        url: string
-        id?: string | null
+        url: string;
+        id?: string | null;
       }[]
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads".
  */
 export interface Lead {
-  id: number
-  name: string
-  phone: string
-  email: string
-  comment?: string | null
-  status: 'new' | 'in_progress' | 'closed'
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  comment?: string | null;
+  status: 'new' | 'in_progress' | 'closed';
   /**
    * Откуда отправлена заявка
    */
-  page?: string | null
-  consentAt?: string | null
-  consentIp?: string | null
-  consentVersion?: string | null
-  updatedAt: string
-  createdAt: string
+  page?: string | null;
+  consentAt?: string | null;
+  consentIp?: string | null;
+  consentVersion?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "programs".
  */
 export interface Program {
-  id: number
-  title: string
+  id: number;
+  title: string;
   /**
    * Адрес страницы: /programs/слаг
    */
-  slug: string
+  slug: string;
   /**
    * В табах текст короче, чем в заголовке
    */
-  tabLabel: string
+  tabLabel: string;
   /**
    * Порядок вкладок слева направо
    */
-  order: number
-  lead: string
+  order: number;
+  lead: string;
   /**
    * Название программы. Выводится полужирным
    */
-  bodyStrong: string
+  bodyStrong: string;
   /**
    * Идёт сразу после выделенного начала, в том же абзаце
    */
-  bodyIntro: string
+  bodyIntro: string;
   /**
    * Абзацы разделяются переводом строки
    */
-  body: string
-  ctaText?: string | null
+  body: string;
+  ctaText?: string | null;
   shortFacts?: {
     items?:
       | {
-          fact: string
+          fact: string;
           /**
            * Не длиннее 5 слов
            */
-          caption: string
-          id?: string | null
+          caption: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
     /**
      * Продолжение фразы «Подходит: …»
      */
-    suits?: string | null
-  }
+    suits?: string | null;
+  };
   /**
    * Без двоеточия в конце
    */
-  cardsTitle?: string | null
-  cardsLayout?: ('icon' | 'title' | 'icon-title') | null
+  cardsTitle?: string | null;
+  cardsLayout?: ('icon' | 'title' | 'icon-title') | null;
   /**
    * Пустой список — блок карточек не выводится на сайте
    */
@@ -532,480 +533,480 @@ export interface Program {
               | 'plus'
               | 'edit'
             )
-          | null
-        title?: string | null
-        text: string
+          | null;
+        title?: string | null;
+        text: string;
         list?:
           | {
-              text: string
-              id?: string | null
+              text: string;
+              id?: string | null;
             }[]
-          | null
-        id?: string | null
+          | null;
+        id?: string | null;
       }[]
-    | null
-  hasTable?: boolean | null
+    | null;
+  hasTable?: boolean | null;
   table?: {
-    title?: string | null
+    title?: string | null;
     /**
      * «Возможности», «По подсистемам», «Сервисы ИТС»
      */
-    firstColumnLabel?: string | null
-    col1Label?: string | null
-    col2Label?: string | null
+    firstColumnLabel?: string | null;
+    col1Label?: string | null;
+    col2Label?: string | null;
     /**
      * Пусто — колонка не выводится
      */
-    col3Label?: string | null
+    col3Label?: string | null;
     rows?:
       | {
-          label: string
-          col1?: ('yes' | 'no' | 'text') | null
-          col2?: ('yes' | 'no' | 'text') | null
-          col3?: ('yes' | 'no' | 'text') | null
-          col1Text?: string | null
-          col2Text?: string | null
-          col3Text?: string | null
-          id?: string | null
+          label: string;
+          col1?: ('yes' | 'no' | 'text') | null;
+          col2?: ('yes' | 'no' | 'text') | null;
+          col3?: ('yes' | 'no' | 'text') | null;
+          col1Text?: string | null;
+          col2Text?: string | null;
+          col3Text?: string | null;
+          id?: string | null;
         }[]
-      | null
-    hasDetails?: boolean | null
-    detailsLabel?: string | null
+      | null;
+    hasDetails?: boolean | null;
+    detailsLabel?: string | null;
     detailsRows?:
       | {
-          label: string
-          col1?: ('yes' | 'no' | 'text') | null
-          col2?: ('yes' | 'no' | 'text') | null
-          col3?: ('yes' | 'no' | 'text') | null
-          col1Text?: string | null
-          col2Text?: string | null
-          col3Text?: string | null
-          id?: string | null
+          label: string;
+          col1?: ('yes' | 'no' | 'text') | null;
+          col2?: ('yes' | 'no' | 'text') | null;
+          col3?: ('yes' | 'no' | 'text') | null;
+          col1Text?: string | null;
+          col2Text?: string | null;
+          col3Text?: string | null;
+          id?: string | null;
         }[]
-      | null
-  }
-  updatedAt: string
-  createdAt: string
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number
-  key: string
+  id: number;
+  key: string;
   data:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number
+  id: number;
   document?:
     | ({
-        relationTo: 'users'
-        value: number | User
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
-        relationTo: 'media'
-        value: number | Media
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
-        relationTo: 'categories'
-        value: number | Category
+        relationTo: 'categories';
+        value: number | Category;
       } | null)
     | ({
-        relationTo: 'services'
-        value: number | Service
+        relationTo: 'services';
+        value: number | Service;
       } | null)
     | ({
-        relationTo: 'leads'
-        value: number | Lead
+        relationTo: 'leads';
+        value: number | Lead;
       } | null)
     | ({
-        relationTo: 'programs'
-        value: number | Program
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'programs';
+        value: number | Program;
+      } | null);
+  globalSlug?: string | null;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number
+  id: number;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: number | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: number;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  loginAttempts?: T
-  lockUntil?: T
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
-  icon?: T
-  order?: T
-  updatedAt?: T
-  createdAt?: T
+  title?: T;
+  slug?: T;
+  icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services_select".
  */
 export interface ServicesSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
-  headline?: T
-  description?: T
-  category?: T
-  icon?: T
-  isPopular?: T
-  isNew?: T
-  isHidden?: T
-  related?: T
+  title?: T;
+  slug?: T;
+  headline?: T;
+  description?: T;
+  category?: T;
+  icon?: T;
+  isPopular?: T;
+  isNew?: T;
+  isHidden?: T;
+  related?: T;
   popup?:
     | T
     | {
         whoNeedsIt?:
           | T
           | {
-              text?: T
-              id?: T
-            }
+              text?: T;
+              id?: T;
+            };
         howItWorks?:
           | T
           | {
-              title?: T
-              description?: T
-              id?: T
-            }
+              title?: T;
+              description?: T;
+              id?: T;
+            };
         requirements?:
           | T
           | {
-              text?: T
-              id?: T
-            }
-        ctaText?: T
-      }
+              text?: T;
+              id?: T;
+            };
+        ctaText?: T;
+      };
   sourceUrls?:
     | T
     | {
-        url?: T
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads_select".
  */
 export interface LeadsSelect<T extends boolean = true> {
-  name?: T
-  phone?: T
-  email?: T
-  comment?: T
-  status?: T
-  page?: T
-  consentAt?: T
-  consentIp?: T
-  consentVersion?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  phone?: T;
+  email?: T;
+  comment?: T;
+  status?: T;
+  page?: T;
+  consentAt?: T;
+  consentIp?: T;
+  consentVersion?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "programs_select".
  */
 export interface ProgramsSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
-  tabLabel?: T
-  order?: T
-  lead?: T
-  bodyStrong?: T
-  bodyIntro?: T
-  body?: T
-  ctaText?: T
+  title?: T;
+  slug?: T;
+  tabLabel?: T;
+  order?: T;
+  lead?: T;
+  bodyStrong?: T;
+  bodyIntro?: T;
+  body?: T;
+  ctaText?: T;
   shortFacts?:
     | T
     | {
         items?:
           | T
           | {
-              fact?: T
-              caption?: T
-              id?: T
-            }
-        suits?: T
-      }
-  cardsTitle?: T
-  cardsLayout?: T
+              fact?: T;
+              caption?: T;
+              id?: T;
+            };
+        suits?: T;
+      };
+  cardsTitle?: T;
+  cardsLayout?: T;
   cards?:
     | T
     | {
-        icon?: T
-        title?: T
-        text?: T
+        icon?: T;
+        title?: T;
+        text?: T;
         list?:
           | T
           | {
-              text?: T
-              id?: T
-            }
-        id?: T
-      }
-  hasTable?: T
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  hasTable?: T;
   table?:
     | T
     | {
-        title?: T
-        firstColumnLabel?: T
-        col1Label?: T
-        col2Label?: T
-        col3Label?: T
+        title?: T;
+        firstColumnLabel?: T;
+        col1Label?: T;
+        col2Label?: T;
+        col3Label?: T;
         rows?:
           | T
           | {
-              label?: T
-              col1?: T
-              col2?: T
-              col3?: T
-              col1Text?: T
-              col2Text?: T
-              col3Text?: T
-              id?: T
-            }
-        hasDetails?: T
-        detailsLabel?: T
+              label?: T;
+              col1?: T;
+              col2?: T;
+              col3?: T;
+              col1Text?: T;
+              col2Text?: T;
+              col3Text?: T;
+              id?: T;
+            };
+        hasDetails?: T;
+        detailsLabel?: T;
         detailsRows?:
           | T
           | {
-              label?: T
-              col1?: T
-              col2?: T
-              col3?: T
-              col1Text?: T
-              col2Text?: T
-              col3Text?: T
-              id?: T
-            }
-      }
-  updatedAt?: T
-  createdAt?: T
+              label?: T;
+              col1?: T;
+              col2?: T;
+              col3?: T;
+              col1Text?: T;
+              col2Text?: T;
+              col3Text?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings".
  */
 export interface Setting {
-  id: number
+  id: number;
   /**
    * В том виде, в каком показывается на сайте
    */
-  phone: string
+  phone: string;
   /**
    * Заполняется автоматически из поля слева
    */
-  phoneRaw?: string | null
-  email: string
-  address: string
-  workHours: string
-  legalName: string
-  inn: string
+  phoneRaw?: string | null;
+  email: string;
+  address: string;
+  workHours: string;
+  legalName: string;
+  inn: string;
   /**
    * Уточнить у Дмитрия
    */
-  ogrn?: string | null
+  ogrn?: string | null;
   /**
    * Один текст на все страницы с тарифами: программы, ИТС, Фреш. Живёт здесь, а не в разделе «Программы 1С», потому что правка должна гасить кеш всего сайта — Settings это и делает.
    */
-  tariffDisclaimer: string
-  updatedAt?: string | null
-  createdAt?: string | null
+  tariffDisclaimer: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "programs-section".
  */
 export interface ProgramsSection {
-  id: number
-  title: string
-  lead: string
+  id: number;
+  title: string;
+  lead: string;
   cloudBanner: {
-    title: string
-    text: string
+    title: string;
+    text: string;
     buttons?:
       | {
-          label: string
-          href: string
-          style?: ('primary' | 'accent') | null
-          id?: string | null
+          label: string;
+          href: string;
+          style?: ('primary' | 'accent') | null;
+          id?: string | null;
         }[]
-      | null
-  }
-  updatedAt?: string | null
-  createdAt?: string | null
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "its".
  */
 export interface It {
-  id: number
-  title: string
+  id: number;
+  title: string;
   /**
    * Не дублировать лид каталога сервисов
    */
-  lead: string
+  lead: string;
   /**
    * Выводится полужирным, в том же абзаце
    */
-  bodyStrong: string
-  bodyIntro: string
+  bodyStrong: string;
+  bodyIntro: string;
   /**
    * Абзацы разделяются переводом строки
    */
-  body: string
-  ctaText?: string | null
+  body: string;
+  ctaText?: string | null;
   shortFacts?: {
     items?:
       | {
-          fact: string
-          caption: string
-          id?: string | null
+          fact: string;
+          caption: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
     /**
      * Продолжение фразы «Подходит: …»
      */
-    suits?: string | null
-  }
+    suits?: string | null;
+  };
   /**
    * Без двоеточия в конце
    */
-  cardsTitle?: string | null
+  cardsTitle?: string | null;
   /**
    * Раскладка всегда «иконка, заголовок и текст»
    */
@@ -1075,91 +1076,95 @@ export interface It {
           | 'tools'
           | 'search'
           | 'plus'
-          | 'edit'
-        title: string
-        text: string
-        id?: string | null
+          | 'edit';
+        title: string;
+        text: string;
+        id?: string | null;
       }[]
-    | null
+    | null;
   included: {
-    title: string
+    title: string;
     /**
      * Номера 01, 02, 03 рисуются индексом — в тексте их писать не надо
      */
     items?:
       | {
-          title: string
-          text: string
-          id?: string | null
+          title: string;
+          text: string;
+          id?: string | null;
         }[]
-      | null
-  }
+      | null;
+  };
   table?: {
-    title?: string | null
-    firstColumnLabel?: string | null
-    col1Label?: string | null
-    col2Label?: string | null
+    title?: string | null;
+    firstColumnLabel?: string | null;
+    col1Label?: string | null;
+    col2Label?: string | null;
     rows?:
       | {
-          label: string
+          label: string;
           /**
            * Если выбран — строка становится ссылкой и открывает попап сервиса. Пусто — обычный текст
            */
-          service?: (number | null) | Service
-          col1?: ('yes' | 'no' | 'text') | null
-          col2?: ('yes' | 'no' | 'text') | null
-          col3?: ('yes' | 'no' | 'text') | null
-          col1Text?: string | null
-          col2Text?: string | null
-          col3Text?: string | null
-          id?: string | null
+          service?: (number | null) | Service;
+          /**
+           * Например /fresh. Заполняется, только если сервис каталога не выбран
+           */
+          href?: string | null;
+          col1?: ('yes' | 'no' | 'text') | null;
+          col2?: ('yes' | 'no' | 'text') | null;
+          col3?: ('yes' | 'no' | 'text') | null;
+          col1Text?: string | null;
+          col2Text?: string | null;
+          col3Text?: string | null;
+          id?: string | null;
         }[]
-      | null
-  }
+      | null;
+  };
   ctaBanner: {
-    title: string
-    text: string
-    buttonLabel: string
-    buttonHref: string
-  }
-  updatedAt?: string | null
-  createdAt?: string | null
+    title: string;
+    text: string;
+    buttonLabel: string;
+    buttonHref: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "fresh".
  */
 export interface Fresh {
-  id: number
-  title: string
-  lead: string
+  id: number;
+  title: string;
+  lead: string;
   /**
    * Выводится полужирным, в том же абзаце
    */
-  bodyStrong: string
-  bodyIntro: string
+  bodyStrong: string;
+  bodyIntro: string;
   /**
    * Абзацы разделяются переводом строки
    */
-  body: string
-  ctaText?: string | null
+  body: string;
+  ctaText?: string | null;
   shortFacts?: {
     items?:
       | {
-          fact: string
-          caption: string
-          id?: string | null
+          fact: string;
+          caption: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
     /**
      * Продолжение фразы «Подходит: …»
      */
-    suits?: string | null
-  }
+    suits?: string | null;
+  };
   /**
    * Без двоеточия в конце
    */
-  cardsTitle?: string | null
+  cardsTitle?: string | null;
   /**
    * Раскладка всегда «иконка и текст», без заголовков
    */
@@ -1232,72 +1237,72 @@ export interface Fresh {
               | 'plus'
               | 'edit'
             )
-          | null
-        text: string
+          | null;
+        text: string;
         list?:
           | {
-              text: string
-              id?: string | null
+              text: string;
+              id?: string | null;
             }[]
-          | null
-        id?: string | null
+          | null;
+        id?: string | null;
       }[]
-    | null
+    | null;
   tariffs: {
-    title: string
-    lead: string
+    title: string;
+    lead: string;
     /**
      * Ровно два: Базовый и ПРОФ. Остальные три — в раскрывашке ниже
      */
     cards?:
       | {
-          name: string
+          name: string;
           /**
            * Например «Рекомендуем». Необязательный
            */
-          badge?: string | null
-          whoFits: string
-          seats: string
-          seatsLabel: string
-          bases: string
-          basesLabel: string
+          badge?: string | null;
+          whoFits: string;
+          seats: string;
+          seatsLabel: string;
+          bases: string;
+          basesLabel: string;
           items?:
             | {
-                kind: 'check' | 'note'
-                text: string
+                kind: 'check' | 'note';
+                text: string;
                 list?:
                   | {
-                      text: string
-                      id?: string | null
+                      text: string;
+                      id?: string | null;
                     }[]
-                  | null
-                id?: string | null
+                  | null;
+                id?: string | null;
               }[]
-            | null
-          id?: string | null
+            | null;
+          id?: string | null;
         }[]
-      | null
+      | null;
     extra: {
-      title: string
+      title: string;
       items?:
         | {
-            name: string
-            specs: string
-            text: string
+            name: string;
+            specs: string;
+            text: string;
             /**
              * Кому нужен тариф. Выводится курсивом
              */
-            note?: string | null
-            id?: string | null
+            note?: string | null;
+            id?: string | null;
           }[]
-        | null
+        | null;
       banner: {
-        text: string
-        buttonLabel: string
-      }
-    }
+        text: string;
+        buttonLabel: string;
+      };
+    };
     common: {
-      title: string
+      title: string;
       /**
        * Четыре в ряд. Пятая уедет на вторую строку и поломает ритм
        */
@@ -1370,347 +1375,525 @@ export interface Fresh {
                   | 'plus'
                   | 'edit'
                 )
-              | null
-            title: string
-            text: string
-            id?: string | null
+              | null;
+            title: string;
+            text: string;
+            id?: string | null;
           }[]
-        | null
-    }
+        | null;
+    };
     switchNote: {
-      title: string
-      text: string
-    }
-  }
-  updatedAt?: string | null
-  createdAt?: string | null
+      title: string;
+      text: string;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "grm".
+ */
+export interface Grm {
+  id: number;
+  title: string;
+  lead: string;
+  /**
+   * Выводится полужирным, в том же абзаце
+   */
+  bodyStrong: string;
+  bodyIntro: string;
+  /**
+   * Необязательно. Абзацы разделяются переводом строки
+   */
+  body?: string | null;
+  ctaText?: string | null;
+  shortFacts?: {
+    items?:
+      | {
+          fact: string;
+          caption: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Продолжение фразы «Подходит: …»
+     */
+    suits?: string | null;
+  };
+  /**
+   * Без двоеточия в конце
+   */
+  cardsTitle?: string | null;
+  /**
+   * Необязательный. Вводит список карточек
+   */
+  cardsLead?: string | null;
+  /**
+   * Раскладка всегда «иконка и текст», без заголовков
+   */
+  cards?:
+    | {
+        icon?:
+          | (
+              | 'report'
+              | 'calculator'
+              | 'signature'
+              | 'receipt'
+              | 'book'
+              | 'folder'
+              | 'print'
+              | 'assignment'
+              | 'exchange'
+              | 'sync'
+              | 'network'
+              | 'globe'
+              | 'cloud'
+              | 'server'
+              | 'database'
+              | 'mobile'
+              | 'devices'
+              | 'extension'
+              | 'phone'
+              | 'email'
+              | 'clock'
+              | 'calendar'
+              | 'location'
+              | 'chat'
+              | 'mic'
+              | 'video'
+              | 'headset'
+              | 'wallet'
+              | 'bank'
+              | 'ruble'
+              | 'cart'
+              | 'cash-register'
+              | 'barcode'
+              | 'scan'
+              | 'storefront'
+              | 'no-cost'
+              | 'truck'
+              | 'warehouse'
+              | 'package'
+              | 'plane'
+              | 'users'
+              | 'handshake'
+              | 'education'
+              | 'certificate'
+              | 'health'
+              | 'company'
+              | 'badge'
+              | 'shield'
+              | 'lock'
+              | 'key'
+              | 'check'
+              | 'star'
+              | 'sparkle'
+              | 'bolt'
+              | 'rocket'
+              | 'idea'
+              | 'timer'
+              | 'chart'
+              | 'bar-chart'
+              | 'gear'
+              | 'tools'
+              | 'search'
+              | 'plus'
+              | 'edit'
+            )
+          | null;
+        text: string;
+        list?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "fresh-vs-grm".
  */
 export interface FreshVsGrm {
-  id: number
-  title: string
-  lead: string
+  id: number;
+  title: string;
+  lead: string;
   fresh: {
-    title: string
+    title: string;
     /**
      * Необязательный. Капс делает вёрстка — писать обычным регистром
      */
-    badge?: string | null
-    description: string
+    badge?: string | null;
+    description: string;
     /**
      * Названия параметров должны совпадать в обеих колонках — иначе строки не встанут друг напротив друга
      */
     rows?:
       | {
-          label: string
-          value: string
-          id?: string | null
+          label: string;
+          value: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
+    /**
+     * Необязательная. Мелкий серый текст в самом низу колонки
+     */
+    note?: string | null;
     /**
      * Ссылка прячется на той странице, где эта колонка и так открыта
      */
-    href: string
-  }
+    href: string;
+  };
   grm: {
-    title: string
+    title: string;
     /**
      * Необязательный. Капс делает вёрстка — писать обычным регистром
      */
-    badge?: string | null
-    description: string
+    badge?: string | null;
+    description: string;
     /**
      * Названия параметров должны совпадать в обеих колонках — иначе строки не встанут друг напротив друга
      */
     rows?:
       | {
-          label: string
-          value: string
-          id?: string | null
+          label: string;
+          value: string;
+          id?: string | null;
         }[]
-      | null
+      | null;
+    /**
+     * Необязательная. Мелкий серый текст в самом низу колонки
+     */
+    note?: string | null;
     /**
      * Ссылка прячется на той странице, где эта колонка и так открыта
      */
-    href: string
-  }
-  updatedAt?: string | null
-  createdAt?: string | null
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
-  phone?: T
-  phoneRaw?: T
-  email?: T
-  address?: T
-  workHours?: T
-  legalName?: T
-  inn?: T
-  ogrn?: T
-  tariffDisclaimer?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  phone?: T;
+  phoneRaw?: T;
+  email?: T;
+  address?: T;
+  workHours?: T;
+  legalName?: T;
+  inn?: T;
+  ogrn?: T;
+  tariffDisclaimer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "programs-section_select".
  */
 export interface ProgramsSectionSelect<T extends boolean = true> {
-  title?: T
-  lead?: T
+  title?: T;
+  lead?: T;
   cloudBanner?:
     | T
     | {
-        title?: T
-        text?: T
+        title?: T;
+        text?: T;
         buttons?:
           | T
           | {
-              label?: T
-              href?: T
-              style?: T
-              id?: T
-            }
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+              label?: T;
+              href?: T;
+              style?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "its_select".
  */
 export interface ItsSelect<T extends boolean = true> {
-  title?: T
-  lead?: T
-  bodyStrong?: T
-  bodyIntro?: T
-  body?: T
-  ctaText?: T
+  title?: T;
+  lead?: T;
+  bodyStrong?: T;
+  bodyIntro?: T;
+  body?: T;
+  ctaText?: T;
   shortFacts?:
     | T
     | {
         items?:
           | T
           | {
-              fact?: T
-              caption?: T
-              id?: T
-            }
-        suits?: T
-      }
-  cardsTitle?: T
+              fact?: T;
+              caption?: T;
+              id?: T;
+            };
+        suits?: T;
+      };
+  cardsTitle?: T;
   cards?:
     | T
     | {
-        icon?: T
-        title?: T
-        text?: T
-        id?: T
-      }
+        icon?: T;
+        title?: T;
+        text?: T;
+        id?: T;
+      };
   included?:
     | T
     | {
-        title?: T
+        title?: T;
         items?:
           | T
           | {
-              title?: T
-              text?: T
-              id?: T
-            }
-      }
+              title?: T;
+              text?: T;
+              id?: T;
+            };
+      };
   table?:
     | T
     | {
-        title?: T
-        firstColumnLabel?: T
-        col1Label?: T
-        col2Label?: T
+        title?: T;
+        firstColumnLabel?: T;
+        col1Label?: T;
+        col2Label?: T;
         rows?:
           | T
           | {
-              label?: T
-              service?: T
-              col1?: T
-              col2?: T
-              col3?: T
-              col1Text?: T
-              col2Text?: T
-              col3Text?: T
-              id?: T
-            }
-      }
+              label?: T;
+              service?: T;
+              href?: T;
+              col1?: T;
+              col2?: T;
+              col3?: T;
+              col1Text?: T;
+              col2Text?: T;
+              col3Text?: T;
+              id?: T;
+            };
+      };
   ctaBanner?:
     | T
     | {
-        title?: T
-        text?: T
-        buttonLabel?: T
-        buttonHref?: T
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+        title?: T;
+        text?: T;
+        buttonLabel?: T;
+        buttonHref?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "fresh_select".
  */
 export interface FreshSelect<T extends boolean = true> {
-  title?: T
-  lead?: T
-  bodyStrong?: T
-  bodyIntro?: T
-  body?: T
-  ctaText?: T
+  title?: T;
+  lead?: T;
+  bodyStrong?: T;
+  bodyIntro?: T;
+  body?: T;
+  ctaText?: T;
   shortFacts?:
     | T
     | {
         items?:
           | T
           | {
-              fact?: T
-              caption?: T
-              id?: T
-            }
-        suits?: T
-      }
-  cardsTitle?: T
+              fact?: T;
+              caption?: T;
+              id?: T;
+            };
+        suits?: T;
+      };
+  cardsTitle?: T;
   cards?:
     | T
     | {
-        icon?: T
-        text?: T
+        icon?: T;
+        text?: T;
         list?:
           | T
           | {
-              text?: T
-              id?: T
-            }
-        id?: T
-      }
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   tariffs?:
     | T
     | {
-        title?: T
-        lead?: T
+        title?: T;
+        lead?: T;
         cards?:
           | T
           | {
-              name?: T
-              badge?: T
-              whoFits?: T
-              seats?: T
-              seatsLabel?: T
-              bases?: T
-              basesLabel?: T
+              name?: T;
+              badge?: T;
+              whoFits?: T;
+              seats?: T;
+              seatsLabel?: T;
+              bases?: T;
+              basesLabel?: T;
               items?:
                 | T
                 | {
-                    kind?: T
-                    text?: T
+                    kind?: T;
+                    text?: T;
                     list?:
                       | T
                       | {
-                          text?: T
-                          id?: T
-                        }
-                    id?: T
-                  }
-              id?: T
-            }
+                          text?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
         extra?:
           | T
           | {
-              title?: T
+              title?: T;
               items?:
                 | T
                 | {
-                    name?: T
-                    specs?: T
-                    text?: T
-                    note?: T
-                    id?: T
-                  }
+                    name?: T;
+                    specs?: T;
+                    text?: T;
+                    note?: T;
+                    id?: T;
+                  };
               banner?:
                 | T
                 | {
-                    text?: T
-                    buttonLabel?: T
-                  }
-            }
+                    text?: T;
+                    buttonLabel?: T;
+                  };
+            };
         common?:
           | T
           | {
-              title?: T
+              title?: T;
               items?:
                 | T
                 | {
-                    icon?: T
-                    title?: T
-                    text?: T
-                    id?: T
-                  }
-            }
+                    icon?: T;
+                    title?: T;
+                    text?: T;
+                    id?: T;
+                  };
+            };
         switchNote?:
           | T
           | {
-              title?: T
-              text?: T
-            }
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+              title?: T;
+              text?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "grm_select".
+ */
+export interface GrmSelect<T extends boolean = true> {
+  title?: T;
+  lead?: T;
+  bodyStrong?: T;
+  bodyIntro?: T;
+  body?: T;
+  ctaText?: T;
+  shortFacts?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              fact?: T;
+              caption?: T;
+              id?: T;
+            };
+        suits?: T;
+      };
+  cardsTitle?: T;
+  cardsLead?: T;
+  cards?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+        list?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "fresh-vs-grm_select".
  */
 export interface FreshVsGrmSelect<T extends boolean = true> {
-  title?: T
-  lead?: T
+  title?: T;
+  lead?: T;
   fresh?:
     | T
     | {
-        title?: T
-        badge?: T
-        description?: T
+        title?: T;
+        badge?: T;
+        description?: T;
         rows?:
           | T
           | {
-              label?: T
-              value?: T
-              id?: T
-            }
-        href?: T
-      }
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        note?: T;
+        href?: T;
+      };
   grm?:
     | T
     | {
-        title?: T
-        badge?: T
-        description?: T
+        title?: T;
+        badge?: T;
+        description?: T;
         rows?:
           | T
           | {
-              label?: T
-              value?: T
-              id?: T
-            }
-        href?: T
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        note?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1718,17 +1901,18 @@ export interface FreshVsGrmSelect<T extends boolean = true> {
  */
 export interface CollectionsWidget {
   data?: {
-    [k: string]: unknown
-  }
-  width: 'full'
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

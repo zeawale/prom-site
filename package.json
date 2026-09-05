@@ -19,7 +19,8 @@
     "seed": "tsx --env-file=.env src/seed/seed.ts",
     "seed:programs": "tsx --env-file=.env src/seed/seed-programs.ts",
     "seed:its": "tsx --env-file=.env src/seed/seed-its.ts",
-    "seed:fresh": "tsx --env-file=.env src/seed/seed-fresh.ts"
+    "seed:fresh": "tsx --env-file=.env src/seed/seed-fresh.ts",
+    "seed:grm": "tsx --env-file=.env src/seed/seed-grm.ts"
   },
   "dependencies": {
     "@iconify-json/material-symbols": "^1.2.89",

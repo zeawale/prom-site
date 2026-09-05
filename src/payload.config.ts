@@ -15,13 +15,14 @@ import { ProgramsSection } from './globals/ProgramsSection'
 import { ITS } from './globals/ITS'
 import { Fresh } from './globals/Fresh'
 import { FreshVsGrm } from './globals/FreshVsGrm'
+import { GRM } from './globals/GRM'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   collections: [Users, Media, Categories, Services, Leads, Programs],
-  globals: [Settings, ProgramsSection, ITS, Fresh, FreshVsGrm],
+  globals: [Settings, ProgramsSection, ITS, Fresh, GRM, FreshVsGrm],
   admin: {
     user: Users.slug,
     importMap: {

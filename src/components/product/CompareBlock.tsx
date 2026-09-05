@@ -6,6 +6,8 @@ export type CompareColumn = {
   badge?: string | null
   description: string
   rows?: { label: string; value: string }[] | null
+  /** Необязательная сноска в самом низу колонки */
+  note?: string | null
   href: string
 }
 
@@ -57,6 +59,8 @@ export default function CompareBlock({ title, lead, fresh, grm, current }: Props
                 </div>
               ))}
             </dl>
+
+            {data.note && <p className={styles.note}>{data.note}</p>}
 
             {key !== current && (
               <Link href={data.href} className={styles.link}>
