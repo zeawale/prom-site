@@ -48,7 +48,12 @@
   /*--accent-text: #c2410c;      */ /* 5.18:1 на белом — оранжевый текст */
 
   /* ---------- Типографика ---------- */
-  --font-family: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+  /* Порядок значим: кириллический сабсет идёт первым, латинский вторым.
+     Браузер подбирает шрифт поглифно, поэтому латинские символы, которых
+     в первом семействе нет, он берёт из второго. Подробности — в
+     комментарии к localFont в layout.tsx */
+  --font-family:
+    var(--font-montserrat), var(--font-montserrat-latin), system-ui, -apple-system, sans-serif;
 
   --fs-display-72: 72px;
   --fs-display-48: 48px;
