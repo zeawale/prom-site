@@ -1,0 +1,82 @@
+.section {
+  padding-block: var(--space-20);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-7);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.item {
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--space-2);
+  padding: var(--space-6);
+}
+
+/* Заголовок нужен для оглавления страницы у скринридера, кнопка —
+   для управления. Поэтому кнопка внутри h3, а не вместо него */
+.questionRow {
+  margin: 0;
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Знак нарисован кружком с символом внутри: минус — U+2212, он есть
+   в латинском сабсете Montserrat, в отличие от многих типографских
+   значков. Плюс — обычный ASCII */
+.sign {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-accent);
+  color: var(--text-inverse);
+  font-size: var(--fs-h5);
+  line-height: var(--lh-none);
+}
+
+.answer {
+  margin-block-start: var(--space-4);
+}
+
+.paragraph {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}

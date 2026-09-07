@@ -1,59 +1,125 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
-import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
+import type { Metadata } from 'next'
+import { getHome, getHomeReviews, getPopularServices, getSettings } from '@/lib/queries'
+import HomeHero from '@/components/home/HomeHero'
+import StateCards, { type StateItem } from '@/components/home/StateCards'
+import BlueBand from '@/components/home/BlueBand'
+import Directions, { type Direction } from '@/components/home/Directions'
+import ServicesPreview from '@/components/home/ServicesPreview'
+import CompanyBlock from '@/components/home/CompanyBlock'
+import NumberedList from '@/components/product/NumberedList'
+import Faq from '@/components/product/Faq'
 
-import config from '@/payload.config'
-import './styles.css'
+export async function generateMetadata(): Promise<Metadata> {
+  const home = await getHome()
+  return {
+    title: 'Сервисы и программы 1С для малого бизнеса в Нижнем Новгороде | ПРО-М',
+    description: home.hero?.lead ?? undefined,
+  }
+}
 
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
+  const [home, settings, reviews, services] = await Promise.all([
+    getHome(),
+    getSettings(),
+    getHomeReviews(),
+    getPopularServices(3),
+  ])
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  const states = home.states
+
+  /* Payload отдаёт массивы объектов ({ text }) и допускает null почти
+     везде — компоненты про это знать не должны, разворачиваем здесь */
+  const stateItems: StateItem[] = (states?.items ?? []).map((item) => ({
+    title: item.title,
+    description: item.description,
+    criteria: (item.criteria ?? []).map((c) => c.text),
+    solutions: (item.solutions ?? []).map((s) => ({
+      eyebrow: s.eyebrow,
+      title: s.title,
+      text: s.text,
+      href: s.href,
+    })),
+  }))
+
+  const directions: Direction[] = (home.directions?.items ?? []).map((item) => ({
+    icon: item.icon,
+    title: item.title,
+    lead: item.lead,
+    list: (item.list ?? []).map((l) => l.text),
+    href: item.href,
+    buttonLabel: item.buttonLabel,
+  }))
 
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/3.x/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/3.x/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
+    <main className="container">
+      <HomeHero
+        title={home.hero?.title ?? ''}
+        lead={home.hero?.lead ?? ''}
+        ctaText={home.hero?.ctaText}
+      />
+
+      <StateCards
+        title={states?.title ?? ''}
+        lead={states?.lead}
+        openLabel={states?.openLabel ?? 'Это про меня'}
+        closeLabel={states?.closeLabel ?? 'Свернуть'}
+        criteriaTitle={states?.criteriaTitle ?? 'Это про вас, если'}
+        solutionLabel={states?.solutionLabel ?? 'Перейти'}
+        items={stateItems}
+        footerText={states?.footer?.text ?? ''}
+        footerButton={states?.footer?.buttonLabel ?? 'Заказать звонок'}
+        phone={settings.phone}
+        phoneRaw={settings.phoneRaw ?? settings.phone}
+      />
+
+      {/* Два блока на общем синем фоне — так в макете */}
+      <BlueBand>
+        <Directions title={home.directions?.title ?? ''} items={directions} />
+        <ServicesPreview
+          title={home.servicesPreview?.title ?? ''}
+          buttonLabel={home.servicesPreview?.buttonLabel}
+          allLabel={home.servicesPreview?.allLabel}
+          services={services}
+        />
+      </BlueBand>
+
+      <CompanyBlock
+        title={home.company?.title ?? ''}
+        lead={home.company?.lead}
+        buttonLabel={home.company?.buttonLabel}
+        buttonHref={home.company?.buttonHref}
+        counters={(home.company?.counters ?? []).map((c) => ({
+          value: c.value,
+          caption: c.caption,
+        }))}
+        reviews={reviews.map((r) => ({
+          id: r.id,
+          author: r.author,
+          role: r.role,
+          text: r.text,
+        }))}
+      />
+
+      {/* Тот же компонент, что пункты 01–06 на /its — переиспользуется,
+          а не переписывается вторым разом */}
+      <NumberedList
+        id="home"
+        title={home.afterPayment?.title ?? ''}
+        lead={home.afterPayment?.lead}
+        items={(home.afterPayment?.items ?? []).map((item) => ({
+          title: item.title,
+          text: item.text,
+        }))}
+      />
+
+      <Faq
+        id="home"
+        title={home.faq?.title ?? ''}
+        items={(home.faq?.items ?? []).map((item) => ({
+          question: item.question,
+          answer: item.answer,
+        }))}
+      />
+    </main>
   )
 }

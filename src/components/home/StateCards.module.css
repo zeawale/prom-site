@@ -1,0 +1,270 @@
+.section {
+  padding-block: var(--space-20);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.lead {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-7);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  align-items: start;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--space-2);
+  padding: var(--space-6);
+  min-width: 0;
+}
+
+/* Раскрытая карточка занимает обе колонки: признаки и решения стоят
+   рядом, а в половине ширины они встали бы друг под друга и блок
+   вытянулся бы на два экрана */
+.card[data-open] {
+  grid-column: 1 / -1;
+  border-bottom: 3px solid var(--border-accent);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.number {
+  color: var(--surface-accent);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-none);
+  flex: 0 0 auto;
+}
+
+.cardTitle {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card[data-open] .cardTitle {
+  font-size: var(--fs-h3);
+}
+
+.description {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ---------- Раскрытая часть ---------- */
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.criteriaTitle {
+  font-size: var(--fs-label-12);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-link);
+  margin: 0 0 var(--space-4);
+}
+
+.criteriaList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.criteriaItem {
+  position: relative;
+  padding-inline-start: var(--space-5);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+/* Маркер рисуется псевдоэлементом: точка из list-style не красится
+   отдельно от текста, а она в макете оранжевая */
+.criteriaItem::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--surface-accent);
+}
+
+.solutions {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.solution {
+  background: var(--surface-muted);
+  border-radius: var(--space-2);
+  padding: var(--space-5);
+}
+
+.solutionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.eyebrow {
+  font-size: var(--fs-label-12);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-link);
+  margin: 0;
+}
+
+.solutionLink {
+  flex: 0 0 auto;
+  background: var(--surface-brand);
+  color: var(--text-inverse);
+  border-radius: var(--space-1);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+}
+
+.solutionLink:hover {
+  filter: brightness(1.1);
+}
+
+.solutionTitle {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.solutionText {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-relaxed);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ---------- Управление ---------- */
+
+.toggle {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-medium);
+  color: var(--text-link);
+  cursor: pointer;
+}
+
+/* У раскрытой карточки ссылка «Свернуть» стоит в правом верхнем углу,
+   а не под содержимым: снизу до неё пришлось бы прокручивать блок целиком */
+.card[data-open] .toggle {
+  position: absolute;
+  inset-block-start: var(--space-6);
+  inset-inline-end: var(--space-6);
+}
+
+.toggle:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Плашка под карточками ---------- */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--space-2);
+  padding: var(--space-6);
+}
+
+.footerText {
+  font-size: var(--fs-body-m);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.phone {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.footerButton {
+  background: none;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--space-1);
+  padding: var(--space-3) var(--space-6);
+  font-family: inherit;
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-semibold);
+  color: var(--text-accent);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.footerButton:hover {
+  filter: brightness(0.92);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

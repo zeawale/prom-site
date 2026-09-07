@@ -156,3 +156,46 @@ export const getFreshVsGrm = async () => {
   const payload = await getPayload({ config })
   return payload.findGlobal({ slug: 'fresh-vs-grm', depth: 0 })
 }
+
+export const getHome = async () => {
+  const payload = await getPayload({ config })
+  // depth: 0 — связей внутри глобала нет: отзывы и карточки сервисов
+  // страница берёт отдельными запросами
+  return payload.findGlobal({ slug: 'home', depth: 0 })
+}
+
+/**
+ * Отзывы для главной. Отдельный запрос, а не поле глобала: те же карточки
+ * идут на «О компании», а дублировать цитату в двух местах — верный способ
+ * получить две её версии.
+ */
+export const getHomeReviews = async () => {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'reviews',
+    where: { showOnHome: { equals: true } },
+    limit: 3,
+    depth: 0,
+    sort: 'order',
+  })
+  return docs
+}
+
+/**
+ * Три сервиса в блок «Сервисы 1С» на главной — популярные из каталога.
+ *
+ * depth: 1 обязателен: карточка открывает попап вызовом
+ * open(categorySlug, slug), и без глубины category останется числом.
+ * Тот же подводный камень, что у getITS.
+ */
+export const getPopularServices = async (limit = 3): Promise<Service[]> => {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'services',
+    where: { and: [VISIBLE, { isPopular: { equals: true } }] },
+    limit,
+    depth: 1,
+    sort: 'title',
+  })
+  return docs
+}

@@ -1,0 +1,121 @@
+.section {
+  padding-block: var(--space-20);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-8);
+  margin-bottom: var(--space-7);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.lead {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 640px;
+}
+
+.button {
+  flex: 0 0 auto;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--space-1);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-semibold);
+  color: var(--text-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.button:hover {
+  filter: brightness(0.92);
+}
+
+.counters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--space-2);
+  padding: var(--space-7);
+  margin: 0 0 var(--space-6);
+}
+
+.counter {
+  min-width: 0;
+}
+
+.value {
+  font-size: var(--fs-display-48);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-none);
+  color: var(--text-link);
+  margin: 0 0 var(--space-3);
+}
+
+.caption {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+
+.review {
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--space-2);
+  padding: var(--space-6);
+  min-width: 0;
+}
+
+.author {
+  font-size: var(--fs-body-m);
+  font-weight: var(--fw-semibold);
+  color: var(--text-link);
+  margin: 0 0 var(--space-1);
+}
+
+.role {
+  font-size: var(--fs-body-xs);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+/* Ёлочки рисует вёрстка: в поле редактор пишет чистый текст, иначе
+   половина отзывов приедет с кавычками, половина без */
+.quote {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.quote::before {
+  content: '«';
+}
+
+.quote::after {
+  content: '»';
+}

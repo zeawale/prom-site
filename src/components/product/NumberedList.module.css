@@ -11,11 +11,25 @@
   margin-inline: var(--space-6);
 }
 
+/* Отступ до списка задаёт шапка целиком: у /its в ней только заголовок,
+   у главной ещё и лид, и в обоих случаях расстояние до пунктов одинаковое */
+.head {
+  margin-bottom: var(--space-7);
+}
+
 .title {
   font-size: var(--fs-h2);
   font-weight: var(--fw-bold);
   line-height: var(--lh-heading);
-  margin: 0 0 var(--space-7);
+  margin: 0;
+}
+
+.lead {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: rgb(255 255 255 / 0.85);
+  margin: var(--space-3) 0 0;
+  max-width: 760px;
 }
 
 .list {

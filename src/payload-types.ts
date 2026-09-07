@@ -74,6 +74,7 @@ export interface Config {
     leads: Lead;
     programs: Program;
     'legal-pages': LegalPage;
+    reviews: Review;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     leads: LeadsSelect<false> | LeadsSelect<true>;
     programs: ProgramsSelect<false> | ProgramsSelect<true>;
     'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -99,6 +101,7 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     settings: Setting;
+    home: Home;
     'programs-section': ProgramsSection;
     its: It;
     fresh: Fresh;
@@ -107,6 +110,7 @@ export interface Config {
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    home: HomeSelect<false> | HomeSelect<true>;
     'programs-section': ProgramsSectionSelect<false> | ProgramsSectionSelect<true>;
     its: ItsSelect<false> | ItsSelect<true>;
     fresh: FreshSelect<false> | FreshSelect<true>;
@@ -638,6 +642,29 @@ export interface LegalPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: number;
+  author: string;
+  /**
+   * Например: руководитель, бухгалтерская компания «Актив Учёт»
+   */
+  role: string;
+  /**
+   * Кавычки-ёлочки ставит вёрстка — в поле их писать не нужно
+   */
+  text: string;
+  /**
+   * На главной выводятся три первых по порядку
+   */
+  showOnHome?: boolean | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -687,6 +714,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'legal-pages';
         value: number | LegalPage;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: number | Review;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -962,6 +993,19 @@ export interface LegalPagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  author?: T;
+  role?: T;
+  text?: T;
+  showOnHome?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1027,6 +1071,206 @@ export interface Setting {
    * Один текст на все страницы с тарифами: программы, ИТС, Фреш. Живёт здесь, а не в разделе «Программы 1С», потому что правка должна гасить кеш всего сайта — Settings это и делает.
    */
   tariffDisclaimer: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: number;
+  hero: {
+    title: string;
+    lead: string;
+    ctaText?: string | null;
+  };
+  states: {
+    title: string;
+    lead?: string | null;
+    openLabel?: string | null;
+    closeLabel?: string | null;
+    criteriaTitle?: string | null;
+    solutionLabel?: string | null;
+    items?:
+      | {
+          title: string;
+          /**
+           * Одна строка — в свёрнутом виде места больше нет
+           */
+          description: string;
+          criteria?:
+            | {
+                text: string;
+                id?: string | null;
+              }[]
+            | null;
+          solutions?:
+            | {
+                /**
+                 * Условие выбора: «База без доработок», «Своего специалиста нет». Капс делает вёрстка
+                 */
+                eyebrow: string;
+                title: string;
+                text: string;
+                /**
+                 * Внутренний путь: /fresh, /programs, /services
+                 */
+                href: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    footer: {
+      text: string;
+      buttonLabel?: string | null;
+    };
+  };
+  directions: {
+    title: string;
+    items?:
+      | {
+          icon?:
+            | (
+                | 'report'
+                | 'calculator'
+                | 'signature'
+                | 'receipt'
+                | 'book'
+                | 'folder'
+                | 'print'
+                | 'assignment'
+                | 'exchange'
+                | 'sync'
+                | 'network'
+                | 'globe'
+                | 'cloud'
+                | 'server'
+                | 'database'
+                | 'mobile'
+                | 'devices'
+                | 'extension'
+                | 'phone'
+                | 'email'
+                | 'clock'
+                | 'calendar'
+                | 'location'
+                | 'chat'
+                | 'mic'
+                | 'video'
+                | 'headset'
+                | 'wallet'
+                | 'bank'
+                | 'ruble'
+                | 'cart'
+                | 'cash-register'
+                | 'barcode'
+                | 'scan'
+                | 'storefront'
+                | 'no-cost'
+                | 'truck'
+                | 'warehouse'
+                | 'package'
+                | 'plane'
+                | 'users'
+                | 'handshake'
+                | 'education'
+                | 'certificate'
+                | 'health'
+                | 'company'
+                | 'badge'
+                | 'shield'
+                | 'lock'
+                | 'key'
+                | 'check'
+                | 'star'
+                | 'sparkle'
+                | 'bolt'
+                | 'rocket'
+                | 'idea'
+                | 'timer'
+                | 'chart'
+                | 'bar-chart'
+                | 'gear'
+                | 'tools'
+                | 'search'
+                | 'plus'
+                | 'edit'
+              )
+            | null;
+          title: string;
+          /**
+           * Оранжевая строка под названием
+           */
+          lead: string;
+          list?:
+            | {
+                text: string;
+                id?: string | null;
+              }[]
+            | null;
+          href: string;
+          buttonLabel?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Карточки берутся из каталога — сервисы с флагом «Популярное». Здесь только обрамление блока
+   */
+  servicesPreview: {
+    title: string;
+    buttonLabel?: string | null;
+    /**
+     * Видна скринридеру, глазами — только стрелка
+     */
+    allLabel?: string | null;
+  };
+  company: {
+    title: string;
+    lead?: string | null;
+    buttonLabel?: string | null;
+    buttonHref?: string | null;
+    counters?:
+      | {
+          value: string;
+          caption: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Выводится тем же компонентом, что и пункты 01–06 на /its
+   */
+  afterPayment: {
+    title: string;
+    lead?: string | null;
+    /**
+     * Номера рисуются порядком, отдельного поля у шага нет
+     */
+    items?:
+      | {
+          title: string;
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  faq: {
+    title: string;
+    items?:
+      | {
+          question: string;
+          /**
+           * Абзацы разделяются переводом строки
+           */
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1676,6 +1920,128 @@ export interface SettingsSelect<T extends boolean = true> {
   inn?: T;
   ogrn?: T;
   tariffDisclaimer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        lead?: T;
+        ctaText?: T;
+      };
+  states?:
+    | T
+    | {
+        title?: T;
+        lead?: T;
+        openLabel?: T;
+        closeLabel?: T;
+        criteriaTitle?: T;
+        solutionLabel?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              criteria?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              solutions?:
+                | T
+                | {
+                    eyebrow?: T;
+                    title?: T;
+                    text?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        footer?:
+          | T
+          | {
+              text?: T;
+              buttonLabel?: T;
+            };
+      };
+  directions?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              lead?: T;
+              list?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              href?: T;
+              buttonLabel?: T;
+              id?: T;
+            };
+      };
+  servicesPreview?:
+    | T
+    | {
+        title?: T;
+        buttonLabel?: T;
+        allLabel?: T;
+      };
+  company?:
+    | T
+    | {
+        title?: T;
+        lead?: T;
+        buttonLabel?: T;
+        buttonHref?: T;
+        counters?:
+          | T
+          | {
+              value?: T;
+              caption?: T;
+              id?: T;
+            };
+      };
+  afterPayment?:
+    | T
+    | {
+        title?: T;
+        lead?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              text?: T;
+              id?: T;
+            };
+      };
+  faq?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

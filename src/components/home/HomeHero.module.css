@@ -1,0 +1,64 @@
+/* Полноширинная секция внутри .container — тот же приём, что у NumberedList */
+.hero {
+  background: var(--surface-brand);
+  color: var(--text-inverse);
+  margin-inline: calc((100% - 100vw) / 2);
+  padding-block: var(--space-20);
+  padding-inline: calc((100vw - var(--container)) / 2);
+}
+
+.inner {
+  max-width: var(--container);
+  margin-inline: var(--space-6);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 507px);
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.text {
+  max-width: 700px;
+}
+
+.title {
+  font-size: var(--fs-display-48);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--space-5);
+}
+
+.lead {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: rgb(255 255 255 / 0.9);
+  margin: 0 0 var(--space-6);
+  max-width: 654px;
+}
+
+.cta {
+  background: var(--surface-accent);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--space-1);
+  padding: var(--space-3) var(--space-10);
+  font-family: inherit;
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.cta:hover {
+  filter: brightness(0.92);
+}
+
+.art {
+  justify-self: end;
+}
+
+/* height: auto обязателен: без него Next ругается, что у картинки поменяли
+   одну сторону из двух, и предупреждение сыплется в консоль на каждой
+   отрисовке — а консоль стережёт дымовой тест */
+.artImage {
+  width: 100%;
+  height: auto;
+}
