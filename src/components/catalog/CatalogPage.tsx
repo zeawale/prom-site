@@ -7,7 +7,6 @@ import { Sidebar } from './Sidebar'
 import { SearchInput } from './SearchInput'
 import styles from './CatalogPage.module.css'
 import { Suspense } from 'react'
-import { ServiceModalProvider } from './ServiceModalProvider'
 
 type Props = {
   categorySlug?: string
