@@ -102,6 +102,8 @@ export interface Config {
   globals: {
     settings: Setting;
     home: Home;
+    about: About;
+    contacts: Contact;
     'programs-section': ProgramsSection;
     its: It;
     fresh: Fresh;
@@ -111,6 +113,8 @@ export interface Config {
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
+    contacts: ContactsSelect<false> | ContactsSelect<true>;
     'programs-section': ProgramsSectionSelect<false> | ProgramsSectionSelect<true>;
     its: ItsSelect<false> | ItsSelect<true>;
     fresh: FreshSelect<false> | FreshSelect<true>;
@@ -1276,6 +1280,113 @@ export interface Home {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: number;
+  title: string;
+  /**
+   * Абзацы разделяются переводом строки
+   */
+  body: string;
+  /**
+   * Необязательно. Пока не загружено — на месте фото серая плашка
+   */
+  photo?: (number | null) | Media;
+  /**
+   * Четыре в макете. Порядок — как в списке
+   */
+  counters?:
+    | {
+        /**
+         * Например: 20+, 2014, 1200+
+         */
+        value: string;
+        caption: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Без двоеточия в конце
+   */
+  reviewsTitle?: string | null;
+  /**
+   * Сами отзывы правятся в разделе «Отзывы». Здесь только текст над ними. На эту страницу идут все отзывы, на главную — три с галочкой «Показывать на главной»
+   */
+  reviewsLead?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contact {
+  id: number;
+  title: string;
+  lead: string;
+  phone: {
+    label: string;
+    /**
+     * Необязательно. Само значение берётся из «Реквизиты и контакты»
+     */
+    caption?: string | null;
+  };
+  email: {
+    label: string;
+    /**
+     * Необязательно. Само значение берётся из «Реквизиты и контакты»
+     */
+    caption?: string | null;
+  };
+  hours: {
+    label: string;
+    /**
+     * Необязательно. Само значение берётся из «Реквизиты и контакты»
+     */
+    caption?: string | null;
+  };
+  address: {
+    label: string;
+    /**
+     * Необязательно. Само значение берётся из «Реквизиты и контакты»
+     */
+    caption?: string | null;
+  };
+  legal: {
+    label: string;
+    /**
+     * Необязательно. Само значение берётся из «Реквизиты и контакты»
+     */
+    caption?: string | null;
+  };
+  inn: {
+    label: string;
+    /**
+     * Необязательно. Само значение берётся из «Реквизиты и контакты»
+     */
+    caption?: string | null;
+  };
+  map: {
+    /**
+     * Адрес виджета из конструктора Яндекс.Карт. Значение по умолчанию ищет офис по адресу; если метка встала неточно, соберите карту в конструкторе и вставьте её ссылку сюда. Параметр lang=ru_RU обязателен: подписи на карте должны быть на русском.
+     */
+    url: string;
+    /**
+     * Тёмная подпись в углу карты
+     */
+    plaque?: string | null;
+    buttonLabel?: string | null;
+    /**
+     * Показывается до нажатия на кнопку. Пока карта не загружена, к Яндексу не уходит ни одного запроса
+     */
+    note?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "programs-section".
  */
 export interface ProgramsSection {
@@ -2041,6 +2152,82 @@ export interface HomeSelect<T extends boolean = true> {
               answer?: T;
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  photo?: T;
+  counters?:
+    | T
+    | {
+        value?: T;
+        caption?: T;
+        id?: T;
+      };
+  reviewsTitle?: T;
+  reviewsLead?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts_select".
+ */
+export interface ContactsSelect<T extends boolean = true> {
+  title?: T;
+  lead?: T;
+  phone?:
+    | T
+    | {
+        label?: T;
+        caption?: T;
+      };
+  email?:
+    | T
+    | {
+        label?: T;
+        caption?: T;
+      };
+  hours?:
+    | T
+    | {
+        label?: T;
+        caption?: T;
+      };
+  address?:
+    | T
+    | {
+        label?: T;
+        caption?: T;
+      };
+  legal?:
+    | T
+    | {
+        label?: T;
+        caption?: T;
+      };
+  inn?:
+    | T
+    | {
+        label?: T;
+        caption?: T;
+      };
+  map?:
+    | T
+    | {
+        url?: T;
+        plaque?: T;
+        buttonLabel?: T;
+        note?: T;
       };
   updatedAt?: T;
   createdAt?: T;

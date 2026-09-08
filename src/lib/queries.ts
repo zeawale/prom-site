@@ -157,6 +157,24 @@ export const getFreshVsGrm = async () => {
   return payload.findGlobal({ slug: 'fresh-vs-grm', depth: 0 })
 }
 
+export const getAbout = async () => {
+  const payload = await getPayload({ config })
+  // depth: 1 — фото директора это upload-связь, без глубины вместо
+  // документа приедет id. Отзывы страница берёт отдельным запросом
+  return payload.findGlobal({ slug: 'about', depth: 1 })
+}
+
+/**
+ * Страница /contacts.
+ *
+ * depth: 0 — связей внутри нет. Сами реквизиты живут в Settings, здесь
+ * только заголовки карточек, подписи и настройки карты.
+ */
+export const getContacts = async () => {
+  const payload = await getPayload({ config })
+  return payload.findGlobal({ slug: 'contacts', depth: 0 })
+}
+
 export const getHome = async () => {
   const payload = await getPayload({ config })
   // depth: 0 — связей внутри глобала нет: отзывы и карточки сервисов
@@ -182,13 +200,36 @@ export const getHomeReviews = async () => {
 }
 
 /**
- * Три сервиса в блок «Сервисы 1С» на главной — популярные из каталога.
+ * Все отзывы для «О компании», в порядке поля order.
+ *
+ * Без фильтра showOnHome, в отличие от getHomeReviews: флаг решает, кто
+ * попадает на главную, а на странице о компании выводятся все.
+ */
+export const getAllReviews = async () => {
+  const payload = await getPayload({ config })
+  const { docs } = await payload.find({
+    collection: 'reviews',
+    limit: 0,
+    pagination: false,
+    depth: 0,
+    sort: 'order',
+  })
+  return docs
+}
+
+/**
+ * Популярные сервисы каталога — лента блока «Сервисы 1С» на главной.
+ *
+ * Лимит по умолчанию щедрый: блок прокручивается горизонтально и должен
+ * показывать все сервисы с флагом «Популярное», а не первые три. Число
+ * оставлено предохранителем на случай, если флаг когда-нибудь проставят
+ * всему каталогу.
  *
  * depth: 1 обязателен: карточка открывает попап вызовом
  * open(categorySlug, slug), и без глубины category останется числом.
  * Тот же подводный камень, что у getITS.
  */
-export const getPopularServices = async (limit = 3): Promise<Service[]> => {
+export const getPopularServices = async (limit = 24): Promise<Service[]> => {
   const payload = await getPayload({ config })
   const { docs } = await payload.find({
     collection: 'services',

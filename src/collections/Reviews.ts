@@ -17,17 +17,22 @@ export const Reviews: CollectionConfig = {
   labels: { singular: 'Отзыв', plural: 'Отзывы' },
   access: { read: () => true },
 
+  /* Гасим обе страницы: три отзыва с флагом showOnHome стоят на главной,
+     все — на «О компании». Раньше здесь была только главная, потому что
+     второй страницы ещё не существовало */
   hooks: {
     afterChange: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
         revalidatePath('/')
+        revalidatePath('/about')
       },
     ],
     afterDelete: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
         revalidatePath('/')
+        revalidatePath('/about')
       },
     ],
   },

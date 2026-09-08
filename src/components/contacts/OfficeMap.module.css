@@ -1,0 +1,76 @@
+/* Пропорция задаётся здесь, а не высотой в пикселях: карта резиновая по
+   ширине, и фиксированная высота на узком экране превратила бы её в
+   вертикальную полосу */
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  min-height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.stub {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--surface-muted);
+}
+
+.note {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-relaxed);
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 460px;
+}
+
+.button {
+  background: var(--surface-accent);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: 10px;
+  padding: var(--space-3) var(--space-7);
+  font-family: inherit;
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(0.92);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 3px;
+}
+
+/* Плашка — обычный HTML поверх карты, а не часть картинки: текст должен
+   читаться скринридером, переводиться и правиться в админке */
+.plaque {
+  position: absolute;
+  inset-block-end: var(--space-5);
+  inset-inline-start: var(--space-5);
+  margin: 0;
+  padding: var(--space-3) var(--space-5);
+  border-radius: 10px;
+  background: var(--text-navy-deep);
+  color: var(--text-inverse);
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-medium);
+  max-width: calc(100% - var(--space-10));
+}
