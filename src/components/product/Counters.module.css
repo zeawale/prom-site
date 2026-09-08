@@ -1,0 +1,39 @@
+/* Число колонок приходит атрибутом, а не отдельным классом: вариантов
+   всего два и оба заданы здесь, из компонента передаётся только цифра */
+.counters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 20px;
+  padding: var(--space-6);
+  margin: 0;
+}
+
+.counters[data-columns='4'] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.counter {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.value {
+  font-size: var(--fs-display-48);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-none);
+  color: var(--text-link);
+  margin: 0 0 var(--space-3);
+}
+
+.caption {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin: 0;
+}
