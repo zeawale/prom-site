@@ -22,7 +22,7 @@ export default async function HomePage() {
     getHome(),
     getSettings(),
     getHomeReviews(),
-    getPopularServices(3),
+    getPopularServices(),
   ])
 
   const states = home.states

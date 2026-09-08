@@ -1,9 +1,18 @@
+/* Обрезки здесь быть не должно. Лента ниже выходит за правый край
+   контейнера, и любой overflow на этой секции срежет её ровно по нему —
+   вынос исчезнет. Обрезка по краю окна живёт на .band в BlueBand.module.css */
+.section {
+  min-width: 0;
+}
+
 .head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-6);
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-5);
+  color: var(--text-inverse);
+  text-decoration: none;
 }
 
 .title {
@@ -13,48 +22,147 @@
   margin: 0;
 }
 
-.all {
-  display: inline-flex;
-  color: var(--text-inverse);
-  text-decoration: none;
-}
-
 .arrow {
   display: block;
+  flex: 0 0 auto;
+  transition: transform 0.15s ease;
 }
 
-.all:hover .arrow {
+.head:hover .arrow {
   transform: translateX(4px);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-6);
+.head:focus-visible {
+  outline: 2px solid var(--border-inverse);
+  outline-offset: 4px;
+  border-radius: var(--space-1);
+}
+
+/* Лента обрезается по правому краю контейнера: карточка, которая в него
+   не помещается, видна наполовину и показывает, что список продолжается.
+
+   Выноса за край окна здесь нет намеренно. Он тут был, и именно из-за него
+   обрезка гуляла: видимая часть ленты равнялась контейнеру плюс расстояние
+   до края экрана, то есть зависела от ширины окна, а карточка оставалась
+   450px. Теперь видимая часть равна контейнеру, а он выше 1552px окна
+   зафиксирован на 1312 — обрезанной всегда оказывается третья карточка.
+
+   Отступа справа у ленты нет: padding на флекс-контейнере уменьшил бы его
+   content box, а в конце прокрутки последняя карточка должна встать ровно
+   по краю контейнера */
+.track {
+  display: flex;
+  gap: var(--space-5);
   list-style: none;
   margin: 0;
   padding: 0;
-  align-items: stretch;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
 }
 
+/* Нативная полоса спрятана: она рисуется по краю контейнера прокрутки,
+   а он вынесен за правый край окна — её правый конец было не достать
+   мышью. Вместо неё своя полоса ниже, по ширине контейнера */
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Своя полоса прокрутки. Ширину и положение бегунка в процентах считает
+   ServicesTrack, всё остальное здесь */
+.bar {
+  position: relative;
+  height: 6px;
+  margin-block-start: var(--space-5);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.24);
+  cursor: pointer;
+  /* без touch-action бегунок на тачскрине уводит страницу вертикально */
+  touch-action: none;
+}
+
+.thumb {
+  position: absolute;
+  inset-block: 0;
+  min-width: 48px;
+  max-width: 100%;
+  border-radius: 999px;
+  background: var(--surface-accent);
+  transition: background-color 0.15s ease;
+}
+
+.bar:hover .thumb {
+  background: #ff8524;
+}
+
+/* 450px, а не 425 из макета. При 425 три карточки плюс два зазора дают
+   1315px, а видимая часть ленты при окне 1440 — 1320px: третья карточка
+   не долезает до края ровно на 5px и остаётся целиком видна, обрезки нет
+   вообще. Порог — 427px, макетное значение стоит буквально на нём.
+   450 даёт обрезку около 70px при 1440 и обрезанную четвёртую на широком
+   мониторе, то есть обрезанная карточка видна всегда.
+
+   Процент здесь не годится принципиально, на этом я уже обожглась:
+   flex-basis в процентах считается от content box самой ленты, а лента
+   растянута отрицательным margin далеко за контейнер. Карточки от этого
+   раздувались, ровно заполняли раздутую ленту — и прокручивать
+   становилось нечего. vw от ширины ленты не зависит, поэтому запасное
+   значение для узких экранов задано через него */
 .card {
+  flex: 0 0 min(450px, 80vw);
+  /* Высота 200, а не 180. При фиксированной высоте отступы и зазоры делят
+     один и тот же запас: на 180 отступы по 20px оставляли самой плотной
+     карточке — «1С:Распознавание первичных документов» с заголовком в две
+     строки — по 2px между блоками, и она читалась слипшейся. 20px сверху
+     и снизу помещаются только начиная с 200. */
+  height: 200px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  /* space-between, а не фиксированный зазор. Высота задана жёстко, а текста
+     в карточках разное количество — с обычным gap весь свободный запас
+     собирался в одном месте: заголовок с подзаголовком слипались вверху
+     на 8px, а перед кнопкой зияла дыра в 39px. Теперь запас делится
+     поровну между тремя блоками.
+
+     gap здесь работает минимумом на случай самых плотных карточек: у
+     «1С:Распознавания первичных документов» заголовок в две строки, и
+     делить там уже почти нечего */
+  gap: var(--space-1);
+  justify-content: space-between;
   background: var(--surface-default);
-  border-radius: var(--space-2);
-  padding: var(--space-6);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: var(--space-5) var(--space-6);
   min-width: 0;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* Рамка прозрачная, а не отсутствующая: появись она только на ховере,
+   карточка дёргалась бы на 2px под курсором */
+.card:hover {
+  border-color: var(--border-brand);
+  background: var(--surface-muted);
 }
 
 .cardTitle {
-  font-size: var(--fs-h5);
+  font-size: var(--fs-h4);
   font-weight: var(--fw-bold);
-  color: var(--text-link);
+  line-height: var(--lh-heading);
+  color: var(--text-navy-deep);
   margin: 0;
 }
 
+/* Две строки максимум, дальше многоточие. Без этого «1С:Сверка 2.0» с её
+   тремя строками выталкивала кнопку за нижний край карточки */
 .headline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
   font-size: var(--fs-body-s);
   font-weight: var(--fw-medium);
   line-height: var(--lh-relaxed);
@@ -62,14 +170,13 @@
   margin: 0;
 }
 
-/* Кнопка прижата к низу: заголовки сервисов разной длины, без этого
-   три кнопки встают на трёх разных высотах */
+/* margin-block-start: auto больше не нужен — кнопку к низу прижимает
+   space-between у карточки */
 .button {
-  margin-block-start: auto;
   width: 100%;
   background: none;
   border: 1px solid var(--border-brand);
-  border-radius: var(--space-1);
+  border-radius: var(--space-2);
   padding: var(--space-2) var(--space-5);
   font-family: inherit;
   font-size: var(--fs-body-s);
@@ -77,10 +184,26 @@
   color: var(--text-link);
   text-align: center;
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
-.button:hover {
+/* Кликается вся карточка: псевдоэлемент кнопки растянут на неё целиком.
+   Кнопка при этом остаётся настоящей кнопкой, а заголовок — заголовком,
+   и в оглавлении страницы у скринридера сервисы никуда не делись */
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+}
+
+.card:hover .button {
   background: var(--surface-brand-soft);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 2px;
 }
 
 .srOnly {
@@ -90,4 +213,12 @@
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .card,
+  .button {
+    transition: none;
+  }
 }
