@@ -1,5 +1,5 @@
 .section {
-  padding-block: var(--space-20);
+  padding: var(--space-10) 0;
 }
 
 .title {
@@ -7,26 +7,32 @@
   font-weight: var(--fw-bold);
   line-height: var(--lh-heading);
   color: var(--text-primary);
-  margin: 0 0 var(--space-7);
+  margin: 0 0 var(--space-5);
 }
 
+/* Один блок на все вопросы, как в макете: рамка и скругление здесь, а не
+   у каждого пункта. overflow: hidden обрезает фон верхнего и нижнего
+   пунктов по радиусу — иначе на ховере из-под скругления вылезают углы */
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: var(--space-4);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .item {
-  background: var(--surface-default);
-  border: 1px solid var(--border-default);
-  border-radius: var(--space-2);
-  padding: var(--space-6);
+  padding: var(--space-5) var(--space-6);
 }
 
-/* Заголовок нужен для оглавления страницы у скринридера, кнопка —
-   для управления. Поэтому кнопка внутри h3, а не вместо него */
+/* Разделитель у всех, кроме первого: border-top на .item дал бы лишнюю
+   линию под верхней рамкой контейнера */
+.item + .item {
+  border-top: 1px solid var(--border-default);
+}
+
 .questionRow {
   margin: 0;
 }
@@ -45,8 +51,14 @@
   font-weight: var(--fw-semibold);
   line-height: var(--lh-heading);
   color: var(--text-primary);
-  text-align: left;
+  text-align: start;
   cursor: pointer;
+}
+
+.question:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 4px;
+  border-radius: var(--space-1);
 }
 
 /* Знак нарисован кружком с символом внутри: минус — U+2212, он есть
@@ -66,8 +78,32 @@
   line-height: var(--lh-none);
 }
 
+/* Тот же приём, что в «Где вы сейчас»: height: auto не анимируется,
+   а grid-template-rows от 0fr к 1fr — да, и высоту заранее знать не нужно */
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.item[data-open] .answerWrap {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  min-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0s linear 0.25s;
+}
+
+.item[data-open] .answerInner {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
 .answer {
-  margin-block-start: var(--space-4);
+  padding-block-start: var(--space-4);
 }
 
 .paragraph {
@@ -79,4 +115,11 @@
 
 .paragraph:last-child {
   margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answerWrap,
+  .answerInner {
+    transition: none;
+  }
 }
