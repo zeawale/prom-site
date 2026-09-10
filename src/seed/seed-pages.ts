@@ -61,10 +61,12 @@ const seed = async () => {
 
       phone: { label: 'Телефон', caption: 'Разберём вашу ситуацию сразу' },
       email: { label: 'Почта', caption: 'Ответим в течение рабочего дня' },
-      hours: { label: 'Часы работы', caption: 'Суббота и воскресенье — на отдыхе' },
+      hours: { label: 'Часы работы', caption: 'Суббота и воскресенье — выходные дни' },
       address: { label: 'Адрес офиса', caption: null },
-      legal: { label: 'Юридическое лицо', caption: 'Договор и счёт выставляем от этого лица' },
-      inn: { label: 'ИНН', caption: 'Остальные реквизиты — в счёте и договоре' },
+      // Юрлицо и ИНН без подписей: значение говорит само за себя, а подпись
+      // под ним была пересказом очевидного
+      legal: { label: 'Юридическое лицо', caption: null },
+      inn: { label: 'ИНН', caption: null },
 
       map: {
         url: 'https://yandex.ru/map-widget/v1/?text=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9%20%D0%9D%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%2C%20%D0%9A%D0%B0%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%2012%20%D0%BA.1&z=17&lang=ru_RU',
