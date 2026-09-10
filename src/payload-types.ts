@@ -101,6 +101,7 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     settings: Setting;
+    'cookie-banner': CookieBanner;
     home: Home;
     about: About;
     contacts: Contact;
@@ -112,6 +113,7 @@ export interface Config {
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    'cookie-banner': CookieBannerSelect<false> | CookieBannerSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
@@ -1080,6 +1082,48 @@ export interface Setting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookie-banner".
+ */
+export interface CookieBanner {
+  id: number;
+  /**
+   * Меняйте дату, когда меняется состав категорий или текст политики cookie. Посетители, согласившиеся со старой версией, увидят баннер снова — согласие на прежних условиях к новым не относится
+   */
+  version: string;
+  title: string;
+  text: string;
+  /**
+   * Ведёт на страницу /cookie, адрес менять не нужно
+   */
+  policyLabel: string;
+  acceptAllLabel: string;
+  /**
+   * Выводится тем же размером и весом, что и кнопка принятия — это требование, а не оформление
+   */
+  necessaryOnlyLabel: string;
+  settingsLabel: string;
+  settings: {
+    title: string;
+    necessary: {
+      label: string;
+      text: string;
+    };
+    analytics: {
+      label: string;
+      text: string;
+    };
+    functional: {
+      label: string;
+      text: string;
+    };
+    saveLabel: string;
+    acceptAllLabel: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home".
  */
 export interface Home {
@@ -2031,6 +2075,47 @@ export interface SettingsSelect<T extends boolean = true> {
   inn?: T;
   ogrn?: T;
   tariffDisclaimer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookie-banner_select".
+ */
+export interface CookieBannerSelect<T extends boolean = true> {
+  version?: T;
+  title?: T;
+  text?: T;
+  policyLabel?: T;
+  acceptAllLabel?: T;
+  necessaryOnlyLabel?: T;
+  settingsLabel?: T;
+  settings?:
+    | T
+    | {
+        title?: T;
+        necessary?:
+          | T
+          | {
+              label?: T;
+              text?: T;
+            };
+        analytics?:
+          | T
+          | {
+              label?: T;
+              text?: T;
+            };
+        functional?:
+          | T
+          | {
+              label?: T;
+              text?: T;
+            };
+        saveLabel?: T;
+        acceptAllLabel?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

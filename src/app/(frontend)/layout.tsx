@@ -4,6 +4,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { LeadModalProvider } from '@/components/lead/LeadModalProvider'
 import { ServiceModalProvider } from '@/components/catalog/ServiceModalProvider'
+import { CookieConsent } from '@/components/cookie/CookieConsent'
+import { getCookieBanner } from '@/lib/queries'
 
 /**
  * Montserrat подключается обычным CSS (см. fonts.css), а не next/font.
@@ -24,7 +26,9 @@ import { ServiceModalProvider } from '@/components/catalog/ServiceModalProvider'
  * какой файл тянуть. Единственное, что next/font делал сам и что теперь
  * приходится писать руками, — preload ниже.
  */
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookie = await getCookieBanner()
+
   return (
     <html lang="ru">
       <head>
@@ -53,9 +57,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <LeadModalProvider>
-          <Header />
-          <ServiceModalProvider>{children}</ServiceModalProvider>
-          <Footer />
+          {/* Обёртка нужна только под overflow-x: clip — см. styles.css.
+              Стоит внутри провайдера, чтобы модалка заявки осталась
+              снаружи обрезки */}
+          <div className="viewport">
+            <Header />
+            <ServiceModalProvider>{children}</ServiceModalProvider>
+            <Footer />
+          </div>
+
+          {/* Снаружи обёртки — плашка и её модалка position: fixed, обрезка
+              по горизонтали им ни к чему, а тексты приходят из CMS */}
+          <CookieConsent
+            texts={{
+              version: cookie.version,
+              title: cookie.title,
+              text: cookie.text,
+              policyLabel: cookie.policyLabel,
+              acceptAllLabel: cookie.acceptAllLabel,
+              necessaryOnlyLabel: cookie.necessaryOnlyLabel,
+              settingsLabel: cookie.settingsLabel,
+              settings: {
+                title: cookie.settings.title,
+                necessary: cookie.settings.necessary,
+                analytics: cookie.settings.analytics,
+                functional: cookie.settings.functional,
+                saveLabel: cookie.settings.saveLabel,
+                acceptAllLabel: cookie.settings.acceptAllLabel,
+              },
+            }}
+          />
         </LeadModalProvider>
       </body>
     </html>

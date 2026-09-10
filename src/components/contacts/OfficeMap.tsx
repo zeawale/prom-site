@@ -1,6 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
+import {
+  allows,
+  readCookieConsent,
+  serverCookieConsent,
+  subscribeCookieConsent,
+} from '@/lib/cookieConsent'
 import styles from './OfficeMap.module.css'
 
 type Props = {
@@ -10,26 +16,54 @@ type Props = {
   note?: string | null
   /** Адрес текстом — он же подпись к карте для скринридера */
   address: string
+  /** Версия согласия из глобала CookieBanner: согласие на прежние условия к новым не относится */
+  consentVersion: string
 }
 
 /**
- * Карта офиса — виджет Яндекс.Карт, который грузится только по нажатию.
+ * Карта офиса — виджет Яндекс.Карт.
  *
- * Iframe не стоит в разметке сразу намеренно. Виджет тянется с серверов
- * Яндекса и ставит свои cookie, то есть до согласия посетителя его быть
- * не должно. Пока кнопку не нажали, к Яндексу не уходит ни одного
- * запроса: в DOM нет ни iframe, ни ссылки на его домен.
+ * Карта открывается сама, если посетитель разрешил функциональные cookie:
+ * флаг общий с cookie-баннером и живёт в lib/cookieConsent. Заглушка с
+ * кнопкой остаётся только для двух случаев — ответа на баннер ещё не было
+ * или он был отрицательным.
  *
- * Согласие здесь одноразовое, на текущий просмотр, и нигде не хранится.
- * Когда появится сквозной cookie-баннер, эту заглушку надо подружить с
- * ним: карта должна открываться сразу, если аналитические cookie уже
- * разрешены. До тех пор явное нажатие — самый честный вариант.
+ * Категория именно функциональная, а не аналитическая: виджет не считает
+ * посещения, он часть содержимого страницы. Поэтому в описании категории
+ * в CMS прямо сказано про встроенную карту — иначе посетитель разрешает
+ * «запоминать настройки», а получает вдобавок запрос к Яндексу.
  *
- * loading="lazy" на iframe оставлен, хотя он уже за кнопкой: браузер всё
- * равно не начнёт грузить виджет, пока карта не окажется во вьюпорте.
+ * Iframe не стоит в разметке безусловно намеренно: виджет тянется с
+ * серверов Яндекса и ставит свои cookie, то есть до согласия его быть не
+ * должно. Пока согласия нет и кнопку не нажали, к Яндексу не уходит ни
+ * одного запроса — в DOM нет ни iframe, ни ссылки на его домен.
+ *
+ * Нажатие кнопки — согласие ровно на этот просмотр: оно НЕ пишется в
+ * хранилище. Отказ на баннере не должен молча превращаться в постоянное
+ * разрешение из-за одного клика по карте.
+ *
+ * loading="lazy" оставлен, хотя iframe появляется уже после решения:
+ * браузер всё равно не начнёт грузить виджет, пока карта не окажется во
+ * вьюпорте.
  */
-export default function OfficeMap({ url, plaque, buttonLabel, note, address }: Props) {
-  const [shown, setShown] = useState(false)
+export default function OfficeMap({
+  url,
+  plaque,
+  buttonLabel,
+  note,
+  address,
+  consentVersion,
+}: Props) {
+  const consent = useSyncExternalStore(
+    subscribeCookieConsent,
+    readCookieConsent,
+    serverCookieConsent,
+  )
+
+  /* Разовое согласие «показать сейчас», поверх сохранённого решения */
+  const [openedByClick, setOpenedByClick] = useState(false)
+
+  const shown = allows(consent, 'functional', consentVersion) || openedByClick
 
   return (
     <div className={styles.frame}>
@@ -44,7 +78,11 @@ export default function OfficeMap({ url, plaque, buttonLabel, note, address }: P
       ) : (
         <div className={styles.stub}>
           {note && <p className={styles.note}>{note}</p>}
-          <button type="button" className={styles.button} onClick={() => setShown(true)}>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={() => setOpenedByClick(true)}
+          >
             {buttonLabel ?? 'Показать карту'}
           </button>
         </div>

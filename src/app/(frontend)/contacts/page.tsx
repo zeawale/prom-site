@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getContacts, getSettings } from '@/lib/queries'
+import { getContacts, getCookieBanner, getSettings } from '@/lib/queries'
 import PageHero from '@/components/product/PageHero'
 import ContactCards, { type ContactCard } from '@/components/contacts/ContactCards'
 import OfficeMap from '@/components/contacts/OfficeMap'
@@ -12,12 +12,18 @@ export async function generateMetadata(): Promise<Metadata> {
     title: contacts.title
       ? `${contacts.title} — ООО «НПП ПРО-М» в Нижнем Новгороде`
       : 'Контакты — ООО «НПП ПРО-М» в Нижнем Новгороде',
-    description: contacts.lead ?? undefined,
+    description: contacts.lead,
   }
 }
 
 export default async function ContactsPage() {
-  const [contacts, settings] = await Promise.all([getContacts(), getSettings()])
+  /* Версия согласия нужна карте: разрешение, данное на прежний состав
+     категорий, к новому не относится */
+  const [contacts, settings, cookie] = await Promise.all([
+    getContacts(),
+    getSettings(),
+    getCookieBanner(),
+  ])
 
   /* Значения — из Settings, обёртки — из Contacts. Порядок карточек
      фиксирован здесь, а не в CMS: он совпадает с макетом, и давать
@@ -59,9 +65,9 @@ export default async function ContactsPage() {
 
   return (
     <main className="container">
-      {/* ?? '' по той же причине, что на /about: пока глобал не сохранён,
-          Payload отдаёт undefined даже для полей с required */}
-      <PageHero title={contacts.title ?? ''} lead={contacts.lead} level={1} />
+      {/* Заполненность глобала гарантирует getContacts — см. assertFilled
+          в lib/queries. Здесь обязательные поля берутся как есть */}
+      <PageHero title={contacts.title} lead={contacts.lead} level={1} />
 
       <ContactCards items={cards} />
 
@@ -72,6 +78,7 @@ export default async function ContactsPage() {
           buttonLabel={contacts.map.buttonLabel}
           note={contacts.map.note}
           address={settings.address}
+          consentVersion={cookie.version}
         />
       )}
     </main>

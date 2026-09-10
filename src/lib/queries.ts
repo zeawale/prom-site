@@ -204,7 +204,20 @@ export const getAbout = async () => {
  */
 export const getContacts = async () => {
   const payload = await getPayload({ config })
-  return payload.findGlobal({ slug: 'contacts', depth: 0 })
+  const contacts = await payload.findGlobal({ slug: 'contacts', depth: 0 })
+  return assertFilled(contacts, 'contacts', ['title', 'lead'])
+}
+
+/**
+ * Тексты cookie-баннера. Читаются в корневом layout, то есть на каждой
+ * странице сайта.
+ */
+export const getCookieBanner = async () => {
+  const payload = await getPayload({ config })
+  const banner = await payload.findGlobal({ slug: 'cookie-banner', depth: 0 })
+  /* Проверяется и группа settings: баннер стоит в корневом layout, и
+     обращение к пустой группе уронило бы не одну страницу, а все 97 */
+  return assertFilled(banner, 'cookie-banner', ['version', 'title', 'text', 'settings'])
 }
 
 export const getHome = async () => {

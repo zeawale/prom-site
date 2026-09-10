@@ -1,0 +1,296 @@
+/* ---------- Плашка ---------- */
+
+/* z-index ниже модалки заявки (100): если посетитель успел открыть форму,
+   плашка не должна лечь поверх неё */
+.banner {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 90;
+  background: var(--surface-default);
+  border-block-start: 1px solid var(--border-default);
+  box-shadow: 0 -4px 24px rgb(13 33 70 / 0.08);
+}
+
+/* Та же сетка, что у шапки, футера и .container */
+.inner {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.copy {
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.text {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-2);
+  max-width: 900px;
+}
+
+.policy {
+  font-size: var(--fs-body-s);
+  color: var(--text-link);
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-shrink: 0;
+}
+
+/* ---------- Кнопки ---------- */
+
+/* .accept и .reject намеренно совпадают во всём, кроме заливки: размер,
+   шрифт, вес, скругление, паддинги. Кнопка отказа, оформленная скромнее
+   кнопки согласия, — это подталкивание, а не выбор */
+.accept,
+.reject {
+  border-radius: 999px;
+  padding: var(--space-4) var(--space-8);
+  font-family: inherit;
+  font-size: var(--fs-body-m);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-none);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.accept {
+  background: var(--surface-accent);
+  border: 2px solid var(--surface-accent);
+  color: var(--text-inverse);
+}
+
+.reject {
+  background: transparent;
+  border: 2px solid var(--surface-accent);
+  color: var(--text-accent);
+}
+
+.accept:hover,
+.reject:hover {
+  filter: brightness(0.92);
+}
+
+.accept:focus-visible,
+.reject:focus-visible,
+.settingsButton:focus-visible,
+.close:focus-visible,
+.switch:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 3px;
+}
+
+.settingsButton {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--fs-body-m);
+  font-weight: var(--fw-semibold);
+  color: var(--text-link);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.settingsButton:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Модалка настроек ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: rgb(13 33 70 / 0.5);
+  overflow-y: auto;
+}
+
+.dialog {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  background: var(--surface-muted);
+  border-radius: 24px;
+}
+
+.close {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--surface-default);
+}
+
+.dialogTitle {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-6);
+}
+
+/* Белая карточка на светло-сером фоне модалки, категории разделены
+   линиями — как в макете */
+.list {
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface-default);
+  border-radius: 16px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-block: var(--space-5);
+}
+
+.row + .row {
+  border-block-start: 1px solid var(--border-default);
+}
+
+.rowText {
+  min-width: 0;
+}
+
+.rowLabel {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.rowDesc {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-relaxed);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ---------- Переключатель ---------- */
+
+/* Зелёный тут единственный на весь сайт и живёт локально. Появится
+   второй — переехать в токены, отдельный токен ради одного места был бы
+   шумом в общей палитре */
+.switch {
+  --switch-off: var(--border-default);
+  --switch-on: #5fc98d;
+
+  flex: 0 0 auto;
+  position: relative;
+  width: 56px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--switch-off);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.switch[data-on] {
+  background: var(--switch-on);
+}
+
+/* Не disabled: отключённая кнопка выпадает из обхода табом и из
+   скринридера, а посетитель должен видеть, что необходимые cookie
+   включены и почему. Поэтому aria-disabled и курсор по умолчанию */
+.switch[data-locked] {
+  cursor: default;
+}
+
+.thumb {
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(13 33 70 / 0.25);
+  transition: translate 0.15s ease;
+}
+
+.switch[data-on] .thumb {
+  translate: 24px 0;
+}
+
+.dialogActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.dialogActions .accept,
+.dialogActions .reject {
+  width: 100%;
+}
+
+/* ---------- Узкие экраны ---------- */
+
+/* Единственный медиазапрос в проекте на сегодня: плашка занимает нижнюю
+   часть экрана, и в строку на телефоне она не укладывается физически.
+   Общий мобильный адаптив — отдельная задача */
+@media (max-width: 900px) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+
+  .actions {
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .dialogActions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .thumb {
+    transition: none;
+  }
+}

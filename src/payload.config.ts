@@ -21,13 +21,25 @@ import { GRM } from './globals/GRM'
 import { Home } from './globals/Home'
 import { About } from './globals/About'
 import { Contacts } from './globals/Contacts'
+import { CookieBanner } from './globals/CookieBanner'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   collections: [Users, Media, Categories, Services, Leads, Programs, LegalPages, Reviews],
-  globals: [Settings, Home, About, Contacts, ProgramsSection, ITS, Fresh, GRM, FreshVsGrm],
+  globals: [
+    Settings,
+    CookieBanner,
+    Home,
+    About,
+    Contacts,
+    ProgramsSection,
+    ITS,
+    Fresh,
+    GRM,
+    FreshVsGrm,
+  ],
   admin: {
     user: Users.slug,
     importMap: {
