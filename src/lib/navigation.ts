@@ -1,6 +1,7 @@
 export type NavItem = { label: string; href: string }
 
 export const mainNav: NavItem[] = [
+  { label: 'Главная', href: '/' },
   { label: 'О компании', href: '/about' },
   { label: '1С сервисы', href: '/services' },
   { label: '1С:Фреш', href: '/fresh' },

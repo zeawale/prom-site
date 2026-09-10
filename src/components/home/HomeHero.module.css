@@ -15,15 +15,19 @@
     #5581CD 100%
   );
   color: var(--text-inverse);
+  /* 100% в margin — это ширина контента .container (1376), 100vw — окно.
+     Разница пополам и есть вынос до края. Проценты здесь считаются от
+     СВОЕГО контейнера, поэтому вынести эту пару в наследуемую переменную
+     нельзя: в ней процент пересчитался бы уже относительно этой секции */
   margin-inline: calc((100% - 100vw) / 2);
   margin-block-start: calc(var(--space-6) * -1);
   padding-block: var(--space-20);
-  padding-inline: calc((100vw - var(--container)) / 2);
+  padding-inline: calc((100vw - var(--container-content)) / 2);
 }
 
 .inner {
-  max-width: var(--container);
-  margin-inline: var(--space-6);
+  max-width: var(--container-content);
+  margin-inline: auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-5);

@@ -4,11 +4,14 @@
   border-bottom: 1px solid var(--border-subtle);
 }
 
+/* Та же сетка, что у .container на страницах: max-width --container плюс
+   боковой отступ --space-6. Раньше здесь было 1440 + 32, и контент шапки
+   оказывался на 32px левее контента страницы */
 .inner {
   height: 100%;
-  max-width: 1440px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 var(--space-6);
   display: flex;
   align-items: center;
   gap: 32px;
@@ -22,23 +25,26 @@
   text-decoration: none;
 }
 
+/* height: auto, а не 49px: box-sizing: border-box глобальный, и любая
+   горизонтальная добавка внутри фиксированной ширины сжимала бы картинку
+   по ширине, не трогая высоту. Разделитель здесь тоже не нужен — он есть
+   отдельным элементом .divider, а было их два */
 .logoProm {
   display: block;
   width: 150px;
-  height: 49px;
-  border-right: 1px var(--border-default) solid;
-  padding-right: var(--space-4);
+  height: auto;
 }
 .logo1c {
   display: block;
   width: 72px;
-  height: 48px;
+  height: auto;
 }
 
 .divider {
+  margin: 0 2px;
   width: 1px;
   height: 29px;
-  background: var(--border-subtle);
+  background: var(--border-inverse);
 }
 
 .nav {
@@ -66,18 +72,13 @@
   font-weight: bold;
 }
 
+/* Телефон отсюда убран — в шапке восемь пунктов меню, и она переполнялась.
+   Номер остался в футере и на «Контактах», кликнуть по нему есть где */
 .actions {
   display: flex;
   align-items: center;
   gap: 32px;
   flex-shrink: 0;
-}
-
-.phone {
-  font-size: var(--fs-label-12);
-  color: var(--text-inverse);
-  text-decoration: none;
-  white-space: nowrap;
 }
 
 .cta {

@@ -3,13 +3,17 @@
   border-top: 1px solid var(--border-subtle);
 }
 
+/* Сетка та же, что у шапки и у .container на страницах */
 .inner {
   min-height: 200px;
-  max-width: 1440px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 40px 32px;
+  padding: 40px var(--space-6);
   display: flex;
-  align-items: flex-start;
+  /* center, а не flex-start: логотип 118px высотой, колонки — 162px, и при
+     верхнем выравнивании логотип висел в верхней части футера, а не по
+     его середине */
+  align-items: center;
   gap: 100px;
 }
 

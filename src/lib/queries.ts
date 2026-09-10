@@ -7,6 +7,37 @@ import type { Program } from '@/payload-types'
 /** Общий фильтр видимости. Используется во ВСЕХ выборках сервисов. */
 export const VISIBLE: Where = { isHidden: { not_equals: true } }
 
+/**
+ * Проверка, что глобал вообще заполняли.
+ *
+ * Глобал, который ни разу не сохраняли, Payload отдаёт без полей: findGlobal
+ * возвращает объект, где required-поля равны undefined, хотя сгенерированный
+ * тип обещает строку. Дальше это прилетает в компонент и падает где-нибудь
+ * на `body.split('\n')` — сообщением, по которому непонятно, что случилось.
+ *
+ * Отсюда правило по проекту: страница падает громко, а не рисует пустоту.
+ * `?? ''` в компонентах — это не «страница пережила», это молча выкаченная
+ * в прод дырка, которую дымовой тест ещё и не увидит (h1 есть, он пустой).
+ * Проверка стоит в геттере, в одном месте: страницы уже получают заполненный
+ * глобал и не защищаются по второму разу.
+ *
+ * Проверяются только обязательные поля верхнего уровня — те, без которых
+ * страница бессмысленна. Необязательные (`counters`, `photo`, подписи
+ * карточек) остаются на совести компонентов, там `?? []` уместен.
+ */
+function assertFilled<T extends object>(doc: T, slug: string, keys: readonly (keyof T)[]): T {
+  const missing = keys.filter((key) => doc[key] === undefined || doc[key] === null)
+
+  if (missing.length) {
+    throw new Error(
+      `Глобал «${slug}» не заполнен: нет полей ${missing.map(String).join(', ')}. ` +
+        'Прогоните сид или сохраните страницу в админке.',
+    )
+  }
+
+  return doc
+}
+
 export async function getSettings() {
   const payload = await getPayload({ config })
   return payload.findGlobal({ slug: 'settings' })
@@ -161,7 +192,8 @@ export const getAbout = async () => {
   const payload = await getPayload({ config })
   // depth: 1 — фото директора это upload-связь, без глубины вместо
   // документа приедет id. Отзывы страница берёт отдельным запросом
-  return payload.findGlobal({ slug: 'about', depth: 1 })
+  const about = await payload.findGlobal({ slug: 'about', depth: 1 })
+  return assertFilled(about, 'about', ['title', 'body'])
 }
 
 /**

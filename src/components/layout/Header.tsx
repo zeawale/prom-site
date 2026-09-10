@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { getSettings } from '@/lib/queries'
 import { mainNav } from '@/lib/navigation'
 import { NavLink } from './NavLink'
 import { RequestButton } from './RequestButton'
 import styles from './Header.module.css'
 
-export async function Header() {
-  const settings = await getSettings()
-
+/**
+ * Шапка ничего не запрашивает: телефон отсюда убран (восемь пунктов меню
+ * и номер в строку не помещались), а больше данных из Settings ей не нужно.
+ * Номер живёт в футере и на «Контактах».
+ */
+export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -45,9 +47,6 @@ export async function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <a href={`tel:${settings.phoneRaw}`} className={styles.phone}>
-            {settings.phone}
-          </a>
           <RequestButton className={styles.cta} source="header" />
         </div>
       </div>

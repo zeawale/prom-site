@@ -9,9 +9,9 @@ import Counters from '@/components/product/Counters'
 
 export async function generateMetadata(): Promise<Metadata> {
   const about = await getAbout()
-  // ?? '' по всей странице: у глобала, который ещё не сохраняли, полей в
-  // базе нет и findGlobal отдаёт undefined, несмотря на required в схеме
-  const first = (about.body ?? '')
+  // Заполненность глобала гарантирует getAbout — см. assertFilled в
+  // lib/queries. Страница обязательные поля больше не подстраховывает
+  const first = about.body
     .split('\n')
     .map((line) => line.trim())
     .find(Boolean)
@@ -40,7 +40,7 @@ export default async function AboutPage() {
 
   return (
     <main className="container">
-      <AboutIntro title={about.title ?? ''} body={about.body} photo={photo} />
+      <AboutIntro title={about.title} body={about.body} photo={photo} />
 
       <Counters
         columns={4}
