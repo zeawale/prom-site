@@ -23,6 +23,7 @@ const BASE = 'http://localhost:3000'
 /** Маршруты, заданные файлами в src/app/(frontend) */
 const STATIC_ROUTES = [
   '/',
+  '/about',
   '/services',
   '/services/popular',
   '/services/new',
@@ -30,6 +31,7 @@ const STATIC_ROUTES = [
   '/grm',
   '/its',
   '/programs',
+  '/contacts',
   '/privacy',
   '/cookie',
   '/consent',
@@ -39,11 +41,11 @@ const STATIC_ROUTES = [
  * Шум, который не является поломкой страницы.
  * Список намеренно короткий: чем он длиннее, тем меньше смысла в тесте.
  *
- * favicon.ico здесь потому, что иконки у сайта нет вообще — это пункт
- * техдолга, а не сломавшийся маршрут. Появится app/icon — строку убрать,
- * и тест начнёт стеречь заодно и её.
+ * favicon.ico отсюда убран: иконка появилась (src/app/icon.svg), Next
+ * отдаёт на неё <link rel="icon">, и запроса к /favicon.ico браузер больше
+ * не делает. Теперь тест стережёт заодно и иконку.
  */
-const NOISE = [/Download the React DevTools/i, /\[Fast Refresh\]/i, /favicon\.ico/i, /source ?map/i]
+const NOISE = [/Download the React DevTools/i, /\[Fast Refresh\]/i, /source ?map/i]
 
 const isNoise = (text: string) => NOISE.some((re) => re.test(text))
 
