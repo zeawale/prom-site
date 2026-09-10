@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getITS, getProgramsSection, getSettings } from '@/lib/queries'
+import { getITS, getSettings } from '@/lib/queries'
 import { toRows } from '@/lib/programs'
 import { RequestButton } from '@/components/layout/RequestButton'
 import PageHero from '@/components/product/PageHero'
@@ -21,11 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ITSPage() {
-  const [its, section, settings] = await Promise.all([
-    getITS(),
-    getProgramsSection(),
-    getSettings(),
-  ])
+  /* ProgramsSection здесь больше не нужен: дисклеймер таблиц уехал в
+     Settings, а шапку раздела рисует только /programs */
+  const [its, settings] = await Promise.all([getITS(), getSettings()])
 
   const cards = (its.cards ?? []).map((card) => ({
     icon: card.icon ?? null,

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { getProgram, getPrograms, getProgramsSection, getSettings } from '@/lib/queries'
+import { getProgram, getPrograms, getSettings } from '@/lib/queries'
 import { toRows } from '@/lib/programs'
 import { RequestButton } from '@/components/layout/RequestButton'
 import PageHero from '@/components/product/PageHero'
@@ -33,11 +33,9 @@ export async function generateMetadata({
 
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [program, section, settings] = await Promise.all([
-    getProgram(slug),
-    getProgramsSection(),
-    getSettings(),
-  ])
+  /* ProgramsSection читает layout раздела, странице программы он ни к
+     чему — результат запроса здесь просто выбрасывался */
+  const [program, settings] = await Promise.all([getProgram(slug), getSettings()])
 
   if (!program) notFound()
 
