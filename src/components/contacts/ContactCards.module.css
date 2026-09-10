@@ -3,21 +3,32 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-5);
   list-style: none;
-  margin: 0 0 var(--space-7);
+  /* 20px до карты — тот же шаг, что между самими карточками */
+  margin: 0 0 var(--space-5);
   padding: 0;
   align-items: stretch;
 }
 
 .card {
+  display: flex;
   background: var(--surface-default);
   border: 1px solid var(--border-default);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: var(--space-5) var(--space-6);
   min-width: 0;
 }
 
+/* Содержимое центрируется по вертикали, а не прижимается к верху.
+   Карточки в ряду одной высоты, а подпись под значением есть не у всех:
+   при верхнем выравнивании у «Юридического лица» и «ИНН» снизу зияла
+   треть карточки — ровно на месте отсутствующей подписи */
 .pair {
+  flex: 1;
+  min-width: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .label {
@@ -34,6 +45,11 @@
   line-height: var(--lh-base);
   color: var(--text-primary);
   margin: 0 0 var(--space-2);
+}
+
+/* Без подписи нижний отступ значения сместил бы пару вверх от центра */
+.value:last-child {
+  margin-block-end: 0;
 }
 
 .link {

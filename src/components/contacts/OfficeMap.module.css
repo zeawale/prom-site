@@ -5,7 +5,8 @@
   position: relative;
   aspect-ratio: 16 / 7;
   min-height: 320px;
-  border-radius: 16px;
+  /* 20px — как у карточек контактов над картой */
+  border-radius: 20px;
   overflow: hidden;
   background: var(--surface-default);
   border: 1px solid var(--border-default);
