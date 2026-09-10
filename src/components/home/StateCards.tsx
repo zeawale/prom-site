@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from 'react'
+import { useId, useRef, useState, type KeyboardEvent } from 'react'
 import Link from 'next/link'
 import { RequestButton } from '@/components/layout/RequestButton'
 import styles from './StateCards.module.css'
@@ -22,8 +22,6 @@ export type StateItem = {
 type Props = {
   title: string
   lead?: string | null
-  openLabel: string
-  closeLabel: string
   criteriaTitle: string
   solutionLabel: string
   items: StateItem[]
@@ -34,31 +32,34 @@ type Props = {
 }
 
 /**
- * «Где вы сейчас» — четыре состояния, подробности раскрываются под сеткой.
+ * «Где вы сейчас» — четыре состояния слева, подробности справа.
  *
- * Открыто может быть только одно: это диагностика, посетитель выбирает
- * свою ситуацию, а не сравнивает четыре сразу.
+ * Раскладка: столбец карточек в левой колонке, панель с подробностями в
+ * правой. Одно состояние выбрано всегда, свернуть всё нельзя. Прежние
+ * версии — сначала карточка, растягивавшаяся на обе колонки сетки 2×2,
+ * потом панель, выезжавшая под сеткой, — обе решали одну проблему: куда
+ * девать раскрытое содержимое, чтобы не двигать соседей. Две колонки
+ * снимают вопрос совсем: подробности стоят на своём месте с самого
+ * начала, ничто никуда не выезжает, и первое состояние видно сразу, без
+ * клика.
  *
- * Раньше раскрытая карточка растягивалась на обе колонки прямо в сетке —
- * от этого сетка перестраивалась, соседи прыгали, а рядом с первой
- * карточкой оставалась дыра. Теперь сетка 2×2 стоит на месте всегда, а
- * содержимое выезжает отдельной панелью под ней: ничего выше панели не
- * сдвигается, и прокрутку не срывает.
+ * Это ровно паттерн вкладок, поэтому и разметка вкладочная: role="tablist"
+ * на списке, role="tab" на карточках, role="tabpanel" на панели. Отсюда же
+ * управление с клавиатуры — по списку вкладок ходят стрелками, а не табом:
+ * в обходе табом весь список занимает одну остановку, дальше фокус уходит
+ * в панель. Home и End прыгают на первую и последнюю.
  *
- * Кликается карточка целиком, поэтому она и есть <button>, а «Это про
- * меня» внутри — обычный span. Вложить кнопку в кнопку нельзя: разметка
- * невалидна, а с клавиатуры получаются две остановки табом на одном
- * элементе.
+ * Карточка целиком — <button>: кликается вся, а не подпись внутри.
+ * Вложить кнопку в кнопку нельзя, поэтому «Это про меня» это span.
  *
- * shown держит последний выбранный индекс отдельно от active. Без него
- * при сворачивании содержимое панели пропадало бы в тот же кадр, и
- * анимация схлопывания шла бы по пустому блоку.
+ * Подписи «Это про меня» и «Свернуть» (openLabel и closeLabel в глобале
+ * Home) больше не выводятся: выбранная карточка видна по рамке, а
+ * сворачивать нечего. Оба поля в CMS остались без потребителей — убрать
+ * при следующей правке схемы.
  */
 export default function StateCards({
   title,
   lead,
-  openLabel,
-  closeLabel,
   criteriaTitle,
   solutionLabel,
   items,
@@ -67,19 +68,41 @@ export default function StateCards({
   phone,
   phoneRaw,
 }: Props) {
-  const [active, setActive] = useState<number | null>(null)
-  const [shown, setShown] = useState(0)
+  const [active, setActive] = useState(0)
   const baseId = useId()
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([])
 
   if (!items.length) return null
 
+  const current = items[active] ?? items[0]
   const panelId = `${baseId}-panel`
-  const current = items[active ?? shown] ?? items[0]
-  const currentNumber = String((active ?? shown) + 1).padStart(2, '0')
+  const tabId = (i: number) => `${baseId}-tab-${i}`
+  const num = (i: number) => String(i + 1).padStart(2, '0')
 
-  const toggle = (i: number) => {
-    setActive((cur) => (cur === i ? null : i))
-    setShown(i)
+  /* Стрелки переносят и выбор, и фокус: у вкладок с автоматической
+     активацией это одно действие, иначе с клавиатуры видно рамку на одной
+     карточке, а содержимое от другой */
+  const select = (i: number) => {
+    const next = (i + items.length) % items.length
+    setActive(next)
+    tabsRef.current[next]?.focus()
+  }
+
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, i: number) => {
+    const moves: Record<string, number> = {
+      ArrowDown: i + 1,
+      ArrowRight: i + 1,
+      ArrowUp: i - 1,
+      ArrowLeft: i - 1,
+      Home: 0,
+      End: items.length - 1,
+    }
+
+    const next = moves[event.key]
+    if (next === undefined) return
+
+    event.preventDefault()
+    select(next)
   }
 
   return (
@@ -89,51 +112,64 @@ export default function StateCards({
       </h2>
       {lead && <p className={styles.lead}>{lead}</p>}
 
-      <ul className={styles.grid}>
-        {items.map((item, i) => {
-          const open = active === i
+      <div className={styles.layout}>
+        <ul
+          className={styles.tabs}
+          role="tablist"
+          aria-orientation="vertical"
+          aria-labelledby={`${baseId}-title`}
+        >
+          {items.map((item, i) => {
+            const selected = active === i
 
-          return (
-            <li key={item.title} className={styles.cell}>
-              <button
-                type="button"
-                className={styles.card}
-                data-open={open || undefined}
-                aria-expanded={open}
-                aria-controls={panelId}
-                onClick={() => toggle(i)}
-              >
-                <span className={styles.head}>
-                  <span className={styles.number} aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
+            return (
+              <li key={item.title} className={styles.cell} role="presentation">
+                <button
+                  type="button"
+                  role="tab"
+                  id={tabId(i)}
+                  ref={(el) => {
+                    tabsRef.current[i] = el
+                  }}
+                  className={styles.card}
+                  data-selected={selected || undefined}
+                  aria-selected={selected}
+                  aria-controls={panelId}
+                  // Внутри вкладок таб-остановка одна: активная вкладка
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActive(i)}
+                  onKeyDown={(event) => onKeyDown(event, i)}
+                >
+                  <span className={styles.head}>
+                    <span className={styles.number} aria-hidden="true">
+                      {num(i)}
+                    </span>
+                    <span className={styles.cardTitle}>{item.title}</span>
                   </span>
-                  <span className={styles.cardTitle}>{item.title}</span>
-                </span>
 
-                <span className={styles.description}>{item.description}</span>
+                  <span className={styles.description}>{item.description}</span>
+                </button>
+              </li>
+            )
+          })}
+        </ul>
 
-                <span className={styles.toggle}>{open ? closeLabel : openLabel}</span>
-              </button>
-            </li>
-          )
-        })}
-      </ul>
-
-      {/* Обёртка живёт в разметке всегда — иначе высоту нечем анимировать.
-          Пока она свёрнута, внутренности переходят в visibility: hidden с
-          задержкой на длину анимации: содержимое видно до конца схлопывания,
-          но ссылки внутри выпадают из обхода табом и из скринридера */}
-      <div className={styles.panelWrap} data-open={active !== null || undefined}>
-        <div className={styles.panelInner}>
-          <div className={styles.panel} id={panelId} role="region" aria-label={current.title}>
+        <div
+          className={styles.panel}
+          id={panelId}
+          role="tabpanel"
+          aria-labelledby={tabId(active)}
+          // Панель фокусируемая: в ней бывает текст без ссылок, и с
+          // клавиатуры до него иначе не добраться
+          tabIndex={0}
+        >
+          {/* key перезапускает появление при каждой смене состояния */}
+          <div className={styles.panelFade} key={active}>
             <div className={styles.panelHead}>
               <span className={styles.number} aria-hidden="true">
-                {currentNumber}
+                {num(active)}
               </span>
               <h3 className={styles.panelTitle}>{current.title}</h3>
-              <button type="button" className={styles.close} onClick={() => setActive(null)}>
-                {closeLabel}
-              </button>
             </div>
 
             <div className={styles.panelBody}>

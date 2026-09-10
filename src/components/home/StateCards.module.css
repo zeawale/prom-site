@@ -17,16 +17,26 @@
   margin: 0 0 var(--space-5);
 }
 
-/* Сетка постоянная: раскрытие ушло в отдельную панель под ней, поэтому
-   ни колонки, ни порядок карточек больше не меняются */
-.grid {
+/* Две колонки: слева столбец состояний, справа подробности выбранного.
+   Высоту строки задаёт то, что выше, — обе колонки тянутся до неё */
+.layout {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: stretch;
+  margin-block-end: var(--space-5);
+}
+
+/* align-content: start — карточки по своей высоте, а не растянутые на всю
+   колонку. Подписи «Это про меня» в них больше нет, содержимое одинаковое
+   у всех четырёх, поэтому и высота ровная сама собой */
+.tabs {
+  display: grid;
+  align-content: start;
   gap: var(--space-5);
   list-style: none;
-  margin: 0 0 var(--space-5);
+  margin: 0;
   padding: 0;
-  align-items: stretch;
 }
 
 /* li растягивается по высоте строки, карточка внутри тянется за ним —
@@ -41,13 +51,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-4);
+  gap: var(--space-3);
   width: 100%;
   min-width: 0;
   background: var(--surface-default);
   border: 1px solid var(--border-default);
   border-radius: 16px;
-  padding: var(--space-6);
+  padding: var(--space-10) var(--space-6);
   font-family: inherit;
   text-align: start;
   cursor: pointer;
@@ -71,7 +81,7 @@
   outline-offset: 2px;
 }
 
-.card[data-open] {
+.card[data-selected] {
   border-color: var(--border-brand);
   background: var(--surface-muted);
 }
@@ -104,60 +114,39 @@
   color: var(--text-muted);
 }
 
-/* margin-block-start: auto прижимает подпись к низу карточки */
-.toggle {
-  margin-block-start: auto;
-  font-size: var(--fs-body-s);
-  font-weight: var(--fw-medium);
-  color: var(--text-link);
-}
+/* ---------- Панель подробностей ---------- */
 
-.card:hover .toggle {
-  text-decoration: underline;
-}
-
-/* ---------- Панель под сеткой ---------- */
-
-/* Высота анимируется через grid-template-rows: 0fr → 1fr. height: auto
-   не анимируется в принципе, а max-height даёт рывок в конце, если
-   угадать высоту не получилось — а здесь она разная у всех четырёх */
-.panelWrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  margin-block-end: 0;
-  transition:
-    grid-template-rows 0.25s ease,
-    margin-block-end 0.25s ease;
-}
-
-.panelWrap[data-open] {
-  grid-template-rows: 1fr;
-  margin-block-end: var(--space-5);
-}
-
-/* min-height: 0 нужен, чтобы grid-элемент не упирался в min-content и
-   действительно схлопывался до нуля */
-.panelInner {
-  min-height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  transition: visibility 0s linear 0.25s;
-}
-
-.panelWrap[data-open] .panelInner {
-  visibility: visible;
-  transition-delay: 0s;
-}
-
-/* Оранжевая полоса снизу — маркер раскрытого состояния, он же был у
-   карточки в первой версии. Здесь она уместнее: панель и есть раскрытое
-   состояние, а карточке хватает синей рамки */
+/* Оранжевая полоса снизу — маркер того, что панель и есть раскрытое
+   состояние; карточке слева хватает синей рамки */
 .panel {
+  height: 100%;
   background: var(--surface-default);
   border: 1px solid var(--border-default);
   border-bottom: 3px solid var(--border-accent);
   border-radius: 16px;
   padding: var(--space-6);
+}
+
+.panel:focus-visible {
+  outline: 2px solid var(--border-brand);
+  outline-offset: 2px;
+}
+
+/* Появление при смене состояния. key на этом блоке перезапускает
+   анимацию каждый раз заново */
+.panelFade {
+  animation: panelIn 0.2s ease;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .panelHead {
@@ -168,34 +157,19 @@
 }
 
 .panelTitle {
-  margin: 0 auto 0 0;
+  margin: 0;
   font-size: var(--fs-h3);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-heading);
   color: var(--text-primary);
 }
 
-.close {
-  flex: 0 0 auto;
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  font-size: var(--fs-body-s);
-  font-weight: var(--fw-medium);
-  color: var(--text-link);
-  cursor: pointer;
-}
-
-.close:hover {
-  text-decoration: underline;
-}
-
+/* Одна колонка, а не две: панель стала вдвое уже, и признаки с решениями
+   рядом уже не помещаются — теперь они друг под другом */
 .panelBody {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: var(--space-8);
-  align-items: start;
+  gap: var(--space-5);
+  align-content: start;
 }
 
 .criteriaTitle {
@@ -352,12 +326,14 @@
   white-space: nowrap;
 }
 
-/* Анимация высоты — украшение, а не смысл. Кому она мешает, тот получает
-   мгновенное раскрытие */
+/* Анимация — украшение, а не смысл. Кому она мешает, тот получает
+   мгновенное переключение */
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .panelWrap,
-  .panelInner {
+  .card {
     transition: none;
+  }
+
+  .panelFade {
+    animation: none;
   }
 }

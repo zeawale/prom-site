@@ -61,8 +61,6 @@ export default async function HomePage() {
       <StateCards
         title={states?.title ?? ''}
         lead={states?.lead}
-        openLabel={states?.openLabel ?? 'Это про меня'}
-        closeLabel={states?.closeLabel ?? 'Свернуть'}
         criteriaTitle={states?.criteriaTitle ?? 'Это про вас, если'}
         solutionLabel={states?.solutionLabel ?? 'Перейти'}
         items={stateItems}
