@@ -68,7 +68,7 @@
 }
 
 .author {
-  font-size: var(--fh-h6);
+  font-size: var(--fs-h6);
   font-weight: var(--fw-semibold);
   color: var(--text-link);
   margin: 0 0 var(--space-1);

@@ -101,13 +101,13 @@
 
 .input[aria-invalid='true'],
 .textarea[aria-invalid='true'] {
-  border-color: var(--surface-1c-red);
+  border-color: var(--surface-error);
 }
 
 .fieldError {
   margin: 0;
   font-size: var(--fs-body-xs);
-  color: var(--surface-1c-red);
+  color: var(--surface-error);
 }
 
 .consent {
@@ -144,7 +144,7 @@
   border-radius: 8px;
   background: #fef2f2;
   font-size: var(--fs-body-xs);
-  color: var(--surface-1c-red);
+  color: var(--surface-error);
 }
 
 .submit {
