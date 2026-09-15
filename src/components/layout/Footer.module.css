@@ -1,6 +1,5 @@
 .footer {
   background: var(--surface-brand);
-  border-top: 1px solid var(--border-subtle);
 }
 
 /* Сетка та же, что у шапки и у .container на страницах */

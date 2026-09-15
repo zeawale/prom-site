@@ -1,7 +1,6 @@
 .header {
   height: var(--header-h);
   background: var(--surface-brand);
-  border-bottom: 1px solid var(--border-subtle);
 }
 
 /* Та же сетка, что у .container на страницах: max-width --container плюс
