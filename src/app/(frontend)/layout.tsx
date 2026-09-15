@@ -1,4 +1,5 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import './styles.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -6,6 +7,33 @@ import { LeadModalProvider } from '@/components/lead/LeadModalProvider'
 import { ServiceModalProvider } from '@/components/catalog/ServiceModalProvider'
 import { CookieConsent } from '@/components/cookie/CookieConsent'
 import { getCookieBanner } from '@/lib/queries'
+
+/**
+ * Базовые метаданные сайта.
+ *
+ * До этого корневого metadata не было вовсе, поэтому страницы без своего
+ * generateMetadata — весь каталог сервисов — уходили в выдачу с пустым
+ * <title>.
+ *
+ * title.template дописывает « | ПРО-М» к заголовку любой страницы, и сами
+ * страницы суффикс больше не пишут: раньше он был вбит руками в десяти
+ * местах. Странице, которой шаблон не нужен (главная), отдаём
+ * title.absolute.
+ *
+ * metadataBase нужен, чтобы Next разворачивал относительные адреса в
+ * canonical и OpenGraph в абсолютные. Домен — из переменной окружения: на
+ * превью-стенде он другой, а зашитый в код прод молча подставился бы в
+ * ссылки предпросмотра.
+ */
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://pm52.ru'),
+  title: {
+    default: 'Сервисы и программы 1С для малого бизнеса в Нижнем Новгороде | ПРО-М',
+    template: '%s | ПРО-М',
+  },
+  description:
+    'ООО «НПП ПРО-М» — официальный партнёр 1С в Нижнем Новгороде с 2014 года. 1С:Фреш, 1С:ГРМ, 1С:ИТС, программы и сервисы 1С для малого бизнеса.',
+}
 
 /**
  * Montserrat подключается обычным CSS (см. fonts.css), а не next/font.

@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
     .find(Boolean)
 
   return {
-    title: about.title ? `${about.title} | ПРО-М` : 'О компании | ПРО-М',
+    title: about.title ?? 'О компании',
     description: first,
   }
 }

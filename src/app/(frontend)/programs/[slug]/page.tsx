@@ -26,7 +26,7 @@ export async function generateMetadata({
   if (!program) return {}
 
   return {
-    title: `${program.title} — купить в Нижнем Новгороде | ПРО-М`,
+    title: `${program.title} — купить в Нижнем Новгороде`,
     description: program.lead,
   }
 }

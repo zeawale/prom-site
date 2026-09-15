@@ -12,7 +12,11 @@ import Faq from '@/components/product/Faq'
 export async function generateMetadata(): Promise<Metadata> {
   const home = await getHome()
   return {
-    title: 'Сервисы и программы 1С для малого бизнеса в Нижнем Новгороде | ПРО-М',
+    // absolute: шаблон « | ПРО-М» из корневого layout сюда не дописывается,
+    // суффикс уже есть в самом заголовке
+    title: {
+      absolute: 'Сервисы и программы 1С для малого бизнеса в Нижнем Новгороде | ПРО-М',
+    },
     description: home.hero?.lead ?? undefined,
   }
 }

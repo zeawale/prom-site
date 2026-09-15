@@ -9,9 +9,13 @@ import OfficeMap from '@/components/contacts/OfficeMap'
 export async function generateMetadata(): Promise<Metadata> {
   const contacts = await getContacts()
   return {
-    title: contacts.title
-      ? `${contacts.title} — ООО «НПП ПРО-М» в Нижнем Новгороде`
-      : 'Контакты — ООО «НПП ПРО-М» в Нижнем Новгороде',
+    // absolute: название компании уже внутри заголовка, шаблон из корневого
+    // layout дописал бы « | ПРО-М» вторым разом
+    title: {
+      absolute: contacts.title
+        ? `${contacts.title} — ООО «НПП ПРО-М» в Нижнем Новгороде`
+        : 'Контакты — ООО «НПП ПРО-М» в Нижнем Новгороде',
+    },
     description: contacts.lead,
   }
 }

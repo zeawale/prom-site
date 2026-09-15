@@ -7,9 +7,9 @@ const SLUG = 'privacy'
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await getLegalPage(SLUG)
-  if (!doc) return { title: 'Политика обработки персональных данных | ПРО-М' }
+  if (!doc) return { title: 'Политика обработки персональных данных' }
   return {
-    title: `${doc.title} | ПРО-М`,
+    title: doc.title,
     description: doc.lead,
     // Юридические страницы не должны конкурировать в выдаче с продуктовыми
     robots: { index: false, follow: true },

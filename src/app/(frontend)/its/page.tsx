@@ -15,7 +15,7 @@ import CtaBanner from '@/components/product/CtaBanner'
 export async function generateMetadata(): Promise<Metadata> {
   const its = await getITS()
   return {
-    title: `${its.title} — сопровождение 1С в Нижнем Новгороде | ПРО-М`,
+    title: `${its.title} — сопровождение 1С в Нижнем Новгороде`,
     description: its.lead,
   }
 }

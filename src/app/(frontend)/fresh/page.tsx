@@ -14,7 +14,7 @@ import CompareBlock from '@/components/product/CompareBlock'
 export async function generateMetadata(): Promise<Metadata> {
   const fresh = await getFresh()
   return {
-    title: `${fresh.title} — работа в 1С через интернет | ПРО-М`,
+    title: `${fresh.title} — работа в 1С через интернет`,
     description: fresh.lead,
   }
 }

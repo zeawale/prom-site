@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!service) return {}
 
   return {
-    title: `${service.title} — сервис 1С | ПРО-М`,
+    title: `${service.title} — сервис 1С`,
     description: service.description,
   }
 }
