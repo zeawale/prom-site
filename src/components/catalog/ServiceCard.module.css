@@ -11,8 +11,28 @@
   width: 100%;
   text-align: left;
   font-family: inherit;
-  border: 1px solid var(--border-default);
   cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Фон карточки не уводим в --surface-muted: это цвет фона страницы, и на
+   ховере карточка сливалась бы с подложкой вместо того, чтобы выделяться.
+   Поэтому подмешиваем к белому немного основного текста — оттенок темнее и
+   белого, и фона страницы. Граница синеет, чтобы состояние читалось и в
+   режиме высокой контрастности, где фон может не отрисоваться */
+.card:hover {
+  background: color-mix(in srgb, var(--surface-default) 95%, var(--text-primary));
+  border-color: var(--border-brand);
+}
+
+/* Нажатие — тот же оттенок вдвое сильнее. Отдельное состояние нужно не
+   для красоты: карточка открывает попап, и без отклика на нажатие клик по
+   медленному соединению выглядит как «не сработало», и по ней жмут второй раз */
+.card:active {
+  background: color-mix(in srgb, var(--surface-default) 90%, var(--text-primary));
+  border-color: var(--border-brand);
 }
 
 .head {
