@@ -45,8 +45,8 @@ export default function CompanyBlock({
         )}
       </div>
 
-      {/* Та же полоса счётчиков, что на «О компании», — общий компонент.
-          Здесь их три, там четыре; отличается только число колонок */}
+      {/* Та же полоса счётчиков, что на «О компании»: общий компонент и
+          общие цифры из Settings */}
       <Counters items={counters} columns={3} className={styles.counters} />
 
       {reviews.length > 0 && (

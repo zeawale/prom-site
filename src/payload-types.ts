@@ -1077,6 +1077,19 @@ export interface Setting {
    * Один текст на все страницы с тарифами: программы, ИТС, Фреш. Живёт здесь, а не в разделе «Программы 1С», потому что правка должна гасить кеш всего сайта — Settings это и делает.
    */
   tariffDisclaimer: string;
+  /**
+   * Показываются на главной и на странице «О компании». Ровно три — раскладка рассчитана на три в ряд
+   */
+  counters?:
+    | {
+        /**
+         * Например: 2006, 300+, 1200+
+         */
+        value: string;
+        caption: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1281,13 +1294,6 @@ export interface Home {
     lead?: string | null;
     buttonLabel?: string | null;
     buttonHref?: string | null;
-    counters?:
-      | {
-          value: string;
-          caption: string;
-          id?: string | null;
-        }[]
-      | null;
   };
   /**
    * Выводится тем же компонентом, что и пункты 01–06 на /its
@@ -1337,19 +1343,6 @@ export interface About {
    * Необязательно. Пока не загружено — на месте фото серая плашка
    */
   photo?: (number | null) | Media;
-  /**
-   * Четыре в макете. Порядок — как в списке
-   */
-  counters?:
-    | {
-        /**
-         * Например: 20+, 2014, 1200+
-         */
-        value: string;
-        caption: string;
-        id?: string | null;
-      }[]
-    | null;
   /**
    * Без двоеточия в конце
    */
@@ -2075,6 +2068,13 @@ export interface SettingsSelect<T extends boolean = true> {
   inn?: T;
   ogrn?: T;
   tariffDisclaimer?: T;
+  counters?:
+    | T
+    | {
+        value?: T;
+        caption?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2205,13 +2205,6 @@ export interface HomeSelect<T extends boolean = true> {
         lead?: T;
         buttonLabel?: T;
         buttonHref?: T;
-        counters?:
-          | T
-          | {
-              value?: T;
-              caption?: T;
-              id?: T;
-            };
       };
   afterPayment?:
     | T
@@ -2250,13 +2243,6 @@ export interface AboutSelect<T extends boolean = true> {
   title?: T;
   body?: T;
   photo?: T;
-  counters?:
-    | T
-    | {
-        value?: T;
-        caption?: T;
-        id?: T;
-      };
   reviewsTitle?: T;
   reviewsLead?: T;
   updatedAt?: T;

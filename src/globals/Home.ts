@@ -264,23 +264,8 @@ export const Home: GlobalConfig = {
             { name: 'buttonHref', type: 'text', label: 'Адрес', defaultValue: '/about' },
           ],
         },
-        {
-          name: 'counters',
-          type: 'array',
-          label: 'Счётчики',
-          labels: { singular: 'Счётчик', plural: 'Счётчики' },
-          minRows: 3,
-          maxRows: 3,
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                { name: 'value', type: 'text', label: 'Число', required: true },
-                { name: 'caption', type: 'text', label: 'Расшифровка', required: true },
-              ],
-            },
-          ],
-        },
+        // Счётчиков здесь больше нет — они общие с «О компании» и живут
+        // в Settings (Реквизиты и контакты → Счётчики компании)
       ],
     },
 

@@ -90,7 +90,8 @@ export default async function HomePage() {
         lead={home.company?.lead}
         buttonLabel={home.company?.buttonLabel}
         buttonHref={home.company?.buttonHref}
-        counters={(home.company?.counters ?? []).map((c) => ({
+        // Счётчики общие с «О компании» и живут в Settings
+        counters={(settings.counters ?? []).map((c) => ({
           value: c.value,
           caption: c.caption,
         }))}

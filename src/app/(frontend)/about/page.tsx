@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getAbout, getAllReviews } from '@/lib/queries'
+import { getAbout, getAllReviews, getSettings } from '@/lib/queries'
 import AboutIntro from '@/components/about/AboutIntro'
 import ReviewGrid from '@/components/about/ReviewGrid'
 import Counters from '@/components/product/Counters'
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [about, reviews] = await Promise.all([getAbout(), getAllReviews()])
+  const [about, reviews, settings] = await Promise.all([getAbout(), getAllReviews(), getSettings()])
 
   /* depth: 1 отдаёт фото документом, но тип поля допускает и число —
      когда картинку удалили из Media, а ссылка осталась. Разворачиваем
@@ -42,9 +42,10 @@ export default async function AboutPage() {
     <main className="container">
       <AboutIntro title={about.title} body={about.body} photo={photo} />
 
+      {/* Та же плашка, что на главной: цифры общие, из Settings */}
       <Counters
-        columns={4}
-        items={(about.counters ?? []).map((counter) => ({
+        columns={3}
+        items={(settings.counters ?? []).map((counter) => ({
           value: counter.value,
           caption: counter.caption,
         }))}

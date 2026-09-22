@@ -4,7 +4,7 @@ export type Counter = { value: string; caption: string }
 
 type Props = {
   items: Counter[]
-  /** Три на главной, четыре на «О компании» */
+  /** Сейчас три и там и там (цифры общие, из Settings). 4 — запас раскладки */
   columns?: 3 | 4
   className?: string
 }

@@ -49,29 +49,8 @@ export const About: GlobalConfig = {
       admin: { description: 'Необязательно. Пока не загружено — на месте фото серая плашка' },
     },
 
-    {
-      name: 'counters',
-      type: 'array',
-      label: 'Счётчики',
-      labels: { singular: 'Счётчик', plural: 'Счётчики' },
-      maxRows: 4,
-      admin: { description: 'Четыре в макете. Порядок — как в списке' },
-      fields: [
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'value',
-              type: 'text',
-              label: 'Число',
-              required: true,
-              admin: { description: 'Например: 20+, 2014, 1200+' },
-            },
-            { name: 'caption', type: 'text', label: 'Подпись', required: true },
-          ],
-        },
-      ],
-    },
+    // Счётчики уехали в Settings: та же плашка стоит на главной, и две
+    // копии цифр в разных глобалах уже успели разойтись
 
     {
       name: 'reviewsTitle',
