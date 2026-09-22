@@ -163,7 +163,9 @@
 
 .relatedGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, 1fr), а не 1fr: 1fr не сжимается меньше содержимого, и
+     «1С:Распознавание первичных документов» раздвигало сетку за край */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-3);
 }
 
@@ -223,4 +225,61 @@
   font-weight: var(--fw-semibold);
   color: var(--text-link);
   text-decoration: none;
+}
+
+/* ---------- Мобильный ---------- */
+@media (max-width: 767px) {
+  .detail {
+    padding: var(--space-5) var(--space-4);
+    border-radius: 16px;
+  }
+
+  /* Справа место под крестик закрытия — иначе он ложится на заголовок */
+  .head {
+    padding-inline-end: var(--space-7);
+    margin-bottom: var(--space-5);
+  }
+
+  .iconBox {
+    width: 40px;
+    height: 40px;
+  }
+
+  .highlight {
+    padding: var(--space-4);
+  }
+
+  .section {
+    margin-bottom: var(--space-5);
+  }
+
+  .sectionTitle {
+    margin-bottom: var(--space-3);
+  }
+
+  .step {
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .stepNum {
+    width: 28px;
+    height: 28px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* В столбик карточка — строка: иконка слева, название справа */
+  .relatedCard {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-3);
+  }
+
+  .relatedTitle {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 }

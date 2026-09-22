@@ -21,3 +21,12 @@
   outline: 2px solid var(--surface-brand);
   outline-offset: -1px;
 }
+
+/* 16px на телефоне: при меньшем кегле Safari на iOS зумит страницу
+   при фокусе в поле */
+@media (max-width: 767px) {
+  .input {
+    font-size: 16px;
+    border-radius: 12px;
+  }
+}

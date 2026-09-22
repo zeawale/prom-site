@@ -326,6 +326,178 @@
   white-space: nowrap;
 }
 
+/* ---------- Адаптив ----------
+
+   Ниже 1200 две колонки не живут: панель подробностей вдвое уже экрана.
+   И на планшете, и на телефоне — аккордеон (блок ниже). Лента карточек
+   со свайпом пробовалась и не прижилась */
+@media (max-width: 1199px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .card {
+    padding: var(--space-5);
+    gap: var(--space-2);
+  }
+
+  .panel {
+    height: auto;
+    padding: var(--space-5);
+  }
+
+  /* Планшет: текст слева, «Заказать звонок» справа, как на десктопе —
+     места хватает. В столбик плашка уходит только на телефоне (ниже) */
+  .footer {
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .number {
+    font-size: var(--fs-h4);
+  }
+
+  .cardTitle {
+    font-size: var(--fs-h6);
+  }
+
+  .description {
+    font-size: var(--fs-body-xs);
+  }
+
+  .panelHead {
+    gap: var(--space-3);
+    margin-block-end: var(--space-4);
+  }
+
+  .criteriaItem {
+    font-size: var(--fs-body-s);
+  }
+
+  .solution {
+    padding: var(--space-4);
+  }
+
+  .solutionHead {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .solutionTitle {
+    font-size: var(--fs-h6);
+  }
+
+  .footerActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .phone {
+    text-align: center;
+  }
+
+  .footerButton {
+    min-height: 48px;
+  }
+}
+
+/* Панель под карточкой — только телефон, см. блок ниже */
+.inlinePanel {
+  display: none;
+}
+
+/* ---------- Телефон: аккордеон ----------
+
+   Лента со свайпом на телефоне не прижилась. Здесь карточки столбиком,
+   и подробности выбранной раскрываются прямо под ней — там, куда нажали.
+   Общая панель справа спрятана. Одно состояние открыто всегда, как и на
+   десктопе: логика вкладок общая, свернуть всё нельзя. Планшет — так же */
+@media (max-width: 1199px) {
+  .tabs {
+    gap: var(--space-3);
+  }
+
+  .cell {
+    flex-direction: column;
+  }
+
+  .panel {
+    display: none;
+  }
+
+  /* Выбранная карточка и её подробности читаются одним блоком: у карточки
+     скругление снизу снято, панель продолжает её рамку. Рамка серая, а не
+     синяя, как у выбранной вкладки на десктопе: здесь раскрытое состояние
+     и так видно по панели и оранжевой полосе снизу */
+  .card[data-selected] {
+    border-color: var(--border-default);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+  }
+
+  .inlinePanel {
+    display: block;
+    background: var(--surface-muted);
+    border: 1px solid var(--border-default);
+    border-top: 0;
+    border-bottom: 3px solid var(--border-accent);
+    border-radius: 0 0 16px 16px;
+    padding: 0 var(--space-4) var(--space-4);
+  }
+
+  /* Номер и название уже есть на карточке прямо над панелью */
+  .inlinePanel .panelHead {
+    display: none;
+  }
+
+  .panelBody {
+    gap: var(--space-4);
+  }
+
+  .solution {
+    background: var(--surface-default);
+  }
+
+  /* Телефон убран из плашки: на мобилке остаётся одна кнопка звонка */
+  .phone {
+    display: none;
+  }
+}
+
+/* «Перейти» на телефоне — под текстом решения, широкой кнопкой.
+   display: contents растворяет шапку решения, и порядок задаётся уже
+   в самой карточке. На планшете кнопка как на десктопе — справа в
+   шапке решения */
+@media (max-width: 767px) {
+  .solution {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .solutionHead {
+    display: contents;
+  }
+
+  .eyebrow {
+    margin-bottom: var(--space-1);
+  }
+
+  .solutionLink {
+    order: 1;
+    margin-top: var(--space-3);
+    text-align: center;
+  }
+}
+
 /* Анимация — украшение, а не смысл. Кому она мешает, тот получает
    мгновенное переключение */
 @media (prefers-reduced-motion: reduce) {

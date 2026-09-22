@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import type { TariffCell, TariffRow } from '@/lib/programs'
 import TariffDetails from './TariffDetails'
 import { TariffServiceLink } from './TariffServiceLink'
@@ -20,15 +21,22 @@ export type TariffTableProps = {
 /** Пустой чекбокс как «нет» — принятое решение Ники, визуал из макета.
  *  Текстовая альтернатива для скринридера добавлена: она невидима и макет
  *  не трогает, но без неё незрячий пользователь читает строку без значения. */
-function Cell({ cell }: { cell: TariffCell }) {
+function Cell({ cell, label }: { cell: TariffCell; label: string }) {
+  /* data-label — подпись колонки для телефона: там шапка таблицы спрятана,
+     и у каждой ячейки над значением рисуется «ПРОФ» / «ТЕХНО» из CSS.
+     role="cell" — см. комментарий у <table> */
   if (cell.value === 'text') {
-    return <td className={styles.cellText}>{cell.text}</td>
+    return (
+      <td className={styles.cellText} data-label={label} role="cell">
+        {cell.text}
+      </td>
+    )
   }
 
   const yes = cell.value === 'yes'
 
   return (
-    <td className={styles.cell}>
+    <td className={styles.cell} data-label={label} role="cell">
       <span className={styles.box} data-yes={yes || undefined} aria-hidden="true">
         {yes && (
           <svg viewBox="0 0 24 24" width="14" height="14" focusable="false">
@@ -48,12 +56,19 @@ function Cell({ cell }: { cell: TariffCell }) {
   )
 }
 
-function Rows({ rows }: { rows: TariffRow[] }) {
+function Rows({ rows, columns }: { rows: TariffRow[]; columns: string[] }) {
   return (
     <>
       {rows.map((row, i) => (
-        <tr key={i}>
-          <th scope="row" className={styles.rowLabel}>
+        <tr
+          key={i}
+          role="row"
+          // Строка с текстовыми значениями («100 комплектов документов»)
+          // на телефоне раскладывается иначе, чем строка с галочками, —
+          // см. TariffTable.module.css
+          data-text={row.cells.some((cell) => cell.value === 'text') || undefined}
+        >
+          <th scope="row" className={styles.rowLabel} role="rowheader">
             {/* Ссылки есть только у строк /its: либо попап карточки каталога,
                 либо адрес страницы сайта. У программ первая колонка — это
                 возможности, ссылаться не на что, и клиентский компонент
@@ -67,7 +82,7 @@ function Rows({ rows }: { rows: TariffRow[] }) {
             )}
           </th>
           {row.cells.map((cell, j) => (
-            <Cell key={j} cell={cell} />
+            <Cell key={j} cell={cell} label={columns[j] ?? ''} />
           ))}
         </tr>
       ))}
@@ -99,7 +114,16 @@ export default function TariffTable({
           иначе в таб-порядок попадает блок, который никуда не прокручивается.
           На десктопе таблица помещается целиком, скролл включается медиазапросом. */}
       <div className={styles.scroller} role="region" aria-labelledby={headingId} tabIndex={0}>
-        <table className={styles.table}>
+        {/* Явные роли на всех уровнях таблицы — не дубль. На телефоне
+            строки перестраиваются через display: block / grid, и Safari
+            с Firefox при смене display выкидывают у элементов табличную
+            семантику: скринридер перестаёт читать таблицу таблицей.
+            Роли возвращают её независимо от CSS */}
+        <table
+          className={styles.table}
+          role="table"
+          style={{ '--cols': columns.length } as CSSProperties}
+        >
           <colgroup>
             <col />
             {columns.map((_, i) => (
@@ -107,26 +131,26 @@ export default function TariffTable({
             ))}
           </colgroup>
 
-          <thead>
-            <tr>
-              <th scope="col" className={styles.headFirst}>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" className={styles.headFirst} role="columnheader">
                 {firstColumnLabel}
               </th>
               {columns.map((label) => (
-                <th key={label} scope="col" className={styles.headValue}>
+                <th key={label} scope="col" className={styles.headValue} role="columnheader">
                   {label}
                 </th>
               ))}
             </tr>
           </thead>
 
-          <tbody>
-            <Rows rows={rows} />
+          <tbody role="rowgroup">
+            <Rows rows={rows} columns={columns} />
           </tbody>
 
           {details && details.rows.length > 0 && (
             <TariffDetails label={details.label} colSpan={colSpan}>
-              <Rows rows={details.rows} />
+              <Rows rows={details.rows} columns={columns} />
             </TariffDetails>
           )}
         </table>

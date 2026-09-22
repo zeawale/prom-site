@@ -32,8 +32,36 @@
 }
 
 .caption {
+  /* Ровные строки вместо «всё в первую, огрызок во вторую»: подпись
+     «год основания НПП «ПРО-М»» на узкой колонке рвалась по дефису
+     в названии — «ПРО-» / «М» */
+  text-wrap: balance;
   font-size: var(--fs-body-s);
   line-height: var(--lh-base);
   color: var(--text-muted);
   margin: 0;
+}
+
+/* ---------- Адаптив ----------
+
+   Четыре в ряд на планшете не помещаются — два на два. Три остаются
+   строкой до телефона. На телефоне три — столбиком, четыре — два на
+   два: подписи короткие, в половину экрана влезают */
+@media (max-width: 1199px) {
+  .counters[data-columns='4'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .counters {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+    border-radius: 16px;
+    padding: var(--space-5);
+  }
+
+  .value {
+    margin-bottom: var(--space-2);
+  }
 }

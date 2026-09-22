@@ -130,7 +130,7 @@
   text-decoration: underline;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   .grid {
     grid-template-columns: 1fr;
   }
@@ -142,5 +142,60 @@
 
   .value {
     text-align: start;
+  }
+}
+
+/* ---------- Телефон ----------
+
+   Две обычные карточки друг под другом, каждая целиком про свой продукт.
+   Перевёрнутая раскладка «шапки сверху, значения под ними» была здесь и
+   не прижилась: глазу приходилось сводить колонки через весь блок.
+   Своя страница подсвечена рамкой — как на десктопе */
+@media (max-width: 767px) {
+  .lead {
+    font-size: var(--fs-body-s);
+  }
+
+  .grid {
+    gap: var(--space-3);
+  }
+
+  .card {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .titleRow {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .description {
+    margin-bottom: var(--space-3);
+  }
+
+  /* В полную ширину телефона пара «параметр — значение» снова помещается
+     в строку: название слева, значение справа */
+  .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3);
+    padding-block: var(--space-2);
+  }
+
+  .label {
+    font-size: var(--fs-body-xs);
+  }
+
+  .value {
+    text-align: end;
+  }
+
+  .note {
+    margin-top: var(--space-4);
+    font-size: var(--fs-body-xs);
+  }
+
+  .note:last-child,
+  .link {
+    padding-block-start: var(--space-4);
   }
 }

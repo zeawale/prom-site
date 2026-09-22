@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import TariffFeatures from './TariffFeatures'
 import styles from './TariffCards.module.css'
 
 export type TariffItem = {
@@ -56,45 +57,47 @@ export default function TariffCards({ title, lead, cards, disclaimer, children }
               </div>
             </div>
 
-            <ul className={styles.features}>
-              {(card.items ?? []).map((item, j) => (
-                <li key={j} className={styles.feature} data-kind={item.kind ?? 'check'}>
-                  {item.kind !== 'note' && (
-                    // Галочка декоративная: она означает «включено», а это уже
-                    // сказано тем, что пункт вообще перечислен в тарифе
-                    <svg
-                      className={styles.check}
-                      viewBox="0 0 24 24"
-                      width="20"
-                      height="20"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <circle cx="12" cy="12" r="10" fill="currentColor" />
-                      <path
-                        d="M7.5 12.5l3 3 6-6.5"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-
-                  <div className={styles.featureBody}>
-                    <span>{item.text}</span>
-                    {item.list && item.list.length > 0 && (
-                      <ul className={styles.subList}>
-                        {item.list.map((sub, k) => (
-                          <li key={k}>{sub.text}</li>
-                        ))}
-                      </ul>
+            <TariffFeatures>
+              <ul className={styles.features}>
+                {(card.items ?? []).map((item, j) => (
+                  <li key={j} className={styles.feature} data-kind={item.kind ?? 'check'}>
+                    {item.kind !== 'note' && (
+                      // Галочка декоративная: она означает «включено», а это уже
+                      // сказано тем, что пункт вообще перечислен в тарифе
+                      <svg
+                        className={styles.check}
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <circle cx="12" cy="12" r="10" fill="currentColor" />
+                        <path
+                          d="M7.5 12.5l3 3 6-6.5"
+                          fill="none"
+                          stroke="#fff"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     )}
-                  </div>
-                </li>
-              ))}
-            </ul>
+
+                    <div className={styles.featureBody}>
+                      <span>{item.text}</span>
+                      {item.list && item.list.length > 0 && (
+                        <ul className={styles.subList}>
+                          {item.list.map((sub, k) => (
+                            <li key={k}>{sub.text}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </TariffFeatures>
           </article>
         ))}
       </div>

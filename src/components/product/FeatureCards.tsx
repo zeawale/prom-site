@@ -49,7 +49,9 @@ export default function FeatureCards({
 
       {lead && <p className={styles.lead}>{lead}</p>}
 
-      <ul className={styles.grid} data-columns={columns}>
+      {/* data-layout читает только CSS: на телефоне карточки «иконка + текст»
+          встают списком, а не сеткой — см. FeatureCards.module.css */}
+      <ul className={styles.grid} data-columns={columns} data-layout={layout}>
         {cards.map((card, i) => (
           <li key={i} className={styles.card}>
             {showIcon && card.icon && (

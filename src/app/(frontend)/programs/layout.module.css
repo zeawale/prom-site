@@ -78,6 +78,21 @@
   outline-offset: 2px;
 }
 
+/* Планшет: две кнопки баннера в строку. min-inline-size 348px на каждую
+   не помещал их рядом, и они уходили в столбик */
+@media (max-width: 1199px) {
+  /* Меньше воздуха до выпадашки программ: 48px отрывали её от баннера */
+  .banner {
+    margin-block-end: var(--space-4);
+  }
+
+  .bannerButton {
+    min-inline-size: 0;
+    flex: 1 1 0;
+    padding-inline: var(--space-4);
+  }
+}
+
 @media (max-width: 767px) {
   .bannerButton {
     min-inline-size: 0;

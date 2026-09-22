@@ -105,6 +105,51 @@ export default function StateCards({
     select(next)
   }
 
+  /* Содержимое панели — одно на две раскладки: справа от карточек на
+     десктопе и прямо под выбранной карточкой на телефоне */
+  const panelBody = (
+    <>
+      <div className={styles.panelHead}>
+        <span className={styles.number} aria-hidden="true">
+          {num(active)}
+        </span>
+        <h3 className={styles.panelTitle}>{current.title}</h3>
+      </div>
+
+      <div className={styles.panelBody}>
+        <div className={styles.criteria}>
+          <p className={styles.criteriaTitle}>{criteriaTitle}</p>
+          <ul className={styles.criteriaList}>
+            {current.criteria.map((text) => (
+              <li key={text} className={styles.criteriaItem}>
+                {text}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.solutions}>
+          {current.solutions.map((solution) => (
+            <div key={solution.href + solution.title} className={styles.solution}>
+              <div className={styles.solutionHead}>
+                <p className={styles.eyebrow}>{solution.eyebrow}</p>
+                <Link href={solution.href} className={styles.solutionLink}>
+                  {solutionLabel}
+                  {/* Название продукта повторяется для скринридера:
+                      несколько кнопок «Перейти» подряд вне контекста
+                      карточки неразличимы */}
+                  <span className={styles.srOnly}> — {solution.title}</span>
+                </Link>
+              </div>
+              <p className={styles.solutionTitle}>{solution.title}</p>
+              <p className={styles.solutionText}>{solution.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  )
+
   return (
     <section className={styles.section} aria-labelledby={`${baseId}-title`}>
       <h2 className={styles.title} id={`${baseId}-title`}>
@@ -134,7 +179,7 @@ export default function StateCards({
                   className={styles.card}
                   data-selected={selected || undefined}
                   aria-selected={selected}
-                  aria-controls={panelId}
+                  aria-controls={`${panelId} ${panelId}-inline`}
                   // Внутри вкладок таб-остановка одна: активная вкладка
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActive(i)}
@@ -149,6 +194,22 @@ export default function StateCards({
 
                   <span className={styles.description}>{item.description}</span>
                 </button>
+
+                {/* Телефон: аккордеон. Подробности раскрываются прямо под
+                    нажатой карточкой, общая панель справа спрятана CSS-ом.
+                    На десктопе наоборот — этот блок не показывается */}
+                {selected && (
+                  <div
+                    className={styles.inlinePanel}
+                    id={`${panelId}-inline`}
+                    role="tabpanel"
+                    aria-labelledby={tabId(i)}
+                  >
+                    <div className={styles.panelFade} key={active}>
+                      {panelBody}
+                    </div>
+                  </div>
+                )}
               </li>
             )
           })}
@@ -165,44 +226,7 @@ export default function StateCards({
         >
           {/* key перезапускает появление при каждой смене состояния */}
           <div className={styles.panelFade} key={active}>
-            <div className={styles.panelHead}>
-              <span className={styles.number} aria-hidden="true">
-                {num(active)}
-              </span>
-              <h3 className={styles.panelTitle}>{current.title}</h3>
-            </div>
-
-            <div className={styles.panelBody}>
-              <div className={styles.criteria}>
-                <p className={styles.criteriaTitle}>{criteriaTitle}</p>
-                <ul className={styles.criteriaList}>
-                  {current.criteria.map((text) => (
-                    <li key={text} className={styles.criteriaItem}>
-                      {text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className={styles.solutions}>
-                {current.solutions.map((solution) => (
-                  <div key={solution.href + solution.title} className={styles.solution}>
-                    <div className={styles.solutionHead}>
-                      <p className={styles.eyebrow}>{solution.eyebrow}</p>
-                      <Link href={solution.href} className={styles.solutionLink}>
-                        {solutionLabel}
-                        {/* Название продукта повторяется для скринридера:
-                            несколько кнопок «Перейти» подряд вне контекста
-                            карточки неразличимы */}
-                        <span className={styles.srOnly}> — {solution.title}</span>
-                      </Link>
-                    </div>
-                    <p className={styles.solutionTitle}>{solution.title}</p>
-                    <p className={styles.solutionText}>{solution.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {panelBody}
           </div>
         </div>
       </div>

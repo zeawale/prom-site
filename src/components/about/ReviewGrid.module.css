@@ -86,3 +86,77 @@
 .quote::after {
   content: '»';
 }
+
+/* ---------- Планшет ----------
+
+   Одна колонка, как отзывы на главной. Паддинг сетки 80px с каждой
+   стороны снят и здесь — на планшете он съедал почти четверть ширины */
+@media (max-width: 1199px) {
+  /* Сверху меньше: 48px от счётчиков до заголовка отзывов на планшете
+     читались как разрыв страницы */
+  .section {
+    padding-block-start: var(--space-6);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: 0;
+  }
+}
+
+/* ---------- Телефон ----------
+
+   Главная причина, по которой отзывы «ехали»: у сетки боковой паддинг
+   --space-20, это 80px с каждой стороны — на телефоне от ширины экрана
+   оставалось меньше половины. Здесь он снят, а сами отзывы — лентой со
+   свайпом, как на главной */
+@media (max-width: 767px) {
+  .section {
+    padding-block-start: var(--space-6);
+  }
+
+  .title {
+    font-size: var(--fs-h2);
+  }
+
+  .lead {
+    font-size: var(--fs-body-s);
+  }
+
+  .grid {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: calc(var(--page-pad) * -1);
+    padding: 0 var(--page-pad);
+    scroll-padding-inline: var(--page-pad);
+  }
+
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .head {
+    gap: var(--space-3);
+    margin-block-end: var(--space-3);
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .quote {
+    font-size: var(--fs-body-s);
+  }
+}

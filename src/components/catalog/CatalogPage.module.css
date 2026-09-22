@@ -1,7 +1,7 @@
 .page {
   max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-6);
+  padding: var(--space-6) var(--page-pad);
   display: grid;
   grid-template-rows: auto auto;
   gap: var(--space-6);
@@ -110,7 +110,7 @@
   gap: var(--space-5);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1199px) {
   .page {
     height: auto;
     display: block;
@@ -121,13 +121,42 @@
   .content {
     display: block;
   }
+  /* Главная поломка мобильного каталога. На десктопе содержимое колонки
+     вынуто из потока (absolute + inset: 0), чтобы высоту задавал сайдбар.
+     Здесь сайдбар уехал наверх, высоту задавать некому — колонка
+     схлопывалась в ноль, а карточки ложились поверх футера. Возвращаем
+     в поток */
+  .contentInner {
+    position: static;
+    display: grid;
+    grid-template-rows: none;
+    gap: var(--space-4);
+  }
+  /* Планшет — две колонки карточек, телефон — одна (ниже) */
   .grid {
     height: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     overflow-y: visible;
     padding-right: 0;
   }
   .gridWrap::after {
     display: none;
+  }
+  /* .page здесь display: block, и gap сетки больше не работает */
+  .header {
+    margin-bottom: var(--space-5);
+  }
+  .layout {
+    gap: var(--space-4);
+  }
+  .grid {
+    gap: var(--space-3);
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

@@ -28,9 +28,9 @@ export default function TariffDetails({ label, colSpan, children }: Props) {
 
   return (
     <>
-      <tbody>
-        <tr>
-          <td colSpan={colSpan} className={styles.detailsCell}>
+      <tbody role="rowgroup">
+        <tr role="row">
+          <td colSpan={colSpan} className={styles.detailsCell} role="cell">
             <button
               type="button"
               className={styles.detailsToggle}
@@ -63,7 +63,7 @@ export default function TariffDetails({ label, colSpan, children }: Props) {
         </tr>
       </tbody>
 
-      <tbody id={bodyId} hidden={!open}>
+      <tbody id={bodyId} hidden={!open} role="rowgroup">
         {children}
       </tbody>
     </>

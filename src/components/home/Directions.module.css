@@ -106,3 +106,32 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* ---------- Адаптив ----------
+
+   Три карточки со списками в две колонки дают сироту во втором ряду,
+   поэтому сразу в одну. Кнопка к низу больше не прижимается — соседей
+   по строке нет, выравнивать не с кем */
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .button {
+    margin-block-start: var(--space-2);
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    border-width: 3px;
+    border-radius: 16px;
+    padding: var(--space-5);
+  }
+
+  .button {
+    align-self: stretch;
+    text-align: center;
+    padding-block: var(--space-3);
+  }
+}

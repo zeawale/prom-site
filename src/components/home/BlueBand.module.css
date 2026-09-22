@@ -29,3 +29,22 @@
   display: grid;
   gap: var(--space-10);
 }
+
+/* ---------- Адаптив ----------
+
+   120px по бокам — десктопная величина. Ниже 1024 поле как у страницы */
+@media (max-width: 1199px) {
+  .band {
+    padding-inline: var(--page-pad);
+  }
+}
+
+@media (max-width: 767px) {
+  .band {
+    padding-block: var(--space-6);
+  }
+
+  .inner {
+    gap: var(--space-6);
+  }
+}

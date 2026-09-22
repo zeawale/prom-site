@@ -59,7 +59,11 @@
 }
 
 .form {
-  width: 600px;
+  /* Было width: 600px — на телефоне форма вылезала за диалог и за экран.
+     Ширину держит сам диалог (max-width 724 минус поля), форма просто
+     заполняет его */
+  width: 100%;
+  max-width: 600px;
   display: grid;
   gap: var(--space-4);
 }
@@ -175,7 +179,9 @@
   gap: var(--space-4);
   justify-items: start;
   padding: 0;
-  width: 500px;
+  /* Та же история, что с .form: фиксированные 500px шире телефона */
+  width: 100%;
+  max-width: 500px;
 }
 .success .title {
   margin: 0;
@@ -200,14 +206,55 @@
   color: var(--text-muted);
 }
 
-@media (max-width: 600px) {
+/* ---------- Телефон ----------
+
+   Раньше здесь была шторка снизу во всю ширину экрана — без полей по бокам
+   она выглядела съехавшей, а крестик лип к краю. Теперь это такая же
+   карточка по центру, как на десктопе, только с узкими полями.
+
+   margin: auto у диалога вместо align-items: center у оверлея: при длинной
+   форме (с ошибками валидации) диалог выше экрана, и центрирование
+   флексом срезало бы его верх без возможности прокрутить. Автоотступы
+   центрируют, пока помещается, и отдают прокрутку оверлею, когда нет */
+@media (max-width: 767px) {
   .overlay {
-    padding: 0;
-    align-items: flex-end;
+    padding: var(--space-3);
+    align-items: flex-start;
   }
+
   .dialog {
+    margin: auto;
     max-width: none;
-    border-radius: 16px 16px 0 0;
-    padding: var(--space-6) var(--space-5) var(--space-7);
+    border-radius: 16px;
+    /* Сверху место под крестик: заголовок по центру не должен
+       залезать под него */
+    padding: var(--space-7) var(--space-4) var(--space-5);
+  }
+
+  .close {
+    top: var(--space-2);
+    right: var(--space-2);
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    margin-bottom: var(--space-3);
+  }
+
+  .subtitle {
+    margin-bottom: var(--space-5);
+    text-align: center;
+  }
+
+  /* 16px, а не токен: при кегле поля меньше 16 Safari на iOS зумит
+     страницу при фокусе и не отдаёт масштаб обратно */
+  .input,
+  .textarea {
+    font-size: 16px;
+  }
+
+  .submit {
+    min-height: 48px;
   }
 }

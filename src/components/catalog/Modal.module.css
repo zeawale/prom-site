@@ -11,6 +11,10 @@
 
 .dialog {
   position: relative;
+  /* min-width: 0 — элемент грида по умолчанию не ужимается уже своего
+     содержимого, и длинное название в «Часто берут вместе» распирало
+     попап шире экрана */
+  min-width: 0;
   width: 100%;
   max-width: 600px;
   background: var(--surface-default);
@@ -39,4 +43,19 @@
 
 .close:hover {
   color: var(--text-primary);
+}
+
+@media (max-width: 767px) {
+  .backdrop {
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .dialog {
+    border-radius: 16px;
+  }
+
+  .close {
+    top: var(--space-2);
+    right: var(--space-2);
+  }
 }

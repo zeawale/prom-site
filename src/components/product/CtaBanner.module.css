@@ -16,7 +16,7 @@
 .inner {
   max-width: var(--container);
   margin-inline: auto;
-  padding: 0 var(--space-6);
+  padding: 0 var(--page-pad);
 }
 
 .title {
@@ -61,4 +61,19 @@
 .button:focus-visible {
   outline: 2px solid var(--border-inverse);
   outline-offset: 2px;
+}
+
+/* ---------- Адаптив ----------
+
+   По бокам у баннера два поля подряд — своё у секции и у .inner. На
+   десктопе это задумано, на телефоне съедало бы 64px с каждой стороны */
+@media (max-width: 767px) {
+  .section {
+    padding-inline: 0;
+  }
+
+  .button {
+    display: flex;
+    width: 100%;
+  }
 }

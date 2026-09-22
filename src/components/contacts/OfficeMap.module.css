@@ -75,3 +75,38 @@
   font-weight: var(--fw-medium);
   max-width: calc(100% - var(--space-10));
 }
+
+/* ---------- Телефон ----------
+
+   Почему карта вылезала за экран: у .frame одновременно aspect-ratio
+   16/7 и min-height 320. При заданной пропорции браузер переносит
+   минимум высоты на минимум ширины — 320 × 16/7 ≈ 731px, — и блок не
+   может стать уже. На телефоне пропорцию снимаем, высота фиксированная:
+   почти квадрат, на нём метка и улицы вокруг читаются */
+@media (max-width: 767px) {
+  .frame {
+    aspect-ratio: auto;
+    min-height: 0;
+    height: 360px;
+    border-radius: 14px;
+  }
+
+  .stub {
+    padding: var(--space-5) var(--space-4);
+    gap: var(--space-4);
+  }
+
+  .button {
+    width: 100%;
+    min-height: 48px;
+    padding-inline: var(--space-4);
+  }
+
+  .plaque {
+    inset-block-end: var(--space-3);
+    inset-inline: var(--space-3);
+    max-width: none;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--fs-body-xs);
+  }
+}

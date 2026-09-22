@@ -4,7 +4,9 @@
   /* Вынос до краёв окна — см. подробный комментарий в HomeHero.module.css */
   margin-inline: calc((100% - 100vw) / 2);
   padding-block: var(--space-20);
-  padding-inline: calc((100vw - var(--container-content)) / 2);
+  /* max() с полем страницы: уже 1376 разница отрицательная, отрицательный
+     padding браузер обнуляет, и текст прилипал бы к краю экрана */
+  padding-inline: max(var(--page-pad), calc((100vw - var(--container-content)) / 2));
 }
 
 .inner {
@@ -76,4 +78,57 @@
   line-height: var(--lh-relaxed);
   margin: 0;
   color: rgb(255 255 255 / 0.85);
+}
+
+/* ---------- Адаптив ----------
+
+   Одна колонка. grid-auto-flow: column и явные строки (--rows) нужны
+   только двухколоночной раскладке — чтобы 01–03 шли слева сверху вниз.
+   В одну колонку поток обычный, строками, и порядок тот же */
+@media (max-width: 1199px) {
+  /* Поля шире, чем у страницы: на синем текст у края читается тесно */
+  .section {
+    padding-inline: max(var(--space-7), calc((100vw - var(--container-content)) / 2));
+    padding-block: var(--space-7);
+  }
+
+  .head {
+    margin-bottom: var(--space-6);
+  }
+
+  .list {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  /* Поле шире, чем у страницы: на синем текст у самого края читается
+     тесно, а воздуха по бокам просила Ника */
+  .section {
+    padding-block: var(--space-10);
+    padding-inline: var(--space-6);
+  }
+
+  .lead {
+    font-size: var(--fs-body-s);
+  }
+
+  .itemTitle {
+    font-size: var(--fs-h6);
+  }
+
+  .item {
+    gap: var(--space-4);
+  }
+
+  .number {
+    min-width: 48px;
+  }
+
+  .itemText {
+    font-size: var(--fs-body-s);
+  }
 }

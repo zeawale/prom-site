@@ -38,6 +38,12 @@ export default function HomeHero({ title, lead, ctaText }: Props) {
             width={507}
             height={342}
             priority
+            /* Ниже 1200 иллюстрация спрятана (display: none), но
+               priority ставит на неё preload, и файл скачался бы всё
+               равно. sizes в 1px на узком экране заставляет браузер взять
+               из srcset самый маленький вариант — пару сотен байт вместо
+               сотни килобайт. Десктоп берёт честные 507px */
+            sizes="(max-width: 1199px) 1px, 507px"
             className={styles.artImage}
           />
         </div>

@@ -59,3 +59,98 @@
 .active .count {
   color: var(--text-link);
 }
+
+/* ---------- Выпадашка для телефона ----------
+
+   На десктопе её нет, на телефоне нет колонки. Порог 900 — тот же, на
+   котором CatalogPage складывает сетку в одну колонку */
+.dropdown {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .sidebar {
+    display: none;
+  }
+
+  .dropdown {
+    display: block;
+    background: var(--surface-default);
+    border: 1px solid var(--border-default);
+    border-radius: 16px;
+  }
+
+  .summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--fs-body-s);
+    color: var(--text-primary);
+  }
+
+  /* Нативный треугольник: list-style убирает его везде, кроме Safari,
+     там отдельный псевдоэлемент */
+  .summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary:focus-visible {
+    outline: 2px solid var(--border-brand);
+    outline-offset: 2px;
+    border-radius: 16px;
+  }
+
+  .summaryLabel {
+    color: var(--text-muted);
+  }
+
+  .summaryValue {
+    min-width: 0;
+    font-weight: var(--fw-semibold);
+    color: var(--text-link);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chevron {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    margin-inline-start: var(--space-2);
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+
+  .dropdown[open] .chevron {
+    transform: translateY(2px) rotate(-135deg);
+  }
+
+  .dropdownPanel {
+    /* Сверху отступ от линии под кнопкой — иначе «Все сервисы»
+       прилипали к ней */
+    padding: var(--space-3) var(--space-2) var(--space-2);
+    border-top: 1px solid var(--border-default);
+  }
+
+  .dropdownPanel .link {
+    padding-block: var(--space-2);
+  }
+
+  .dropdownPanel .icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

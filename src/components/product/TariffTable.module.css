@@ -186,36 +186,205 @@
   border: 0;
 }
 
-/* ---------- Мобильный ---------- */
+/* ---------- Планшет ----------
 
-@media (max-width: 767px) {
-  .table {
-    /* Ниже этого таблица нечитаема, поэтому включаем горизонтальный скролл.
-       min-width обязателен: без него table-layout: fixed ужмёт колонки
-       в ширину экрана и скроллить будет нечего. */
-    min-inline-size: 560px;
+   Колонки тарифов (БАЗОВАЯ / ПРОФ / КОРП) уже, чем на десктопе: 190px
+   на каждую при ширине планшета сжимали колонку возможностей до
+   полоски. Высвобожденное место уходит названиям строк */
+@media (max-width: 1199px) {
+  /* Скролла на планшете нет: колонки сужены, таблица помещается. Обёртка
+     с overflow: auto на Windows рисовала пустую полосу прокрутки даже при
+     переполнении на пару пикселей от рамок */
+  .scroller {
+    overflow-x: visible;
   }
 
   .colValue {
-    width: 110px;
+    width: 120px;
   }
 
+  .table thead th,
   .rowLabel,
-  .headFirst {
-    /* Залипающая первая колонка: при скролле вправо видно, о чём строка.
-       position: sticky на th работает только при table-layout: fixed
-       и заданном фоне — прозрачный фон пропустит под себя соседние ячейки. */
+  .cell,
+  .cellText {
+    padding-inline: var(--space-3);
+  }
+}
+
+/* ---------- Мобильный ----------
+
+   Было два варианта, оба не прижились. Горизонтальный скролл прятал
+   правую колонку и шеврон «Детально» за край экрана. Строка-блок с
+   подписью «ПРОФ» / «ТЕХНО» над каждым значением читалась как анкета,
+   а не как таблица.
+
+   Сейчас — плотная таблица без скролла: название слева на всё свободное
+   место, колонки значений справа узкими столбцами фиксированной ширины.
+   Шапка одна на всю таблицу и прилипает к верху экрана при прокрутке —
+   у УТ строк почти полсотни, и без неё к середине забываешь, какая
+   колонка где. Число колонок — 2 или 3 — приходит переменной --cols
+   с самой таблицы (role-атрибуты в TSX держат семантику таблицы при
+   смене display) */
+@media (max-width: 767px) {
+  .scroller {
+    overflow: visible;
+    border-radius: 12px;
+    background: var(--surface-default);
+    border: 1px solid var(--border-default);
+  }
+
+  .table,
+  .table thead,
+  .table tbody {
+    display: block;
+    font-size: var(--fs-body-xs);
+  }
+
+  /* hidden у tbody «Детально» слабее класса выше — возвращаем явно */
+  .table tbody[hidden] {
+    display: none;
+  }
+
+  .table colgroup {
+    display: none;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(var(--cols, 2), 60px);
+    align-items: center;
+    column-gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  /* Липкая шапка. top: 0 — шапка сайта не липкая, прилипать не к чему */
+  .table thead {
     position: sticky;
-    inset-inline-start: 0;
-    z-index: 1;
+    top: 0;
+    z-index: 2;
+    border-radius: 11px 11px 0 0;
+    background: var(--surface-brand);
+  }
+
+  .table thead th {
+    padding: var(--space-1) 0;
+    font-size: var(--fs-label-11);
+    letter-spacing: 0;
+    background: none;
   }
 
   .headFirst {
-    /* Шапка залипает и по горизонтали, и остаётся над строками */
-    z-index: 2;
+    position: static;
+    white-space: normal;
+  }
+
+  .headValue {
+    text-align: center;
   }
 
   .rowLabel {
-    box-shadow: 1px 0 0 var(--border-default);
+    position: static;
+    box-shadow: none;
+    padding: 0;
+    background: none;
+    line-height: var(--lh-tight);
+    overflow-wrap: anywhere;
+  }
+
+  .cell,
+  .cellText {
+    padding: 0;
+    background: none;
+    text-align: center;
+    line-height: var(--lh-tight);
+    overflow-wrap: anywhere;
+  }
+
+  .box {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+
+  /* Строка с кнопкой «Детально» — одна ячейка во всю ширину */
+  .table tr:has(.detailsCell) {
+    display: block;
+    padding: 0;
+  }
+
+  .detailsCell {
+    display: block;
+  }
+
+  .detailsToggle {
+    padding: var(--space-3);
+  }
+
+  .disclaimer {
+    margin-top: var(--space-4);
+    font-size: var(--fs-body-xs);
+  }
+}
+
+/* ---------- Телефон: строки с текстом ----------
+
+   Галочки в колонку 60px помещаются, а «100 комплектов документов» —
+   нет: текст ломался посреди слова («комплект / ов»). Строки, где хоть
+   одно значение текстом, раскладываются в две строки: название на всю
+   ширину, под ним значения поровну на всю ширину, над каждым мелкая
+   подпись колонки. Таких строк в таблице ИТС четыре — остальные
+   остаются плотными, с общей шапкой */
+@media (max-width: 767px) {
+  .table tr[data-text] {
+    grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+    align-items: start;
+    row-gap: var(--space-2);
+    column-gap: var(--space-3);
+  }
+
+  .table tr[data-text] .rowLabel {
+    grid-column: 1 / -1;
+  }
+
+  .table tr[data-text] .cell,
+  .table tr[data-text] .cellText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    text-align: start;
+    overflow-wrap: normal;
+    color: var(--text-primary);
+    font-weight: var(--fw-medium);
+  }
+
+  .table tr[data-text] .cell::before,
+  .table tr[data-text] .cellText::before {
+    content: attr(data-label);
+    font-size: var(--fs-label-11);
+    font-weight: var(--fw-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+  }
+}
+
+/* В строках с текстом галочка рядом со словами («ограниченный доступ»)
+   читалась как чужеродный значок. Там вместо неё показывается слово —
+   то самое «Есть» / «Нет», которое уже лежит в ячейке для скринридера.
+   Отдельный текст не заводим: одно и то же слово в двух местах однажды
+   разойдётся */
+@media (max-width: 767px) {
+  .table tr[data-text] .box {
+    display: none;
+  }
+
+  .table tr[data-text] .srOnly {
+    position: static;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
   }
 }

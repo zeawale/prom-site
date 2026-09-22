@@ -74,3 +74,52 @@
   font-weight: var(--fw-semibold);
   color: var(--text-inverse);
 }
+
+/* ---------- Телефон ----------
+
+   Три факта в ряд оказались перегружены: крупные цифры, под каждой
+   подпись в две-три строки, всё впритык. Здесь каждый факт — строка
+   «значение — подпись», как в справочнике: значение слева жирным,
+   подпись справа мелким. Карточка короче и читается сверху вниз */
+@media (max-width: 767px) {
+  .card {
+    padding: var(--space-4);
+    border-radius: 16px;
+    gap: var(--space-3);
+  }
+
+  .label {
+    font-size: var(--fs-label-12);
+  }
+
+  .list {
+    gap: 0;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: baseline;
+    column-gap: var(--space-3);
+    padding-block: var(--space-2);
+    border-top: 1px solid rgb(255 255 255 / 0.16);
+  }
+
+  .item:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .fact {
+    font-size: var(--fs-h6);
+  }
+
+  .caption {
+    font-size: var(--fs-body-xs);
+    line-height: var(--lh-base);
+  }
+
+  .suits {
+    padding-block-start: var(--space-3);
+  }
+}

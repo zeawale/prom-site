@@ -43,3 +43,112 @@
     transition: none;
   }
 }
+
+/* ---------- Выпадашка для планшета и телефона ---------- */
+
+.dropdown {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .nav {
+    display: none;
+  }
+
+  .dropdown {
+    display: block;
+    position: relative;
+    margin-block-end: var(--space-6);
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-default);
+    border: 1px solid var(--border-brand);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: var(--fs-body-s);
+    text-align: start;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  .toggle:focus-visible {
+    outline: 2px solid var(--border-brand);
+    outline-offset: 2px;
+  }
+
+  .toggleLabel {
+    color: var(--text-muted);
+  }
+
+  .toggleValue {
+    min-width: 0;
+    font-weight: var(--fw-semibold);
+    color: var(--text-link);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chevron {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    margin-inline-start: auto;
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+
+  .chevron[data-open] {
+    transform: translateY(2px) rotate(-135deg);
+  }
+
+  /* Поверх контента, а не в потоке: иначе при открытии страница под
+     списком прыгает вниз на семь строк */
+  .panel {
+    position: absolute;
+    inset-inline: 0;
+    top: calc(100% + var(--space-1));
+    z-index: 20;
+    padding: var(--space-2);
+    background: var(--surface-default);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgb(13 33 70 / 0.12);
+  }
+
+  .panelList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .option {
+    display: block;
+    padding: var(--space-3);
+    border-radius: 8px;
+    font-size: var(--fs-body-s);
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .option[data-active] {
+    background: var(--surface-brand-soft);
+    color: var(--text-link);
+    font-weight: var(--fw-semibold);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

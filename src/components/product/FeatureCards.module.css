@@ -139,9 +139,119 @@
 
 /* ---------- Мобильный ---------- */
 
-@media (max-width: 1023px) {
+/* Две колонки и на планшете, и на телефоне — решение Ники. Было в одну
+   колонку, и шесть карточек преимуществ растягивались на пять экранов.
+   На телефоне это ~160px на карточку, поэтому ниже всё ужато до
+   компактного варианта — того же, что у четырёх карточек в ряд на десктопе.
+   Карточки со списками (КА) в полэкрана тесноваты — смотреть вживую */
+@media (max-width: 1199px) {
   .grid,
   .grid[data-columns='4'] {
+    --cols: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid,
+  .grid[data-columns='4'] {
+    gap: var(--space-2);
+  }
+
+  .card,
+  .grid[data-columns='4'] .card {
+    padding: var(--space-3);
+    border-radius: 10px;
+    /* Длинные слова вроде «Бухгалтерия» в узкой колонке не должны
+       распирать карточку */
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .iconBox,
+  .grid[data-columns='4'] .iconBox {
+    inline-size: 32px;
+    block-size: 32px;
+    margin-block-end: var(--space-2);
+  }
+
+  .cardTitle,
+  .grid[data-columns='4'] .cardTitle {
+    font-size: var(--fs-label-14);
+    margin-block-end: var(--space-1);
+  }
+
+  .text,
+  .list,
+  .grid[data-columns='4'] .text {
+    font-size: var(--fs-body-xs);
+    line-height: var(--lh-base);
+  }
+
+  .list {
+    gap: var(--space-1);
+    padding-inline-start: var(--space-4);
+  }
+
+  .lead {
+    font-size: var(--fs-body-s);
+  }
+}
+
+/* Карточки «иконка + текст» без заголовка (Фреш, ГРМ, часть программ) в две
+   колонки на телефоне смотрелись странно: абзац в полэкрана под одинокой
+   иконкой. Здесь они в одну колонку строкой — иконка слева, текст справа.
+   Карточки с заголовками и четвёрки остаются сеткой в две колонки */
+@media (max-width: 767px) {
+  .grid[data-layout='icon']:not([data-columns='4']) {
     --cols: 1;
+  }
+
+  /* Грид, а не флекс-строка: у КА под текстом бывает список, и во
+     флекс-строке он вставал третьей колонкой справа от текста. Здесь
+     иконка — отдельная колонка на всю высоту, а текст и список идут
+     друг под другом во второй */
+  .grid[data-layout='icon']:not([data-columns='4']) .card {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: var(--space-3);
+    align-items: start;
+    padding: var(--space-3) var(--space-4);
+    hyphens: manual;
+  }
+
+  .grid[data-layout='icon']:not([data-columns='4']) .iconBox {
+    grid-row: 1 / span 2;
+    margin-block-end: 0;
+  }
+
+  .grid[data-layout='icon']:not([data-columns='4']) .card > :not(.iconBox) {
+    grid-column: 2;
+  }
+
+  .grid[data-layout='icon']:not([data-columns='4']) .text,
+  .grid[data-layout='icon']:not([data-columns='4']) .list {
+    font-size: var(--fs-body-s);
+  }
+
+  .grid[data-layout='icon']:not([data-columns='4']) .text {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Карточки с заголовками без иконок (Розница) — тоже одной колонкой:
+     в полэкрана у них было по слову в строку и перенос на переносе.
+     Широкие и невысокие вместо узких и длинных */
+  .grid[data-layout='title']:not([data-columns='4']) {
+    --cols: 1;
+  }
+
+  .grid[data-layout='title']:not([data-columns='4']) .card {
+    padding: var(--space-3) var(--space-4);
+    hyphens: manual;
+  }
+
+  .grid[data-layout='title']:not([data-columns='4']) .text {
+    font-size: var(--fs-body-s);
   }
 }

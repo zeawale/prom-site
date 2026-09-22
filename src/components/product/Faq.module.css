@@ -123,3 +123,33 @@
     transition: none;
   }
 }
+
+/* ---------- Адаптив ---------- */
+/* Снизу ноль и на планшете: под FAQ стоит нижний паддинг .container, и
+   два отступа подряд давали дыру вдвое больше, чем сверху блока */
+@media (max-width: 1199px) {
+  .section {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Снизу ноль: под FAQ и так стоит нижний паддинг .container, и два
+     отступа подряд давали дыру вдвое больше, чем сверху блока */
+  .section {
+    padding-block: var(--space-6) 0;
+  }
+
+  .item {
+    padding: var(--space-4);
+  }
+
+  .question {
+    gap: var(--space-4);
+    font-size: var(--fs-h6);
+  }
+
+  .paragraph {
+    font-size: var(--fs-body-s);
+  }
+}

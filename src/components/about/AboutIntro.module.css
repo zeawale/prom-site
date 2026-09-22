@@ -47,3 +47,23 @@
   background: var(--surface-muted);
   border: 1px solid var(--border-default);
 }
+
+/* ---------- Планшет и телефон ----------
+
+   Две колонки не живут: фото в трети экрана — это ~100px, а текст рядом
+   рвался по слову в строку. Текст во всю ширину, фото (пока плашка)
+   под ним */
+@media (max-width: 1199px) {
+  .section {
+    padding-block-end: var(--space-6);
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .paragraph {
+    margin-bottom: var(--space-3);
+  }
+}

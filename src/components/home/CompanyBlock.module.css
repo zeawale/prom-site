@@ -96,3 +96,91 @@
 .quote::after {
   content: '»';
 }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 1199px) {
+  /* «Подробнее о компании» — в самый низ, под отзывы (планшет и телефон).
+     Шапка растворяется через display: contents, и кнопка становится
+     прямым элементом флекса секции — её можно увести в конец порядком,
+     не трогая разметку. В обходе табом она остаётся после заголовка:
+     порядок фокуса идёт по DOM, а не по order */
+  .section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .head {
+    display: contents;
+  }
+
+  .head > div {
+    margin-bottom: var(--space-5);
+  }
+
+  /* По центру и шире — Ника: под колонкой отзывов кнопка у левого края
+     выглядела забытой */
+  .button {
+    order: 1;
+    margin-top: var(--space-5);
+    align-self: center;
+    min-width: min(320px, 100%);
+    text-align: center;
+  }
+
+  /* Отступ между счётчиками и отзывами — только отзывам. .section в
+     селекторе поднимает специфичность над margin: 0 из модуля Counters */
+  .section .counters {
+    margin-block-end: 0;
+  }
+
+  /* Отступ задаётся отзывам, а не счётчикам: margin на .counters не
+     срабатывал — в модуле Counters у той же полосы стоит margin: 0, и
+     какой из двух одинаково специфичных классов победит, решает порядок
+     подключения CSS, а не наш код */
+  .reviews {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+}
+
+@media (max-width: 767px) {
+  .button {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  /* Отзывы — лентой со свайпом, как сервисы: следующая карточка
+     выглядывает справа и показывает, что лента продолжается */
+  .reviews {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Лента до края экрана, а не до края поля: так «выглядывание»
+       следующей карточки читается как продолжение, а не как обрезка */
+    margin-inline: calc(var(--page-pad) * -1);
+    padding-inline: var(--page-pad);
+    scroll-padding-inline: var(--page-pad);
+  }
+
+  .reviews::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+
+  .counters {
+    margin-block-end: var(--space-5);
+  }
+
+  .review {
+    border-radius: 16px;
+    padding: var(--space-5);
+  }
+}

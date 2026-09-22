@@ -129,3 +129,24 @@
 .relatedItem {
   color: var(--text-link);
 }
+
+/* ---------- Мобильный ---------- */
+@media (max-width: 767px) {
+  .card {
+    row-gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  .iconBox {
+    width: 32px;
+    height: 32px;
+  }
+
+  .title {
+    line-height: var(--lh-tight);
+  }
+
+  .related {
+    padding-top: var(--space-3);
+  }
+}

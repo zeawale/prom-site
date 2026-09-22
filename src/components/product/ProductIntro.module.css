@@ -78,8 +78,48 @@
 
 /* ---------- Мобильный ---------- */
 
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Боковой паддинг сетки — десктопный отступ внутри контейнера; на
+     телефоне поле страницы уже есть, второе съедало бы 40px ширины */
+  .grid {
+    padding: 0;
+    gap: var(--space-3);
+  }
+
+  /* Облегчённая карточка: серая рамка, как у остальных карточек сайта,
+     а не синяя; кнопка обычной высоты со скруглением остальных кнопок.
+     Синяя рамка и оранжевая плита во всю ширину спорили с «Коротко о
+     сервисе» прямо под ними — выделять на экране надо её */
+  .card {
+    padding: var(--space-4);
+    border: 1px solid var(--border-default);
+    border-radius: 16px;
+  }
+
+  .text {
+    gap: var(--space-2);
+  }
+
+  .intro,
+  .paragraph {
+    font-size: var(--fs-body-s);
+    line-height: var(--lh-base);
+  }
+
+  .cta {
+    margin-block-start: var(--space-4);
+  }
+
+  .button {
+    min-height: 44px;
+    padding-block: var(--space-2);
+    border-radius: 12px;
+    font-size: var(--fs-body-s);
   }
 }

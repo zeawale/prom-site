@@ -117,6 +117,23 @@
   color: var(--text-muted);
 }
 
+/* ---------- Обёртка списка ----------
+
+   Обёртка и тело списка — флекс-колонки на всю оставшуюся высоту
+   карточки: иначе сноска внизу (margin-block-start: auto) перестала бы
+   прижиматься к низу, и подвалы двух тарифов разъехались бы */
+.featuresWrap,
+.featuresBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Кнопка «Что входит» есть только на телефоне */
+.featuresToggle {
+  display: none;
+}
+
 /* ---------- Пункты ---------- */
 
 .features {
@@ -179,12 +196,87 @@
   margin: var(--space-5) 0 0;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1199px) {
   .grid {
     grid-template-columns: 1fr;
   }
 
   .feature[data-kind='note'] {
     margin-block-start: 0;
+  }
+}
+
+/* ---------- Планшет и телефон ----------
+
+   Обе карточки в одну колонку, но список программ свёрнут под «Что
+   входит» — ниже 1200, как и остальной адаптив. Без этого два тарифа — это три экрана прокрутки, а решает
+   посетитель по названию, «кому подходит» и цифрам — они видны сразу */
+@media (max-width: 1199px) {
+  .card {
+    padding: var(--space-5);
+  }
+
+  .titleRow {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .metrics {
+    margin: var(--space-4) 0;
+    padding: var(--space-3) 0;
+  }
+
+  .featuresToggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+    min-height: 44px;
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-brand-soft);
+    border: 0;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: var(--fs-body-s);
+    font-weight: var(--fw-semibold);
+    color: var(--text-link);
+    cursor: pointer;
+  }
+
+  .featuresToggle:focus-visible {
+    outline: 2px solid var(--border-brand);
+    outline-offset: 2px;
+  }
+
+  .featuresChevron {
+    flex: none;
+    transition: transform 0.15s ease;
+  }
+
+  .featuresWrap[data-open] .featuresChevron {
+    transform: rotate(180deg);
+  }
+
+  .featuresWrap:not([data-open]) .featuresBody {
+    display: none;
+  }
+
+  .featuresBody {
+    margin-top: var(--space-4);
+  }
+
+  .features {
+    gap: var(--space-3);
+  }
+
+  .feature {
+    font-size: var(--fs-body-s);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featuresChevron {
+    transition: none;
   }
 }
