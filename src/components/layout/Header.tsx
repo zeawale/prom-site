@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { mainNav } from '@/lib/navigation'
 import { NavLink } from './NavLink'
+import { MobileNav } from './MobileNav'
 import { RequestButton } from './RequestButton'
 import styles from './Header.module.css'
 
@@ -9,6 +10,9 @@ import styles from './Header.module.css'
  * Шапка ничего не запрашивает: телефон отсюда убран (восемь пунктов меню
  * и номер в строку не помещались), а больше данных из Settings ей не нужно.
  * Номер живёт в футере и на «Контактах».
+ *
+ * Серверной шапка осталась и с бургером: клиентский только MobileNav,
+ * ему нужно состояние «открыто».
  */
 export function Header() {
   return (
@@ -49,6 +53,12 @@ export function Header() {
         <div className={styles.actions}>
           <RequestButton className={styles.cta} source="header" />
         </div>
+
+        {/* Ниже 1200 меню и кнопка выше прячутся, вместо них бургер.
+            Показ и скрытие — только CSS, без проверки ширины в JS: иначе
+            на сервере не знали бы, что рендерить, и шапка мигала бы
+            при гидратации */}
+        <MobileNav />
       </div>
     </header>
   )

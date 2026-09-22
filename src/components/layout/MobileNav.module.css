@@ -1,0 +1,154 @@
+/* Видим только там, где десктопное меню спрятано. Порог 1199 общий с
+   Header.module.css: восемь пунктов, логотипы и кнопка в строку
+   помещаются примерно с 1200 */
+.root {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .root {
+    display: block;
+    margin-inline-start: auto;
+  }
+}
+
+/* 44×44 — минимальная зона нажатия для пальца */
+.burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-inline-end: -10px; /* полоски встают по краю контента, а не зоны нажатия */
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-inverse);
+  cursor: pointer;
+}
+
+.bars {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 16px;
+}
+
+.bars > span {
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.bars > span:nth-child(1) {
+  top: 0;
+}
+.bars > span:nth-child(2) {
+  top: 7px;
+}
+.bars > span:nth-child(3) {
+  top: 14px;
+}
+
+/* Открыто — крестик из тех же полосок */
+.bars[data-open] > span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.bars[data-open] > span:nth-child(2) {
+  opacity: 0;
+}
+.bars[data-open] > span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Панель позиционируется от .header (там position: relative) и
+   занимает остаток экрана под шапкой. dvh, а не vh: на мобильном
+   Safari vh считается без адресной строки, и низ панели с кнопкой
+   уезжал бы под неё. Шапка не липкая, поэтому top: 100% всегда
+   совпадает с её нижним краем — меню открывается только сверху
+   страницы, где шапка видна */
+.panel {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 50;
+  height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--page-pad) var(--space-6);
+  background: var(--surface-brand);
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+  animation: panelIn 0.2s ease;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list > li + li {
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.link {
+  display: block;
+  padding-block: var(--space-4);
+  font-size: var(--fs-label-16);
+  line-height: var(--lh-tight);
+  color: var(--text-inverse);
+  text-decoration: none;
+}
+
+.linkActive {
+  color: var(--text-accent);
+  font-weight: var(--fw-bold);
+}
+
+.cta {
+  align-self: stretch;
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border: none;
+  border-radius: 12px;
+  background: var(--surface-accent);
+  color: var(--text-inverse);
+  font-family: inherit;
+  font-size: var(--fs-label-16);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.cta:hover {
+  filter: brightness(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bars > span {
+    transition: none;
+  }
+
+  .panel {
+    animation: none;
+  }
+}

@@ -1,4 +1,6 @@
 .header {
+  /* relative — от шапки позиционируется панель бургер-меню */
+  position: relative;
   height: var(--header-h);
   background: var(--surface-brand);
 }
@@ -10,7 +12,7 @@
   height: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 var(--page-pad);
   display: flex;
   align-items: center;
   gap: 32px;
@@ -94,4 +96,40 @@
 
 .cta:hover {
   filter: brightness(0.92);
+}
+
+/* ---------- Адаптив ----------
+
+   Восемь пунктов в строку при зазоре 32 впритык влезают только около
+   1380. Между 1200 и 1380 зазоры ужимаются, ниже 1200 меню уходит в
+   бургер (MobileNav). Пороги посчитаны по ширине подписей в Montserrat
+   14px — перемерить на живой странице, если поменяется меню */
+@media (max-width: 1379px) {
+  .inner,
+  .nav {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .nav,
+  .actions {
+    display: none;
+  }
+}
+
+/* На телефоне логотипы уменьшаются пропорционально: 150 + 72 и
+   разделитель рядом с бургером занимали бы почти всю строку */
+@media (max-width: 767px) {
+  .logoProm {
+    width: 116px;
+  }
+
+  .logo1c {
+    width: 56px;
+  }
+
+  .divider {
+    height: 24px;
+  }
 }
