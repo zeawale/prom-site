@@ -1,0 +1,92 @@
+/* Страница 404. Живёт внутри .container, поэтому шапка и футер на месте,
+   а сама она — обычная секция сайта, не отдельный экран.
+
+   min-height подобран так, чтобы на десктопе футер не подпрыгивал под
+   три строки текста: 100dvh минус шапка, футер и вертикальные поля
+   контейнера — грубо, но пустой экран под текстом выглядит хуже */
+.section {
+  min-height: calc(100dvh - var(--header-h) - 200px - 2 * var(--space-6));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 640px;
+  padding-block: var(--space-8);
+}
+
+.code {
+  font-size: var(--fs-display-72);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-none);
+  color: var(--text-link);
+  margin: 0 0 var(--space-4);
+}
+
+.title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.text {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-6);
+}
+
+.text a {
+  color: var(--text-link);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-6);
+  border-radius: 20px;
+  font-size: var(--fs-label-16);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-none);
+  text-decoration: none;
+  transition: filter 0.15s ease;
+}
+
+/* Синий, а не оранжевый: это навигация, а не призыв оставить заявку.
+   Заодно контраст 8.6:1 — этой кнопке общий проход по оранжевому не нужен */
+.primary {
+  background: var(--surface-brand);
+  color: var(--text-inverse);
+}
+
+.secondary {
+  background: var(--surface-default);
+  color: var(--text-link);
+  border: 1px solid var(--border-brand);
+}
+
+.primary:hover,
+.secondary:hover {
+  filter: brightness(0.92);
+}
+
+@media (max-width: 767px) {
+  .section {
+    min-height: auto;
+    padding-block: var(--space-6);
+  }
+
+  .primary,
+  .secondary {
+    flex: 1 1 100%;
+  }
+}
