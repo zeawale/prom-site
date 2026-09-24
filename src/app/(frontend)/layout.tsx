@@ -7,6 +7,7 @@ import { LeadModalProvider } from '@/components/lead/LeadModalProvider'
 import { ServiceModalProvider } from '@/components/catalog/ServiceModalProvider'
 import { CookieConsent } from '@/components/cookie/CookieConsent'
 import { getCookieBanner } from '@/lib/queries'
+import { SITE_URL } from '@/lib/site'
 
 /**
  * Базовые метаданные сайта.
@@ -21,12 +22,11 @@ import { getCookieBanner } from '@/lib/queries'
  * title.absolute.
  *
  * metadataBase нужен, чтобы Next разворачивал относительные адреса в
- * canonical и OpenGraph в абсолютные. Домен — из переменной окружения: на
- * превью-стенде он другой, а зашитый в код прод молча подставился бы в
- * ссылки предпросмотра.
+ * canonical и OpenGraph в абсолютные. Домен — из SITE_URL (lib/site.ts):
+ * тот же адрес читают sitemap, robots и proxy, расходиться им нельзя.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://pm52.ru'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Сервисы и программы 1С для малого бизнеса в Нижнем Новгороде | ПРО-М',
     template: '%s | ПРО-М',
