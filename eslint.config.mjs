@@ -44,8 +44,14 @@ const eslintConfig = [
   },
 
   {
-    // Сгенерированное Payload не наше и правится только генератором
-    ignores: ['.next/', 'src/payload-types.ts', 'src/payload-generated-schema.ts'],
+    // Сгенерированное Payload не наше и правится только генератором.
+    // Миграции — тоже: их пишет migrate:create с неиспользуемыми аргументами
+    ignores: [
+      '.next/',
+      'src/payload-types.ts',
+      'src/payload-generated-schema.ts',
+      'src/migrations/',
+    ],
   },
 ]
 

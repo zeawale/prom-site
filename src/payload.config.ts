@@ -22,6 +22,7 @@ import { Home } from './globals/Home'
 import { About } from './globals/About'
 import { Contacts } from './globals/Contacts'
 import { CookieBanner } from './globals/CookieBanner'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,10 +52,32 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  /**
+   * Схема базы меняется только миграциями, авто-push выключен.
+   *
+   * По умолчанию адаптер в dev-режиме сам подгоняет таблицы под конфиг
+   * (drizzle push). Удобно ровно до первого переименования поля: drizzle не
+   * отличает rename от «удалить старую колонку и создать новую» и задаёт
+   * вопрос в терминале — а на проде терминала нет, и данные в колонке
+   * теряются молча. Поэтому push выключен везде, а не только на проде:
+   * dev и прод проходят одну и ту же последовательность миграций, и
+   * расхождение схем между машинами исключено.
+   *
+   * Правишь коллекцию или глобал → `pnpm migrate:create <имя>` →
+   * смотришь сгенерированный файл в src/migrations → `pnpm migrate`.
+   * Снимок схемы (`*.json`) рядом с миграцией нужен для следующего diff,
+   * из репозитория не удалять.
+   *
+   * prodMigrations: на проде непримёненные миграции прогоняются сами при
+   * старте приложения (и при `next build`, он тоже поднимает Payload).
+   * Отдельный шаг деплоя «не забыть прогнать migrate» не нужен.
+   */
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || '',
     },
+    push: false,
+    prodMigrations: migrations,
   }),
   sharp,
   plugins: [],
