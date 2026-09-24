@@ -7,6 +7,10 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  /* Слэш в конце адреса снимает proxy (src/proxy.ts), а не Next: у него
+     это отдельный 308 до всех остальных редиректов, и старые адреса
+     WordPress вида /kontakty/ ехали бы на новый сайт за два перехода */
+  skipTrailingSlashRedirect: true,
   images: {
     /* Список закрытый: как только localPatterns задан, всё, чего в нём нет,
        next/image отклоняет с Invalid src prop. SVG-логотипы шапки сюда не
