@@ -27,7 +27,8 @@ test.describe('Admin Panel', () => {
 
   test('can navigate to list view', async () => {
     await page.goto('http://localhost:3000/admin/collections/users')
-    await expect(page).toHaveURL('http://localhost:3000/admin/collections/users')
+    // Админка Payload дописывает ?depth=1&limit=10 — точное совпадение не годится
+    await expect(page).toHaveURL(/^http:\/\/localhost:3000\/admin\/collections\/users(\?|$)/)
     const listViewArtifact = page.locator('h1', { hasText: 'Users' }).first()
     await expect(listViewArtifact).toBeVisible()
   })
