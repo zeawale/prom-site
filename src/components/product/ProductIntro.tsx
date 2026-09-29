@@ -41,7 +41,7 @@ export default function ProductIntro({
       <div className={styles.card}>
         <div className={styles.text}>
           <p className={styles.paragraph}>
-            <strong className={styles.strong}>{bodyStrong}</strong> {bodyIntro}
+            <strong>{bodyStrong}</strong> {bodyIntro}
           </p>
 
           {paragraphs.map((p, i) => (

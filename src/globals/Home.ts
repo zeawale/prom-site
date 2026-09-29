@@ -58,26 +58,9 @@ export const Home: GlobalConfig = {
         { name: 'title', type: 'text', label: 'Заголовок блока', required: true },
         { name: 'lead', type: 'textarea', label: 'Подзаголовок' },
 
-        /* Подписи управления вынесены на уровень секции, а не в карточку:
-           они одинаковы у всех четырёх, и четыре копии одного слова в
-           админке — это четыре возможности их рассинхронизировать */
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'openLabel',
-              type: 'text',
-              label: 'Ссылка «раскрыть»',
-              defaultValue: 'Это про меня',
-            },
-            {
-              name: 'closeLabel',
-              type: 'text',
-              label: 'Ссылка «свернуть»',
-              defaultValue: 'Свернуть',
-            },
-          ],
-        },
+        /* Подписи «Это про меня» / «Свернуть» (openLabel, closeLabel) убраны:
+           StateCards их не выводит — выбранная карточка видна по рамке.
+           Колонки сняты миграцией 20260929_drop_state_labels */
         {
           type: 'row',
           fields: [

@@ -1149,8 +1149,6 @@ export interface Home {
   states: {
     title: string;
     lead?: string | null;
-    openLabel?: string | null;
-    closeLabel?: string | null;
     criteriaTitle?: string | null;
     solutionLabel?: string | null;
     items?:
@@ -2137,8 +2135,6 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         title?: T;
         lead?: T;
-        openLabel?: T;
-        closeLabel?: T;
         criteriaTitle?: T;
         solutionLabel?: T;
         items?:

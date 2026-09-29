@@ -42,7 +42,7 @@ export default function AboutIntro({ title, body, photo }: Props) {
       <h1 className={styles.title}>{title}</h1>
 
       <div className={styles.grid}>
-        <div className={styles.text}>
+        <div>
           {paragraphs.map((paragraph) => (
             <p className={styles.paragraph} key={paragraph}>
               {paragraph}

@@ -52,10 +52,9 @@ type Props = {
  * Карточка целиком — <button>: кликается вся, а не подпись внутри.
  * Вложить кнопку в кнопку нельзя, поэтому «Это про меня» это span.
  *
- * Подписи «Это про меня» и «Свернуть» (openLabel и closeLabel в глобале
- * Home) больше не выводятся: выбранная карточка видна по рамке, а
- * сворачивать нечего. Оба поля в CMS остались без потребителей — убрать
- * при следующей правке схемы.
+ * Подписей «Это про меня» и «Свернуть» нет: выбранная карточка видна по
+ * рамке, а сворачивать нечего. Поля openLabel/closeLabel из глобала Home
+ * удалены вместе с колонками (миграция 20260929_drop_state_labels).
  */
 export default function StateCards({
   title,
@@ -117,7 +116,7 @@ export default function StateCards({
       </div>
 
       <div className={styles.panelBody}>
-        <div className={styles.criteria}>
+        <div>
           <p className={styles.criteriaTitle}>{criteriaTitle}</p>
           <ul className={styles.criteriaList}>
             {current.criteria.map((text) => (

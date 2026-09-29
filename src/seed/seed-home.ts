@@ -32,8 +32,6 @@ const seed = async () => {
       states: {
         title: 'Где вы сейчас',
         lead: 'Одно из четырёх состояний описывает вашу ситуацию — выберите своё.',
-        openLabel: 'Это про меня',
-        closeLabel: 'Свернуть',
         criteriaTitle: 'Это про вас, если',
         solutionLabel: 'Перейти',
         items: [
