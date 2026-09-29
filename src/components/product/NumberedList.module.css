@@ -1,12 +1,11 @@
 .section {
   background: var(--surface-brand);
   color: var(--text-inverse);
-  /* Вынос до краёв окна — см. подробный комментарий в HomeHero.module.css */
-  margin-inline: calc((100% - 100vw) / 2);
+  /* Во всё окно: все три колонки сетки страницы, см. .container в
+     styles.css. Контент центрует и ограничивает .inner */
+  grid-column: full;
   padding-block: var(--space-20);
-  /* max() с полем страницы: уже 1376 разница отрицательная, отрицательный
-     padding браузер обнуляет, и текст прилипал бы к краю экрана */
-  padding-inline: max(var(--page-pad), calc((100vw - var(--container-content)) / 2));
+  padding-inline: var(--page-pad);
 }
 
 .inner {
@@ -88,7 +87,7 @@
 @media (max-width: 1199px) {
   /* Поля шире, чем у страницы: на синем текст у края читается тесно */
   .section {
-    padding-inline: max(var(--space-7), calc((100vw - var(--container-content)) / 2));
+    padding-inline: var(--space-7);
     padding-block: var(--space-7);
   }
 

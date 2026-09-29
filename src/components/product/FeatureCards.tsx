@@ -40,7 +40,11 @@ export default function FeatureCards({
   const showTitle = layout === 'title' || layout === 'icon-title'
 
   return (
-    <section className={styles.section} aria-labelledby={title ? headingId : undefined}>
+    <section
+      className={styles.section}
+      data-spaced="both"
+      aria-labelledby={title ? headingId : undefined}
+    >
       {title && (
         <Heading id={headingId} className={headingLevel === 3 ? styles.subheading : styles.heading}>
           {title}

@@ -2,7 +2,8 @@
   background: var(--surface-brand);
   color: var(--text-inverse);
   margin-top: 32px;
-  margin-inline: calc((100% - 100vw) / 2);
+  /* Во всё окно: все три колонки сетки страницы, см. .container */
+  grid-column: full;
   padding: var(--space-6);
   /*
     Белая полоса под баннером — это padding: var(--space-5) у .container.

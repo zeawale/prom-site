@@ -31,7 +31,7 @@ export default function TariffCards({ title, lead, cards, disclaimer, children }
   if (!cards.length) return null
 
   return (
-    <section className={styles.section} aria-labelledby="tariffs-heading">
+    <section className={styles.section} data-spaced="top" aria-labelledby="tariffs-heading">
       <h2 id="tariffs-heading" className={styles.heading}>
         {title}
       </h2>

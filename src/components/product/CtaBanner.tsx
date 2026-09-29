@@ -14,7 +14,7 @@ type Props = {
  */
 export default function CtaBanner({ title, text, buttonLabel, buttonHref }: Props) {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-spaced="top">
       <div className={styles.inner}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.text}>{text}</p>

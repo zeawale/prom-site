@@ -32,7 +32,7 @@ export default function CompareBlock({ title, lead, fresh, grm, current }: Props
   ]
 
   return (
-    <section className={styles.section} aria-labelledby="compare-heading">
+    <section className={styles.section} data-spaced="top" aria-labelledby="compare-heading">
       <h2 id="compare-heading" className={styles.heading}>
         {title}
       </h2>

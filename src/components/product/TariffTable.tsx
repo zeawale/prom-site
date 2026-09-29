@@ -103,7 +103,11 @@ export default function TariffTable({
   const colSpan = columns.length + 1
 
   return (
-    <section className={styles.section} aria-labelledby={title ? headingId : undefined}>
+    <section
+      className={styles.section}
+      data-spaced="top"
+      aria-labelledby={title ? headingId : undefined}
+    >
       {title && (
         <h2 id={headingId} className={styles.title}>
           {title}

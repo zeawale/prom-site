@@ -85,17 +85,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <LeadModalProvider>
-          {/* Обёртка нужна только под overflow-x: clip — см. styles.css.
-              Стоит внутри провайдера, чтобы модалка заявки осталась
-              снаружи обрезки */}
-          <div className="viewport">
-            <Header />
-            <ServiceModalProvider>{children}</ServiceModalProvider>
-            <Footer />
-          </div>
+          <Header />
+          <ServiceModalProvider>{children}</ServiceModalProvider>
+          <Footer />
 
-          {/* Снаружи обёртки — плашка и её модалка position: fixed, обрезка
-              по горизонтали им ни к чему, а тексты приходят из CMS */}
+          {/* Плашка и её модалка position: fixed; тексты приходят из CMS */}
           <CookieConsent
             texts={{
               version: cookie.version,

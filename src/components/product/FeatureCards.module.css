@@ -1,3 +1,5 @@
+/* Отступ с обеих сторон; на уровне страницы про это знает сетка
+   .container — см. data-spaced в styles.css */
 .section {
   margin: var(--space-6) 0;
 }
