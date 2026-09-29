@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { revalidatePath } from 'next/cache'
+import { revalidateSection } from '@/lib/revalidate'
 import { iconField } from './fields/iconField'
 import { tariffRowFields } from './fields/tariffRowFields'
 
@@ -24,26 +24,25 @@ export const Programs: CollectionConfig = {
    * запроса Next, а сид — обычный процесс Node. Без флага `pnpm seed:programs`
    * падает на первом же создании документа.
    *
-   * ВНИМАНИЕ (04.09.2026): локально этот хук вызывается и отрабатывает без
-   * исключения, но страница остаётся с заголовком x-nextjs-cache: HIT.
-   * Проверено на обоих сборщиках и на чистом Next мимо Payload — то есть
-   * дело не в этом коде. Разбираться на проде. Здесь ничего не «чинить»
-   * наугад: за час перебора вариантов ни один не дал результата.
+   * История (04.09.2026): хук отрабатывал без исключения, а страница
+   * оставалась HIT. Причина нашлась 29.09: revalidatePath('/programs',
+   * 'layout') искал тег без группы маршрутов (frontend) и ничего не
+   * сбрасывал — см. lib/revalidate.ts. Сброс отдельной страницы по адресу
+   * (`/programs/<slug>`) работал и тогда.
    */
   hooks: {
     afterChange: [
-      ({ doc, req }) => {
+      ({ req }) => {
         if (req?.context?.disableRevalidate) return
-        // Тип 'layout' сбрасывает и шапку раздела с табами, и все страницы
-        // под /programs — иначе новая программа не появится в табах
-        revalidatePath('/programs', 'layout')
-        revalidatePath(`/programs/${doc.slug}`)
+        // Весь раздел: шапка с табами и все страницы под /programs — иначе
+        // новая программа не появится в табах. Своя страница входит туда же
+        revalidateSection('/programs')
       },
     ],
     afterDelete: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
-        revalidatePath('/programs', 'layout')
+        revalidateSection('/programs')
       },
     ],
   },

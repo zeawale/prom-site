@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import { revalidatePath } from 'next/cache'
+import { revalidateSection } from '@/lib/revalidate'
 
 /**
  * Всё, что одинаково на семи страницах программ.
@@ -16,8 +16,8 @@ export const ProgramsSection: GlobalConfig = {
     afterChange: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
-        revalidatePath('/programs/[slug]', 'page')
-        revalidatePath('/programs', 'layout')
+        // Шапка раздела и все семь страниц под ней — один layout
+        revalidateSection('/programs')
       },
     ],
   },

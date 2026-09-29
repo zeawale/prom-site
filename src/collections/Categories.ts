@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { iconField } from './fields/iconField'
-import { revalidatePath } from 'next/cache'
+import { revalidateSection } from '@/lib/revalidate'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -11,13 +11,13 @@ export const Categories: CollectionConfig = {
     afterChange: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
-        revalidatePath('/services', 'layout')
+        revalidateSection('/services')
       },
     ],
     afterDelete: [
       ({ req }) => {
         if (req?.context?.disableRevalidate) return
-        revalidatePath('/services', 'layout')
+        revalidateSection('/services')
       },
     ],
   },
