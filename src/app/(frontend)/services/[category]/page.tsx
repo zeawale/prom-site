@@ -45,15 +45,12 @@ export async function generateStaticParams() {
 
 export default async function ServicesCategoryPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ category: string }>
-  searchParams: Promise<{ q?: string }>
 }) {
   const { category } = await params
-  const { q } = await searchParams
 
   if (!(await findCategory(category))) notFound()
 
-  return <CatalogPage categorySlug={category} query={q} />
+  return <CatalogPage categorySlug={category} />
 }

@@ -2,19 +2,22 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Where } from 'payload'
 import { VISIBLE } from '@/lib/queries'
-import { ServiceCard } from './ServiceCard'
 import { Sidebar } from './Sidebar'
-import { SearchInput } from './SearchInput'
+import { CatalogResults } from './CatalogResults'
 import styles from './CatalogPage.module.css'
-import { Suspense } from 'react'
 
 type Props = {
   categorySlug?: string
   flag?: 'popular' | 'new'
-  query?: string
 }
 
-export async function CatalogPage({ categorySlug, flag, query }: Props) {
+/**
+ * Страница каталога. Серверная и статическая: категорию и флаг задаёт
+ * роут, а поисковая строка ?q= сюда не доходит — её читает и применяет
+ * CatalogResults в браузере. Пока страница получала searchParams, Next
+ * считал её динамической и рендерил каталог на каждый запрос.
+ */
+export async function CatalogPage({ categorySlug, flag }: Props) {
   const payload = await getPayload({ config })
 
   const filters: Where[] = [VISIBLE]
@@ -22,18 +25,13 @@ export async function CatalogPage({ categorySlug, flag, query }: Props) {
   if (flag === 'popular') filters.push({ isPopular: { equals: true } })
   if (flag === 'new') filters.push({ isNew: { equals: true } })
 
-  const { docs } = await payload.find({
+  const { docs: services } = await payload.find({
     collection: 'services',
     where: { and: filters },
     limit: 100,
     depth: 1,
     sort: 'title',
   })
-
-  const q = query?.trim().toLowerCase()
-  const services = q
-    ? docs.filter((s) => [s.title, s.headline, s.description].join(' ').toLowerCase().includes(q))
-    : docs
 
   return (
     <main className={styles.page}>
@@ -47,36 +45,13 @@ export async function CatalogPage({ categorySlug, flag, query }: Props) {
       </header>
 
       <div className={styles.layout}>
-        <div className={styles.aside}>
+        <div>
           <Sidebar activeSlug={categorySlug ?? flag} />
         </div>
 
         <div className={styles.content}>
           <div className={styles.contentInner}>
-            <div className={styles.toolbar}>
-              <Suspense fallback={null}>
-                <SearchInput />
-              </Suspense>
-            </div>
-
-            {services.length > 0 ? (
-              <div className={styles.gridWrap}>
-                <div
-                  className={styles.grid}
-                  tabIndex={0}
-                  role="region"
-                  aria-label="Каталог сервисов"
-                >
-                  {services.map((s) => (
-                    <ServiceCard key={s.id} service={s} />
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p className={styles.empty}>
-                По запросу ничего не нашлось. Попробуйте другое слово или откройте полный каталог.
-              </p>
-            )}
+            <CatalogResults services={services} />
           </div>
         </div>
       </div>

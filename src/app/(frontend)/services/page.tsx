@@ -7,11 +7,8 @@ export const metadata: Metadata = {
     'Каталог сервисов 1С:ИТС: отчётность, ЭДО, маркировка, кадры, проверка контрагентов, приём оплат. Подключение и поддержка в Нижнем Новгороде.',
 }
 
-export default async function ServicesIndexPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>
-}) {
-  const { q } = await searchParams
-  return <CatalogPage query={q} />
+// searchParams здесь не читаются намеренно: ?q= обрабатывает CatalogResults
+// в браузере, а страница остаётся статической
+export default function ServicesIndexPage() {
+  return <CatalogPage />
 }

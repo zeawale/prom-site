@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 }
 
-export default async function NewPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q } = await searchParams
-  return <CatalogPage flag="new" query={q} />
+export default function NewPage() {
+  return <CatalogPage flag="new" />
 }

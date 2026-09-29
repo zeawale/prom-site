@@ -1,28 +1,17 @@
 'use client'
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import styles from './SearchInput.module.css'
 
-export function SearchInput() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const [value, setValue] = useState(searchParams.get('q') ?? '')
+type Props = {
+  value: string
+  onChange: (value: string) => void
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const params = new URLSearchParams(searchParams)
-      if (value) params.set('q', value)
-      else params.delete('q')
-
-      const query = params.toString()
-      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false })
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [value, pathname, router, searchParams])
-
+/**
+ * Поле поиска по каталогу. Само состояния не держит: значение и обработчик
+ * приходят из CatalogResults, где живут и фильтр, и запись ?q= в адрес.
+ */
+export function SearchInput({ value, onChange }: Props) {
   return (
     <div className={styles.wrap}>
       <input
@@ -30,7 +19,7 @@ export function SearchInput() {
         className={styles.input}
         placeholder="Поиск по сервисам"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         aria-label="Поиск по каталогу сервисов"
       />
     </div>
