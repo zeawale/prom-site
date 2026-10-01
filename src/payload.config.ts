@@ -1,4 +1,5 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -79,6 +80,27 @@ export default buildConfig({
     push: false,
     prodMigrations: migrations,
   }),
+  /**
+   * Почта — SMTP Яндекса с ящика на домене, по паролю приложения.
+   * Отправитель обязан совпадать с SMTP_USER: письмо с чужим From Яндекс
+   * не примет. Без SMTP_HOST адаптер не подключается, и Payload пишет
+   * письма в консоль — так на машине разработки ничего не уходит наружу.
+   */
+  email: process.env.SMTP_HOST
+    ? nodemailerAdapter({
+        defaultFromAddress: process.env.SMTP_USER || '',
+        defaultFromName: 'Сайт ПРО-М',
+        transportOptions: {
+          host: process.env.SMTP_HOST,
+          port: Number(process.env.SMTP_PORT || 465),
+          secure: Number(process.env.SMTP_PORT || 465) === 465,
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        },
+      })
+    : undefined,
   sharp,
   plugins: [],
 })

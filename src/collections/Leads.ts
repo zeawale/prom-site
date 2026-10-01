@@ -1,10 +1,14 @@
 import type { CollectionConfig } from 'payload'
+import { notifyNewLead } from '@/lib/leadEmail'
 
 export const Leads: CollectionConfig = {
   slug: 'leads',
   labels: {
     singular: 'Заявка',
     plural: 'Заявки',
+  },
+  hooks: {
+    afterChange: [notifyNewLead],
   },
   access: {
     create: () => true,
