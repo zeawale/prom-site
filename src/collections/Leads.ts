@@ -11,7 +11,10 @@ export const Leads: CollectionConfig = {
     afterChange: [notifyNewLead],
   },
   access: {
-    create: () => true,
+    // Форма создаёт заявку через Local API на сервере, ему access не
+    // нужен. Открытый create пускал бы в /api/leads мимо проверки полей и
+    // согласия, а каждая такая заявка — ещё и письмо в рабочий ящик
+    create: ({ req }) => Boolean(req.user),
     read: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
