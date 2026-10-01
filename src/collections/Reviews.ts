@@ -9,8 +9,8 @@ import { revalidatePath } from 'next/cache'
  * получить две разошедшиеся версии одной цитаты. Флаг showOnHome
  * решает, кто попадает на главную, порядок задаётся полем order.
  *
- * Фото нет намеренно: в макете карточка отзыва без аватара. Появятся
- * реальные фотографии — добавится upload-поле, а не переделается блок.
+ * Фото и должности нет намеренно: отзывы взяты с Яндекс Карт, а там
+ * автор — это имя, иногда с первой буквой фамилии, и больше ничего.
  */
 export const Reviews: CollectionConfig = {
   slug: 'reviews',
@@ -39,7 +39,7 @@ export const Reviews: CollectionConfig = {
 
   admin: {
     useAsTitle: 'author',
-    defaultColumns: ['author', 'role', 'showOnHome', 'order'],
+    defaultColumns: ['author', 'showOnHome', 'order'],
     group: 'Контент',
   },
 
@@ -47,22 +47,19 @@ export const Reviews: CollectionConfig = {
     {
       name: 'author',
       type: 'text',
-      label: 'Имя и фамилия',
+      label: 'Имя автора',
       required: true,
-    },
-    {
-      name: 'role',
-      type: 'text',
-      label: 'Должность и компания',
-      required: true,
-      admin: { description: 'Например: руководитель, бухгалтерская компания «Актив Учёт»' },
+      admin: { description: 'Как в источнике отзыва. Например: Лидия К.' },
     },
     {
       name: 'text',
       type: 'textarea',
       label: 'Текст отзыва',
       required: true,
-      admin: { description: 'Кавычки-ёлочки ставит вёрстка — в поле их писать не нужно' },
+      admin: {
+        description:
+          'Кавычки-ёлочки вокруг отзыва ставит вёрстка — в поле их писать не нужно. Кавычки внутри текста — „лапки“. Длинный отзыв сворачивается до пяти строк с кнопкой «Показать полностью»',
+      },
     },
     {
       name: 'showOnHome',

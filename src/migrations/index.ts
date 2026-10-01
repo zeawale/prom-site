@@ -1,6 +1,7 @@
 import * as migration_20260924_143320_initial from './20260924_143320_initial';
 import * as migration_20260929_150731_drop_state_labels from './20260929_150731_drop_state_labels';
 import * as migration_20261001_105107_add_about_photo_caption from './20261001_105107_add_about_photo_caption';
+import * as migration_20261001_112229_drop_review_role from './20261001_112229_drop_review_role';
 
 export const migrations = [
   {
@@ -16,6 +17,11 @@ export const migrations = [
   {
     up: migration_20261001_105107_add_about_photo_caption.up,
     down: migration_20261001_105107_add_about_photo_caption.down,
-    name: '20261001_105107_add_about_photo_caption'
+    name: '20261001_105107_add_about_photo_caption',
+  },
+  {
+    up: migration_20261001_112229_drop_review_role.up,
+    down: migration_20261001_112229_drop_review_role.down,
+    name: '20261001_112229_drop_review_role'
   },
 ];

@@ -1,0 +1,44 @@
+.quote {
+  margin: 0;
+}
+
+.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+}
+
+.clamp[data-expanded] {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+}
+
+.text::before {
+  content: '«';
+}
+
+.text::after {
+  content: '»';
+}
+
+/* Кнопка-ссылка: рамка и фон спорили бы с рамкой самой карточки.
+   Вертикальный padding — чтобы в неё попадал палец */
+.toggle {
+  margin-block-start: var(--space-1);
+  padding: var(--space-2) 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--fs-body-s);
+  font-weight: var(--fw-semibold);
+  color: var(--text-link);
+  cursor: pointer;
+}
+
+.toggle:hover {
+  text-decoration: underline;
+}

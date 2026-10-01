@@ -63,7 +63,6 @@ export default async function AboutPage() {
         reviews={reviews.map((review) => ({
           id: review.id,
           author: review.author,
-          role: review.role,
           text: review.text,
         }))}
       />

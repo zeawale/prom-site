@@ -71,30 +71,15 @@
   font-size: var(--fs-h6);
   font-weight: var(--fw-semibold);
   color: var(--text-link);
-  margin: 0 0 var(--space-1);
-}
-
-.role {
-  font-size: var(--fs-body-xs);
-  color: var(--text-muted);
   margin: 0 0 var(--space-4);
 }
 
-/* Ёлочки рисует вёрстка: в поле редактор пишет чистый текст, иначе
-   половина отзывов приедет с кавычками, половина без */
+/* Ёлочки и обрезку длинного отзыва рисует ReviewQuote, здесь только
+   типографика цитаты на главной */
 .quote {
   font-size: var(--fs-body-s);
   line-height: var(--lh-relaxed);
   color: var(--text-secondary);
-  margin: 0;
-}
-
-.quote::before {
-  content: '«';
-}
-
-.quote::after {
-  content: '»';
 }
 
 /* ---------- Адаптив ---------- */

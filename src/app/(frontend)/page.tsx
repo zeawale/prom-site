@@ -98,7 +98,6 @@ export default async function HomePage() {
         reviews={reviews.map((r) => ({
           id: r.id,
           author: r.author,
-          role: r.role,
           text: r.text,
         }))}
       />

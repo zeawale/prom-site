@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Counters, { type Counter } from '@/components/product/Counters'
+import ReviewQuote from '@/components/ui/ReviewQuote'
 import styles from './CompanyBlock.module.css'
 
 export type { Counter }
-export type Review = { id: number | string; author: string; role: string; text: string }
+export type Review = { id: number | string; author: string; text: string }
 
 type Props = {
   title: string
@@ -17,8 +18,8 @@ type Props = {
 /**
  * «С кем вы будете работать»: счётчики компании и отзывы клиентов.
  *
- * Кавычки-ёлочки ставит вёрстка (::before / ::after), а не редактор:
- * иначе в базе половина отзывов окажется с кавычками, половина без.
+ * Цитату рисует ReviewQuote — общий с «О компании»: ёлочки и обрезка
+ * длинного отзыва там.
  */
 export default function CompanyBlock({
   title,
@@ -54,8 +55,7 @@ export default function CompanyBlock({
           {reviews.map((review) => (
             <li className={styles.review} key={review.id}>
               <p className={styles.author}>{review.author}</p>
-              <p className={styles.role}>{review.role}</p>
-              <blockquote className={styles.quote}>{review.text}</blockquote>
+              <ReviewQuote text={review.text} className={styles.quote} />
             </li>
           ))}
         </ul>

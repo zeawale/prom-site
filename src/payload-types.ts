@@ -652,13 +652,12 @@ export interface LegalPage {
  */
 export interface Review {
   id: number;
+  /**
+   * Как в источнике отзыва. Например: Лидия К.
+   */
   author: string;
   /**
-   * Например: руководитель, бухгалтерская компания «Актив Учёт»
-   */
-  role: string;
-  /**
-   * Кавычки-ёлочки ставит вёрстка — в поле их писать не нужно
+   * Кавычки-ёлочки вокруг отзыва ставит вёрстка — в поле их писать не нужно. Кавычки внутри текста — „лапки“. Длинный отзыв сворачивается до пяти строк с кнопкой «Показать полностью»
    */
   text: string;
   /**
@@ -1003,7 +1002,6 @@ export interface LegalPagesSelect<T extends boolean = true> {
  */
 export interface ReviewsSelect<T extends boolean = true> {
   author?: T;
-  role?: T;
   text?: T;
   showOnHome?: T;
   order?: T;
