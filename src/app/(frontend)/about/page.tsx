@@ -40,7 +40,12 @@ export default async function AboutPage() {
 
   return (
     <main className="container">
-      <AboutIntro title={about.title} body={about.body} photo={photo} />
+      <AboutIntro
+        title={about.title}
+        body={about.body}
+        photo={photo}
+        photoCaption={about.photoCaption}
+      />
 
       {/* Та же плашка, что на главной: цифры общие, из Settings */}
       <Counters

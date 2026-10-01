@@ -32,10 +32,22 @@
   margin-bottom: 0;
 }
 
+/* У figure браузерные поля 1em 40px — без сброса фото стало бы уже колонки */
+.figure {
+  margin: 0;
+}
+
 .photo {
   width: 100%;
   height: auto;
   border-radius: 16px;
+}
+
+.caption {
+  font-size: var(--fs-body-s);
+  line-height: var(--lh-base);
+  color: var(--text-muted);
+  margin-block-start: var(--space-3);
 }
 
 /* aspect-ratio, а не фиксированная высота: плашка должна занимать столько

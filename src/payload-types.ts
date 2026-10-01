@@ -1342,6 +1342,10 @@ export interface About {
    */
   photo?: (number | null) | Media;
   /**
+   * Должность и имя. Выводится только вместе с фото
+   */
+  photoCaption?: string | null;
+  /**
    * Без двоеточия в конце
    */
   reviewsTitle?: string | null;
@@ -2239,6 +2243,7 @@ export interface AboutSelect<T extends boolean = true> {
   title?: T;
   body?: T;
   photo?: T;
+  photoCaption?: T;
   reviewsTitle?: T;
   reviewsLead?: T;
   updatedAt?: T;

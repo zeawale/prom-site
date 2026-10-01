@@ -18,6 +18,7 @@ type Props = {
    */
   body?: string | null
   photo?: AboutPhoto | null
+  photoCaption?: string | null
 }
 
 /**
@@ -30,8 +31,11 @@ type Props = {
  * Фото необязательное. Пока его нет, на месте стоит серая плашка той же
  * высоты: без неё правая колонка схлопывается и текст растягивается на всю
  * ширину, а при появлении фотографии вёрстка прыгает обратно.
+ *
+ * Подпись — часть фотографии: без фото она не выводится, подписывать
+ * серую плашку нечем.
  */
-export default function AboutIntro({ title, body, photo }: Props) {
+export default function AboutIntro({ title, body, photo, photoCaption }: Props) {
   const paragraphs = (body ?? '')
     .split('\n')
     .map((line) => line.trim())
@@ -51,13 +55,16 @@ export default function AboutIntro({ title, body, photo }: Props) {
         </div>
 
         {photo ? (
-          <Image
-            className={styles.photo}
-            src={photo.url}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-          />
+          <figure className={styles.figure}>
+            <Image
+              className={styles.photo}
+              src={photo.url}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+            />
+            {photoCaption && <figcaption className={styles.caption}>{photoCaption}</figcaption>}
+          </figure>
         ) : (
           /* aria-hidden: заглушка ничего не сообщает, и объявлять её
              скринридеру нечем — это пустое место, а не изображение */
