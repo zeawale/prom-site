@@ -20,6 +20,13 @@ type Props = {
  *
  * Цитату рисует ReviewQuote — общий с «О компании»: ёлочки и обрезка
  * длинного отзыва там.
+ *
+ * Ссылка «Подробнее о компании» стоит в разметке дважды: в шапке блока
+ * для десктопа и под отзывами для планшета и телефона, лишняя спрятана
+ * через display: none. Раньше она была одна и уезжала вниз через order —
+ * на экране последней, а в обходе табом первой, раньше кнопок в отзывах.
+ * Спрятанная через display: none ссылка не попадает ни в обход табом, ни
+ * в дерево доступности, так что дубля для скринридера нет.
  */
 export default function CompanyBlock({
   title,
@@ -29,6 +36,8 @@ export default function CompanyBlock({
   counters,
   reviews,
 }: Props) {
+  const label = buttonLabel ?? 'Подробнее о компании'
+
   return (
     <section className={styles.section} aria-labelledby="home-company">
       <div className={styles.head}>
@@ -40,8 +49,8 @@ export default function CompanyBlock({
         </div>
 
         {buttonHref && (
-          <Link href={buttonHref} className={styles.button}>
-            {buttonLabel ?? 'Подробнее о компании'}
+          <Link href={buttonHref} className={`${styles.button} ${styles.buttonTop}`}>
+            {label}
           </Link>
         )}
       </div>
@@ -59,6 +68,12 @@ export default function CompanyBlock({
             </li>
           ))}
         </ul>
+      )}
+
+      {buttonHref && (
+        <Link href={buttonHref} className={`${styles.button} ${styles.buttonBottom}`}>
+          {label}
+        </Link>
       )}
     </section>
   )
