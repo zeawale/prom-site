@@ -13,6 +13,7 @@ export function ServiceDetailClient({ service }: { service: Service }) {
     <ServiceBody
       service={service}
       source="service"
+      headingLevel={2}
       renderRelated={(related) =>
         related.map((r) => {
           const cat = typeof r.category === 'object' && r.category !== null ? r.category.slug : null

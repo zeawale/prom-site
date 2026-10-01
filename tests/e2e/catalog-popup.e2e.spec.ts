@@ -51,7 +51,9 @@ test.describe('Попап каталога', () => {
 
     const dialog = page.getByRole('dialog')
     await expect(dialog).toBeVisible()
-    await expect(dialog.getByRole('heading', { level: 1 })).toHaveText(service.title)
+    // В попапе название сервиса — <h2>: <h1> на странице один, у каталога
+    await expect(dialog.getByRole('heading', { level: 2 }).first()).toHaveText(service.title)
+    await expect(page.locator('h1')).toHaveCount(1)
     await expect(page).toHaveURL(`${BASE}/services/${service.category.slug}/${service.slug}`)
     // Страница под попапом не прокручивается
     await expect(page.locator('body')).toHaveCSS('overflow', 'hidden')
@@ -116,10 +118,10 @@ test.describe('Попап каталога', () => {
     await page.goto(`${BASE}/services/${service.category.slug}`)
     await card(page, service.title).click()
     const dialog = page.getByRole('dialog')
-    await expect(dialog.getByRole('heading', { level: 1 })).toHaveText(service.title)
+    await expect(dialog.getByRole('heading', { level: 2 }).first()).toHaveText(service.title)
 
     await dialog.getByRole('button', { name: related.title }).click()
-    await expect(dialog.getByRole('heading', { level: 1 })).toHaveText(related.title)
+    await expect(dialog.getByRole('heading', { level: 2 }).first()).toHaveText(related.title)
     await expect(page).toHaveURL(new RegExp(`/services/${related.category.slug}/`))
 
     // Один «назад» закрывает окно и возвращает адрес категории

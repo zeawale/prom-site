@@ -11,9 +11,20 @@ type Props = {
   source: string
   /** Как рендерить связанные сервисы: ссылками или кнопками попапа */
   renderRelated: (related: Service[]) => ReactNode
+  /**
+   * Уровень заголовка с названием сервиса: 1 на отдельной странице, 2 в
+   * попапе. Попап открывается поверх каталога или главной, где свой <h1>
+   * уже есть, и второй на странице быть не должен. Заголовки разделов и
+   * шагов считаются от него, чтобы иерархия не рвалась
+   */
+  headingLevel: 1 | 2
 }
 
-export function ServiceBody({ service, source, renderRelated }: Props) {
+export function ServiceBody({ service, source, renderRelated, headingLevel }: Props) {
+  const Title = `h${headingLevel}` as 'h1' | 'h2'
+  const SectionTitle = `h${headingLevel + 1}` as 'h2' | 'h3'
+  const StepTitle = `h${headingLevel + 2}` as 'h3' | 'h4'
+
   const related = visibleRelated(service.related)
   const steps = service.popup?.howItWorks ?? []
   const whoNeedsIt = service.popup?.whoNeedsIt ?? []
@@ -31,7 +42,7 @@ export function ServiceBody({ service, source, renderRelated }: Props) {
           <Icon slug={service.icon} size={24} />
         </span>
         <div>
-          <h1 className={styles.title}>{service.title}</h1>
+          <Title className={styles.title}>{service.title}</Title>
           {categoryTitle && <p className={styles.category}>{categoryTitle}</p>}
         </div>
       </header>
@@ -43,7 +54,7 @@ export function ServiceBody({ service, source, renderRelated }: Props) {
 
       {whoNeedsIt.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Кому нужен</h2>
+          <SectionTitle className={styles.sectionTitle}>Кому нужен</SectionTitle>
           <ul className={styles.checkList}>
             {whoNeedsIt.map((item) => (
               <li key={item.id} className={styles.checkItem}>
@@ -57,13 +68,13 @@ export function ServiceBody({ service, source, renderRelated }: Props) {
 
       {steps.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Как это работает</h2>
+          <SectionTitle className={styles.sectionTitle}>Как это работает</SectionTitle>
           <ol className={styles.steps}>
             {steps.map((step, i) => (
               <li key={step.id} className={styles.step}>
                 <span className={styles.stepNum}>{i + 1}</span>
                 <div>
-                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <StepTitle className={styles.stepTitle}>{step.title}</StepTitle>
                   <p className={styles.stepText}>{step.description}</p>
                 </div>
               </li>
@@ -74,7 +85,7 @@ export function ServiceBody({ service, source, renderRelated }: Props) {
 
       {requirements.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Что нужно для подключения</h2>
+          <SectionTitle className={styles.sectionTitle}>Что нужно для подключения</SectionTitle>
           <ul className={styles.reqList}>
             {requirements.map((item) => (
               <li key={item.id} className={styles.reqItem}>
@@ -87,7 +98,7 @@ export function ServiceBody({ service, source, renderRelated }: Props) {
 
       {related.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Часто берут вместе</h2>
+          <SectionTitle className={styles.sectionTitle}>Часто берут вместе</SectionTitle>
           <div className={styles.relatedGrid}>{renderRelated(related)}</div>
         </section>
       )}

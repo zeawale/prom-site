@@ -15,6 +15,7 @@ export function ServiceDetail({ service }: { service: Service }) {
     <ServiceBody
       service={service}
       source="service-page"
+      headingLevel={1}
       renderRelated={(related) =>
         related.map((r) => {
           const href = serviceHref(r)
