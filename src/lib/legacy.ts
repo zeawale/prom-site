@@ -10,9 +10,8 @@
  * Ключи — путь без завершающего слэша и в нижнем регистре; так их
  * нормализует proxy перед поиском. Значения — путь на новом сайте.
  *
- * Список редиректов и удалённых разделов — по карте сайта и меню старого
- * сайта. Карта там неполная (см. мастер-промт), полный перечень адресов
- * ждём из админки WordPress и Вебмастера — дополнять сюда.
+ * Списки сверены 01.10.2026 со всеми 56 опубликованными страницами из
+ * REST API WordPress (/wp-json/wp/v2/pages; записей блога там нет).
  */
 
 /** Старый адрес → новый. Только там, где преемник отвечает на тот же запрос */
@@ -35,6 +34,18 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/programmy-1s/1s-upravlenie-torgovlej': '/programs/upravlenie-torgovley',
   '/programmy-1s/1s-zarplata-i-upravlenie-personalom-8': '/programs/zup',
   '/programmy-1s/1s-licenzii': '/programs/litsenzii',
+
+  // Страницы программ 2015 года в корне сайта, вне /programmy-1s/.
+  // Нашлись в REST API WordPress 01.10.2026, в карте и меню их не было
+  '/1s-buxgalteriya-8': '/programs/buhgalteriya',
+  '/1c-buxgalteriya-8-prof': '/programs/buhgalteriya',
+  '/1s-buxgalteriya-8-bazovaya-versiya': '/programs/buhgalteriya',
+  '/1sbuxgalteriya-8-korp': '/programs/buhgalteriya',
+  '/1s-zarplata-i-upravlenie-personalom-8': '/programs/zup',
+  '/1spredpriyatie-8-upravlenie-torgovlej': '/programs/upravlenie-torgovley',
+  '/1supravlenie-torgovlej-8-bazovaya-versiya': '/programs/upravlenie-torgovley',
+  '/1spredpriyatie-8-upravlenie-torgovlej-i-vzaimootnosheniyami-s-klientami-crm':
+    '/programs/upravlenie-torgovley',
 
   // Страницы про 1С из меню старого сайта, которых не было в карте.
   // Доработка и сопровождение — это /its; «купить 1С» — раздел программ
@@ -72,6 +83,11 @@ export const LEGACY_GONE_PREFIXES: string[] = [
   '/vakansii',
   '/video',
   '/gallery',
+  '/partnerskaya-programma',
+  '/universalnaya-pechatnaya-forma',
+  // Старые программы для ИП и упрощёнки: преемника на новом сайте нет
+  '/1spredprinimatel-8',
+  '/1suproshhenka-8',
   // Мусор темы из старой карты сайта
   '/coming-soon',
   '/contact-us',
