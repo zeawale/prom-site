@@ -48,6 +48,7 @@
   line-height: var(--lh-base);
   color: var(--text-muted);
   margin-block-start: var(--space-3);
+  text-align: center;
 }
 
 /* aspect-ratio, а не фиксированная высота: плашка должна занимать столько
@@ -77,5 +78,15 @@
 
   .paragraph {
     margin-bottom: var(--space-3);
+  }
+}
+
+/* Только планшет: в одной колонке фото растягивалось на всю ширину
+   страницы и занимало экран целиком. На телефоне колонка узкая, там
+   оно остаётся */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .figure,
+  .placeholder {
+    display: none;
   }
 }
