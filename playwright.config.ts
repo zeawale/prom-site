@@ -37,5 +37,9 @@ export default defineConfig({
     command: 'pnpm dev',
     reuseExistingServer: true,
     url: 'http://localhost:3000',
+    // Номер-заглушка: тестам Метрики нужен счётчик, а в .env разработки его
+    // нет. Сам тег Метрики тесты подменяют, к Яндексу ничего не уходит.
+    // Работает, только если сервер поднимает Playwright, а не уже запущенный pnpm dev
+    env: { NEXT_PUBLIC_YM_ID: process.env.NEXT_PUBLIC_YM_ID || '12345678' },
   },
 })

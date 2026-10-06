@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { LeadModalProvider } from '@/components/lead/LeadModalProvider'
 import { ServiceModalProvider } from '@/components/catalog/ServiceModalProvider'
 import { CookieConsent } from '@/components/cookie/CookieConsent'
+import { YandexMetrika } from '@/components/analytics/YandexMetrika'
 import { getCookieBanner } from '@/lib/queries'
 import { SITE_URL } from '@/lib/site'
 
@@ -54,6 +55,12 @@ export const metadata: Metadata = {
  * какой файл тянуть. Единственное, что next/font делал сам и что теперь
  * приходится писать руками, — preload ниже.
  */
+/**
+ * Счётчик Метрики. Через переменную окружения, а не константой: на машине
+ * разработки её нет, и посещения localhost не попадают в статистику сайта.
+ */
+const YM_ID = Number(process.env.NEXT_PUBLIC_YM_ID) || null
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookie = await getCookieBanner()
 
@@ -109,6 +116,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               },
             }}
           />
+
+          <YandexMetrika counterId={YM_ID} consentVersion={cookie.version} />
         </LeadModalProvider>
       </body>
     </html>

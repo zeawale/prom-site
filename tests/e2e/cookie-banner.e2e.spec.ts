@@ -10,11 +10,35 @@ import {
  * вещи, ради которых баннер вообще написан так, а не иначе
  * (см. комментарий в CookieConsent.tsx):
  *   • отказ и согласие — кнопки одного размера, без подталкивания;
- *   • до ответа сторонних ресурсов на странице нет (карта на «Контактах»);
+ *   • до ответа сторонних ресурсов на странице нет (карта на «Контактах»,
+ *     Метрика);
  *   • новая версия условий спрашивает заново.
+ *
+ * Тег Метрики подменяется пустым скриптом во всех тестах файла: «Принять
+ * все» иначе слало бы настоящие хиты. Пустой тег оставляет на месте
+ * очередь вызовов `window.ym.a` — по ней и видно, что ушло бы в Метрику.
  */
 
 const BASE = 'http://localhost:3000'
+const METRIKA = /mc\.yandex\.ru/
+
+test.beforeEach(async ({ page }) => {
+  await page.route(METRIKA, (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
+  )
+})
+
+/** Вызовы Метрики, накопленные в очереди до загрузки тега */
+async function ymCalls(page: Page): Promise<unknown[][] | null> {
+  return page.evaluate(() => {
+    const ym = (window as unknown as { ym?: { a?: unknown[][] } }).ym
+    return ym ? (ym.a ?? []).map((args) => Array.from(args)) : null
+  })
+}
+
+const METRIKA_HINT =
+  'Метрики нет на странице: dev-сервер запущен без NEXT_PUBLIC_YM_ID. ' +
+  'Остановите pnpm dev — Playwright поднимет свой сервер со счётчиком-заглушкой'
 
 function banner(page: Page) {
   return page.getByRole('region', { name: /cookie/i })
@@ -151,5 +175,63 @@ test.describe('Cookie-баннер', () => {
     const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     expect(markup).not.toMatch(/role="region"[^>]*aria-label="Мы используем cookie"/)
     expect(markup).not.toContain('Только необходимые')
+  })
+})
+
+test.describe('Метрика под согласие', () => {
+  test('до ответа и после отказа к Метрике не уходит ни одного запроса', async ({ page }) => {
+    const requests: string[] = []
+    page.on('request', (r) => {
+      if (METRIKA.test(r.url())) requests.push(r.url())
+    })
+
+    await page.goto(`${BASE}/`)
+    await expect(banner(page)).toBeVisible()
+    expect(await ymCalls(page)).toBeNull()
+
+    await banner(page).getByRole('button', { name: 'Только необходимые' }).click()
+    await expect(banner(page)).toBeHidden()
+    expect(await ymCalls(page)).toBeNull()
+    expect(requests).toEqual([])
+  })
+
+  test('«принять все» включает Метрику без перезагрузки', async ({ page }) => {
+    await page.goto(`${BASE}/`)
+    const tag = page.waitForRequest(/mc\.yandex\.ru\/metrika\/tag\.js/)
+    await banner(page).getByRole('button', { name: 'Принять все' }).first().click()
+    await tag
+
+    const calls = (await ymCalls(page)) ?? []
+    expect(calls.map((c) => c[1]), METRIKA_HINT).toEqual(['init', 'hit'])
+    // Только статистика посещений: политика cookie не обещает записи действий
+    expect(calls[0][2]).toMatchObject({ defer: true, webvisor: false, clickmap: false })
+  })
+
+  test('переход по сайту без перезагрузки — ещё один хит с прошлой страницей в referer', async ({
+    page,
+    request,
+  }) => {
+    await presetCookieConsent(page, await getConsentVersion(request), {
+      analytics: true,
+      functional: false,
+    })
+    await page.goto(`${BASE}/`)
+    await expect.poll(async () => (await ymCalls(page))?.length ?? 0, { message: METRIKA_HINT }).toBe(2)
+
+    await page.getByRole('navigation').getByRole('link', { name: 'О компании' }).first().click()
+    await page.waitForURL(`${BASE}/about`)
+
+    await expect.poll(async () => (await ymCalls(page))?.length ?? 0).toBe(3)
+    const hit = (await ymCalls(page))![2]
+    expect(hit[1]).toBe('hit')
+    expect(hit[2]).toBe(`${BASE}/about`)
+    expect(hit[3]).toMatchObject({ referer: `${BASE}/` })
+  })
+
+  test('согласие на старые условия Метрику не включает', async ({ page }) => {
+    await presetCookieConsent(page, '1970-01-01', { analytics: true, functional: true })
+    await page.goto(`${BASE}/`)
+    await expect(banner(page)).toBeVisible()
+    expect(await ymCalls(page)).toBeNull()
   })
 })
