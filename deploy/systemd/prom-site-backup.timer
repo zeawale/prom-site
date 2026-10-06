@@ -1,0 +1,10 @@
+[Unit]
+Description=Ежедневный бэкап pm52.ru
+
+[Timer]
+OnCalendar=*-*-* 03:30
+# Сервер был выключен в 03:30 — бэкап догонит при старте
+Persistent=true
+
+[Install]
+WantedBy=timers.target

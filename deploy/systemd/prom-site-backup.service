@@ -1,0 +1,6 @@
+[Unit]
+Description=Бэкап базы и media pm52.ru
+
+[Service]
+Type=oneshot
+ExecStart=/srv/prom-site/deploy/backup.sh

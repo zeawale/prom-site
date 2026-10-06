@@ -1,0 +1,31 @@
+# Приложение pm52.ru: Next.js с Payload, слушает только localhost:3000,
+# снаружи его видно через nginx. Кладётся в /etc/systemd/system/.
+#
+# .env из /srv/prom-site Next читает сам при старте — EnvironmentFile не
+# нужен, и переменные живут в одном месте, а не в двух.
+
+[Unit]
+Description=pm52.ru (Next.js + Payload)
+After=network.target
+
+[Service]
+Type=simple
+User=prom
+Group=prom
+WorkingDirectory=/srv/prom-site
+Environment=NODE_ENV=production
+Environment=NODE_OPTIONS=--no-deprecation
+# Через node напрямую, а не pnpm start: не зависим от того, куда corepack
+# положил pnpm, и сигнал остановки приходит самому Next
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
+Restart=always
+RestartSec=5
+
+# Приложению нечего делать вне своей папки
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
