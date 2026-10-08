@@ -11,6 +11,9 @@
 
 set -euo pipefail
 
+# В копии базы заявки с телефонами и почтой — читать её может только root
+umask 077
+
 APP_DIR=/srv/prom-site
 BACKUP_DIR=/var/backups/prom-site
 KEEP_DAYS=14
@@ -18,6 +21,7 @@ KEEP_DAYS=14
 stamp=$(date +%Y-%m-%d_%H%M)
 target="$BACKUP_DIR/$stamp"
 mkdir -p "$target"
+chmod 700 "$BACKUP_DIR"
 
 sqlite3 "$APP_DIR/prom-site.db" ".backup '$target/prom-site.db'"
 sqlite3 "$target/prom-site.db" 'PRAGMA integrity_check;' | grep -qx ok

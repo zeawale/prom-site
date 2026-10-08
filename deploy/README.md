@@ -51,8 +51,15 @@ node -v && pnpm -v
 
 ```bash
 useradd --create-home --shell /bin/bash prom
+echo 'COREPACK_ENABLE_DOWNLOAD_PROMPT=0' >> /etc/environment
 mkdir -p /srv/prom-site && chown prom:prom /srv/prom-site
 sudo -u prom git clone https://github.com/zeawale/prom-site.git /srv/prom-site
+
+# pnpm той же версии, что у разработки: без этого corepack у prom возьмёт
+# последнюю (на 08.10.2026 — 12.x), а lockfile собран 11-й.
+# cd в домашнюю папку обязателен: corepack читает .corepack.env из текущей
+# папки, и из /root у prom падает с EACCES
+cd /home/prom && sudo -u prom -H bash -lc 'cd ~ && corepack prepare pnpm@11.22.0 --activate && pnpm -v'
 ```
 
 ## 4. .env
