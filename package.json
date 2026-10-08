@@ -1,7 +1,7 @@
 {
   "name": "prom-site",
   "version": "1.0.0",
-  "description": "A blank template to get started with Payload 3.0",
+  "description": "Корпоративный сайт НПП «ПРО-М», партнёра 1С в Нижнем Новгороде: Next.js и Payload CMS",
   "license": "MIT",
   "type": "module",
   "scripts": {
