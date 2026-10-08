@@ -14,6 +14,7 @@
 ![Vitest](https://img.shields.io/badge/Vitest-1e1e2e?style=for-the-badge&logo=vitest&logoColor=a6e3a1)
 ![pnpm](https://img.shields.io/badge/pnpm-1e1e2e?style=for-the-badge&logo=pnpm&logoColor=a6e3a1)
 
+[![Сайт](https://img.shields.io/badge/%D0%A1%D0%B0%D0%B9%D1%82_pm52.ru-1e1e2e?style=for-the-badge&logo=googlechrome&logoColor=a6e3a1)](https://www.pm52.ru)
 [![Figma](https://img.shields.io/badge/%D0%9C%D0%B0%D0%BA%D0%B5%D1%82_%D0%B2_Figma-1e1e2e?style=for-the-badge&logo=figma&logoColor=a6e3a1)](https://www.figma.com/design/MhQUztZQARwwwbrzVjKCNX/)
 
 </div>
@@ -22,14 +23,13 @@
 
 ## 📋 о проекте
 
-Редизайн и разработка с нуля корпоративного сайта **НПП «ПРО-М»** — официального партнёра 1С, который продаёт и сопровождает программы и облачные сервисы 1С для малого бизнеса. Сайт заменяет прежний, на WordPress.
+Редизайн и разработка с нуля корпоративного сайта **НПП «ПРО-М»** — официального партнёра 1С, который продаёт и сопровождает программы и облачные сервисы 1С для малого бизнеса. Сайт заменил прежний, на WordPress, и работает на **[pm52.ru](https://www.pm52.ru)** с октября 2026.
 
 Мой первый коммерческий проект, сделан в одиночку: макет в Figma, модель данных и код — мои.
 
 Главное требование заказчика: **весь текстовый контент правится в админке**, без правок кода и без деплоя.
 
-<!-- Сюда скриншот или GIF -->
-<!-- ![demo](link-to-screenshot) -->
+![Главная страница pm52.ru](docs/screenshot.png)
 
 ## ✨ возможности
 
@@ -138,9 +138,11 @@ pnpm dev
 | `pnpm migrate:create <имя>` | Создать миграцию по изменениям схемы |
 | `pnpm generate:types` | Пересобрать `payload-types.ts` |
 
+Деплой на сервер — по шагам в [`deploy/README.md`](deploy/README.md): Ubuntu, nginx, systemd, ежедневный бэкап, обновление одной командой.
+
 ## 🧪 тесты
 
-97 сквозных тестов: дымовой прогон по всем маршрутам (статус, ошибки в консоли, единственный `<h1>`), форма заявки, cookie-баннер, попап каталога и поиск, редиректы, 404, sitemap и robots.
+113 сквозных тестов: дымовой прогон по всем маршрутам (статус, ошибки в консоли, единственный `<h1>`), форма заявки, cookie-баннер, попап каталога и поиск, Метрика под согласие, редиректы, 404, sitemap и robots.
 
 ```bash
 pnpm test:e2e --workers=1
