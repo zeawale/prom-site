@@ -15,8 +15,10 @@ import CtaBanner from '@/components/product/CtaBanner'
 export async function generateMetadata(): Promise<Metadata> {
   const its = await getITS()
   return {
-    title: `${its.title} — сопровождение 1С в Нижнем Новгороде`,
-    description: its.lead,
+    // «обновление 1с» ищут чаще, чем «сопровождение», — оба слова в заголовок
+    title: `${its.title} — обновление и сопровождение 1С в Нижнем Новгороде`,
+    description:
+      'Договор 1С:ИТС: легальные обновления, консультации и сервисы фирмы «1С» в одной подписке. Подключение и сопровождение у партнёра 1С в Нижнем Новгороде.',
   }
 }
 

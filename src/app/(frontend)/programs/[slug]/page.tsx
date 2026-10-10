@@ -27,7 +27,11 @@ export async function generateMetadata({
 
   return {
     title: `${program.title} — купить в Нижнем Новгороде`,
-    description: program.lead,
+    // Лид говорит, что умеет программа; хвост — где её купить: по запросу
+    // «купить 1с бухгалтерия» в Нижнем Новгороде этого в сниппете и ждут
+    description: [program.lead, 'Купить у официального партнёра 1С в Нижнем Новгороде.']
+      .filter(Boolean)
+      .join(' '),
   }
 }
 
@@ -58,8 +62,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      {/* level=2: h1 занят шапкой раздела */}
-      <PageHero title={program.title} lead={program.lead} level={2} />
+      <PageHero title={program.title} lead={program.lead} />
 
       <ProductIntro
         id={program.slug}

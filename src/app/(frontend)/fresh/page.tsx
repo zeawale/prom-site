@@ -14,8 +14,10 @@ import CompareBlock from '@/components/product/CompareBlock'
 export async function generateMetadata(): Promise<Metadata> {
   const fresh = await getFresh()
   return {
-    title: `${fresh.title} — работа в 1С через интернет`,
-    description: fresh.lead,
+    // Ищут «облачная 1с», «1с в облаке», «1с фреш тарифы» — эти слова и в сниппет
+    title: `${fresh.title} — облачная 1С: тарифы и подключение в Нижнем Новгороде`,
+    description:
+      '1С в облаке: Бухгалтерия, УНФ, ЗУП и другие программы через браузер, без своего сервера. Тарифы 1С:Фреш и подключение у партнёра 1С в Нижнем Новгороде.',
   }
 }
 

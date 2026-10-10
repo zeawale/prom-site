@@ -9,16 +9,16 @@ import CompanyBlock from '@/components/home/CompanyBlock'
 import NumberedList from '@/components/product/NumberedList'
 import Faq from '@/components/product/Faq'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const home = await getHome()
-  return {
-    // absolute: шаблон « | ПРО-М» из корневого layout сюда не дописывается,
-    // суффикс уже есть в самом заголовке
-    title: {
-      absolute: 'Сервисы и программы 1С для малого бизнеса в Нижнем Новгороде | ПРО-М',
-    },
-    description: home.hero?.lead ?? undefined,
-  }
+export const metadata: Metadata = {
+  // absolute: шаблон « | ПРО-М» из корневого layout сюда не дописывается,
+  // суффикс уже есть в самом заголовке
+  title: {
+    absolute: 'Партнёр 1С в Нижнем Новгороде: программы, 1С:Фреш, сопровождение | ПРО-М',
+  },
+  // Не лид хиро: в нём нет ни города, ни слова «партнёр», а по ним и ищут
+  // («1с нижний новгород», «франчайзи 1с»)
+  description:
+    'Официальный партнёр 1С в Нижнем Новгороде с 2014 года. Продаём программы 1С, переводим учёт в облако 1С:Фреш, обновляем и сопровождаем 1С по договору ИТС.',
 }
 
 export default async function HomePage() {

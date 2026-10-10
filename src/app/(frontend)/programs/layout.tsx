@@ -6,10 +6,13 @@ import styles from './layout.module.css'
 /**
  * Шапка раздела: одинакова на всех семи страницах.
  *
+ * «Программы 1С» — не h1, а абзац с тем же видом. h1 у каждой страницы
+ * свой, это название программы (PageHero): с общим h1 у поисковиков
+ * выходило семь страниц с одним и тем же главным заголовком.
+ *
  * <main> живёт здесь, а не в страницах. Отступление от общего правила
  * осознанное: layout привязан к сегменту /programs и всегда стоит ровно над
- * своими страницами, вложенных <main> возникнуть не может. Зато H1 раздела
- * оказывается внутри <main>, а не до него.
+ * своими страницами, вложенных <main> возникнуть не может.
  */
 export default async function ProgramsLayout({ children }: { children: React.ReactNode }) {
   const [programs, section] = await Promise.all([getPrograms(), getProgramsSection()])
@@ -22,7 +25,7 @@ export default async function ProgramsLayout({ children }: { children: React.Rea
   return (
     <main className="container">
       <header className={styles.hero}>
-        <h1 className={styles.title}>{section.title}</h1>
+        <p className={styles.title}>{section.title}</p>
         <p className={styles.lead}>{section.lead}</p>
       </header>
 

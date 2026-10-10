@@ -11,7 +11,7 @@ import CompareBlock from '@/components/product/CompareBlock'
 export async function generateMetadata(): Promise<Metadata> {
   const grm = await getGrm()
   return {
-    title: `${grm.title} — аренда 1С в облаке партнёра`,
+    title: `${grm.title} — аренда 1С в облаке для вашей конфигурации`,
     description: grm.lead,
   }
 }
