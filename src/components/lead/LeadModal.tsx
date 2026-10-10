@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { submitLead } from '@/app/actions/submitLead'
+import { reachGoal } from '@/components/analytics/YandexMetrika'
 import type { LeadResult } from '@/lib/leads'
 import styles from './LeadModal.module.css'
 
@@ -79,6 +80,9 @@ export function LeadModal({ source, onClose }: Props) {
 
     if (result.ok) {
       setStatus('success')
+      // Цель «Заявка отправлена» в Метрике: без неё не посчитать, сколько
+      // заявок приходит из поиска и с какой страницы
+      reachGoal('lead_sent')
     } else {
       setStatus('idle')
       setError(result.error)

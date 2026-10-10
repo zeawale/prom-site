@@ -122,6 +122,32 @@ test.describe('Форма заявки', () => {
     await expect(dialog).toBeHidden()
   })
 
+  test('с согласием на аналитику отправка достигает цели Метрики', async ({ page, request }) => {
+    // Тег подменяется пустым скриптом, как в cookie-banner: вызовы
+    // остаются в очереди window.ym.a, настоящих хитов нет
+    await page.route(/mc\.yandex\.ru/, (route) =>
+      route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
+    )
+    await presetCookieConsent(page, await getConsentVersion(request), {
+      analytics: true,
+      functional: false,
+    })
+    const dialog = await openForm(page)
+
+    await dialog.getByLabel('ФИО').fill('Тест Метрики')
+    await dialog.getByLabel('Телефон').fill('+7 (999) 123-45-67')
+    await dialog.getByLabel('E-mail').fill(EMAIL)
+    await dialog.getByLabel(/обработку персональных данных/i).check()
+    await dialog.getByRole('button', { name: 'Отправить заявку' }).click()
+    await expect(dialog.getByRole('heading', { name: 'Заявка отправлена' })).toBeVisible()
+
+    const goals = await page.evaluate(() => {
+      const ym = (window as unknown as { ym?: { a?: unknown[][] } }).ym
+      return (ym?.a ?? []).map((args) => Array.from(args)).filter((c) => c[1] === 'reachGoal')
+    })
+    expect(goals.map((c) => c[2])).toEqual(['lead_sent'])
+  })
+
   test('Escape и клик по фону закрывают форму', async ({ page }) => {
     let dialog = await openForm(page)
     await page.keyboard.press('Escape')

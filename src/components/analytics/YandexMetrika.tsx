@@ -29,6 +29,21 @@ type Props = {
 
 const TAG_SRC = 'https://mc.yandex.ru/metrika/tag.js'
 
+/** Счётчик, в который сейчас можно слать события. null — Метрики нет или согласия нет */
+let activeCounter: number | null = null
+
+/**
+ * Достижение цели Метрики. Цель с тем же идентификатором заводится в
+ * интерфейсе Метрики: «Цели» → «JavaScript-событие».
+ *
+ * Без согласия на аналитику ничего не отправляет: activeCounter
+ * выставляет только компонент ниже и только при включённой Метрике.
+ */
+export function reachGoal(target: string) {
+  if (activeCounter === null || !window.ym) return
+  window.ym(activeCounter, 'reachGoal', target)
+}
+
 /**
  * Яндекс.Метрика под согласие на аналитические cookie.
  *
@@ -59,7 +74,11 @@ export function YandexMetrika({ counterId, consentVersion }: Props) {
   const lastUrl = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!enabled || counterId === null) return
+    if (!enabled || counterId === null) {
+      activeCounter = null
+      return
+    }
+    activeCounter = counterId
 
     if (!initialized.current) {
       initialized.current = true
