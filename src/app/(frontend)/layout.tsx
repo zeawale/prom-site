@@ -7,6 +7,7 @@ import { LeadModalProvider } from '@/components/lead/LeadModalProvider'
 import { ServiceModalProvider } from '@/components/catalog/ServiceModalProvider'
 import { CookieConsent } from '@/components/cookie/CookieConsent'
 import { YandexMetrika } from '@/components/analytics/YandexMetrika'
+import { OrganizationJsonLd } from '@/components/seo/OrganizationJsonLd'
 import { getCookieBanner } from '@/lib/queries'
 import { SITE_URL } from '@/lib/site'
 
@@ -89,6 +90,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <OrganizationJsonLd />
       </head>
       <body>
         <LeadModalProvider>
