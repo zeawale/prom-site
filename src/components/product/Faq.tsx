@@ -32,10 +32,13 @@ export default function Faq({ id, title, items }: Props) {
   if (!items.length) return null
 
   const toggle = (i: number) => setOpen((cur) => (cur === i ? null : i))
+  // Один id на заголовок и aria-labelledby: раньше при переданном id
+  // секция ссылалась на несуществующий элемент и оставалась без подписи
+  const titleId = id ? `${id}-faq` : `${baseId}-title`
 
   return (
-    <section className={styles.section} aria-labelledby={`${baseId}-title`}>
-      <h2 className={styles.title} id={id ? `${id}-faq` : `${baseId}-title`}>
+    <section className={styles.section} aria-labelledby={titleId}>
+      <h2 className={styles.title} id={titleId}>
         {title}
       </h2>
 
