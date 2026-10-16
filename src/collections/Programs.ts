@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { revalidateSection } from '@/lib/revalidate'
 import { iconField } from './fields/iconField'
 import { tariffRowFields } from './fields/tariffRowFields'
+import { faqField } from './fields/faqField'
 
 export const Programs: CollectionConfig = {
   slug: 'programs',
@@ -261,5 +262,8 @@ export const Programs: CollectionConfig = {
         },
       ],
     },
+
+    // ---------- Вопросы и ответы ----------
+    faqField(),
   ],
 }

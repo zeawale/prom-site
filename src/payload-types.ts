@@ -597,6 +597,22 @@ export interface Program {
         }[]
       | null;
   };
+  /**
+   * Без вопросов блок на странице не показывается
+   */
+  faq?: {
+    title?: string | null;
+    items?:
+      | {
+          question: string;
+          /**
+           * Абзацы разделяются переводом строки
+           */
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -958,6 +974,18 @@ export interface ProgramsSelect<T extends boolean = true> {
               col1Text?: T;
               col2Text?: T;
               col3Text?: T;
+              id?: T;
+            };
+      };
+  faq?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
               id?: T;
             };
       };
@@ -1603,6 +1631,22 @@ export interface It {
     buttonLabel: string;
     buttonHref: string;
   };
+  /**
+   * Без вопросов блок на странице не показывается
+   */
+  faq?: {
+    title?: string | null;
+    items?:
+      | {
+          question: string;
+          /**
+           * Абзацы разделяются переводом строки
+           */
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1863,6 +1907,22 @@ export interface Fresh {
       text: string;
     };
   };
+  /**
+   * Без вопросов блок на странице не показывается
+   */
+  faq?: {
+    title?: string | null;
+    items?:
+      | {
+          question: string;
+          /**
+           * Абзацы разделяются переводом строки
+           */
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1988,6 +2048,22 @@ export interface Grm {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Без вопросов блок на странице не показывается
+   */
+  faq?: {
+    title?: string | null;
+    items?:
+      | {
+          question: string;
+          /**
+           * Абзацы разделяются переводом строки
+           */
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2402,6 +2478,18 @@ export interface ItsSelect<T extends boolean = true> {
         buttonLabel?: T;
         buttonHref?: T;
       };
+  faq?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2513,6 +2601,18 @@ export interface FreshSelect<T extends boolean = true> {
               text?: T;
             };
       };
+  faq?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2554,6 +2654,18 @@ export interface GrmSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
+      };
+  faq?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

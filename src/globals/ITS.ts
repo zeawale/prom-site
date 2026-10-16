@@ -2,6 +2,7 @@ import type { GlobalConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 import { iconField } from '../collections/fields/iconField'
 import { tariffRowFields } from '../collections/fields/tariffRowFields'
+import { faqField } from '../collections/fields/faqField'
 
 /**
  * Страница /its целиком.
@@ -216,5 +217,8 @@ export const ITS: GlobalConfig = {
         },
       ],
     },
+
+    // ---------- Вопросы и ответы ----------
+    faqField(),
   ],
 }

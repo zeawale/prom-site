@@ -5,6 +5,9 @@ import PageHero from '@/components/product/PageHero'
 import ProductIntro from '@/components/product/ProductIntro'
 import FeatureCards from '@/components/product/FeatureCards'
 import CompareBlock from '@/components/product/CompareBlock'
+import Faq from '@/components/product/Faq'
+import { FaqJsonLd } from '@/components/seo/FaqJsonLd'
+import { toFaq } from '@/lib/faq'
 
 // Своего layout нет, как у /its и /fresh — <main> и .container рендерит страница
 
@@ -28,6 +31,8 @@ export default async function GrmPage() {
     text: card.text,
     list: (card.list ?? []).map((item) => item.text),
   }))
+
+  const faq = toFaq(grm.faq)
 
   return (
     <main className="container">
@@ -65,6 +70,9 @@ export default async function GrmPage() {
           current="grm"
         />
       )}
+
+      <Faq id="grm" {...faq} />
+      <FaqJsonLd items={faq.items} />
     </main>
   )
 }

@@ -7,6 +7,9 @@ import PageHero from '@/components/product/PageHero'
 import ProductIntro from '@/components/product/ProductIntro'
 import FeatureCards from '@/components/product/FeatureCards'
 import TariffTable from '@/components/product/TariffTable'
+import Faq from '@/components/product/Faq'
+import { FaqJsonLd } from '@/components/seo/FaqJsonLd'
+import { toFaq } from '@/lib/faq'
 
 // <main> и .container живут в programs/layout.tsx — здесь их быть не должно.
 
@@ -50,6 +53,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
     text: card.text,
     list: (card.list ?? []).map((item) => item.text),
   }))
+
+  const faq = toFaq(program.faq)
 
   // hasTable управляет видимостью группы в админке, но саму группу Payload
   // хранит всегда — поэтому проверяем флаг, а не наличие объекта
@@ -103,6 +108,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           }
         />
       )}
+
+      <Faq id={program.slug} {...faq} />
+      <FaqJsonLd items={faq.items} />
     </>
   )
 }

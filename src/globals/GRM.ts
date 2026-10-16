@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 import { iconField } from '../collections/fields/iconField'
+import { faqField } from '../collections/fields/faqField'
 
 /**
  * Страница /grm целиком.
@@ -128,5 +129,8 @@ export const GRM: GlobalConfig = {
         },
       ],
     },
+
+    // ---------- Вопросы и ответы ----------
+    faqField(),
   ],
 }

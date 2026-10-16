@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 import { iconField } from '../collections/fields/iconField'
+import { faqField } from '../collections/fields/faqField'
 
 /**
  * Страница /fresh целиком.
@@ -278,5 +279,8 @@ export const Fresh: GlobalConfig = {
         },
       ],
     },
+
+    // ---------- Вопросы и ответы ----------
+    faqField(),
   ],
 }

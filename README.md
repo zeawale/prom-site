@@ -120,6 +120,7 @@ pnpm seed:home
 pnpm seed:reviews
 pnpm seed:pages
 pnpm seed:cookie
+pnpm seed:faq
 ```
 
 ```bash

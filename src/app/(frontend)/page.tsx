@@ -8,6 +8,8 @@ import ServicesPreview from '@/components/home/ServicesPreview'
 import CompanyBlock from '@/components/home/CompanyBlock'
 import NumberedList from '@/components/product/NumberedList'
 import Faq from '@/components/product/Faq'
+import { FaqJsonLd } from '@/components/seo/FaqJsonLd'
+import { toFaq } from '@/lib/faq'
 
 export const metadata: Metadata = {
   // absolute: шаблон « | ПРО-М» из корневого layout сюда не дописывается,
@@ -30,6 +32,7 @@ export default async function HomePage() {
   ])
 
   const states = home.states
+  const faq = toFaq(home.faq)
 
   /* Payload отдаёт массивы объектов ({ text }) и допускает null почти
      везде — компоненты про это знать не должны, разворачиваем здесь */
@@ -114,14 +117,8 @@ export default async function HomePage() {
         }))}
       />
 
-      <Faq
-        id="home"
-        title={home.faq?.title ?? ''}
-        items={(home.faq?.items ?? []).map((item) => ({
-          question: item.question,
-          answer: item.answer,
-        }))}
-      />
+      <Faq id="home" {...faq} />
+      <FaqJsonLd items={faq.items} />
     </main>
   )
 }

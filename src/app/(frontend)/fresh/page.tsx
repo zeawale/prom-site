@@ -8,6 +8,9 @@ import TariffCards from '@/components/product/TariffCards'
 import MoreTariffs from '@/components/product/MoreTariffs'
 import NoteBox from '@/components/product/NoteBox'
 import CompareBlock from '@/components/product/CompareBlock'
+import Faq from '@/components/product/Faq'
+import { FaqJsonLd } from '@/components/seo/FaqJsonLd'
+import { toFaq } from '@/lib/faq'
 
 // Как и у /its, своего layout нет — <main> и .container рендерит страница
 
@@ -39,6 +42,7 @@ export default async function FreshPage() {
     list: [],
   }))
 
+  const faq = toFaq(fresh.faq)
   const tariffs = fresh.tariffs
   const extra = tariffs?.extra
 
@@ -102,6 +106,9 @@ export default async function FreshPage() {
           current="fresh"
         />
       )}
+
+      <Faq id="fresh" {...faq} />
+      <FaqJsonLd items={faq.items} />
     </main>
   )
 }

@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
 import { iconField } from '../collections/fields/iconField'
+import { faqField } from '../collections/fields/faqField'
 
 /**
  * Главная страница целиком.
@@ -278,30 +279,6 @@ export const Home: GlobalConfig = {
     },
 
     // ---------- FAQ ----------
-    {
-      name: 'faq',
-      type: 'group',
-      label: 'Часто задаваемые вопросы',
-      fields: [
-        { name: 'title', type: 'text', label: 'Заголовок блока', required: true },
-        {
-          name: 'items',
-          type: 'array',
-          label: 'Вопросы',
-          labels: { singular: 'Вопрос', plural: 'Вопросы' },
-          minRows: 1,
-          fields: [
-            { name: 'question', type: 'text', label: 'Вопрос', required: true },
-            {
-              name: 'answer',
-              type: 'textarea',
-              label: 'Ответ',
-              required: true,
-              admin: { description: 'Абзацы разделяются переводом строки' },
-            },
-          ],
-        },
-      ],
-    },
+    faqField({ required: true }),
   ],
 }

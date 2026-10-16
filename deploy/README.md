@@ -94,7 +94,7 @@ sudo -u prom -H bash -lc 'cd /srv/prom-site && pnpm install --frozen-lockfile &&
 
 sudo -u prom -H bash -lc 'cd /srv/prom-site && pnpm seed && pnpm seed:programs && pnpm seed:its \
   && pnpm seed:fresh && pnpm seed:grm && pnpm seed:legal && pnpm seed:home \
-  && pnpm seed:reviews && pnpm seed:pages && pnpm seed:cookie'
+  && pnpm seed:reviews && pnpm seed:pages && pnpm seed:cookie && pnpm seed:faq'
 
 sudo -u prom -H bash -lc 'cd /srv/prom-site && pnpm build'
 ```

@@ -8,6 +8,9 @@ import FeatureCards from '@/components/product/FeatureCards'
 import NumberedList from '@/components/product/NumberedList'
 import TariffTable from '@/components/product/TariffTable'
 import CtaBanner from '@/components/product/CtaBanner'
+import Faq from '@/components/product/Faq'
+import { FaqJsonLd } from '@/components/seo/FaqJsonLd'
+import { toFaq } from '@/lib/faq'
 
 // В отличие от программ, у /its нет своего layout — <main> и .container
 // рендерит сама страница
@@ -33,6 +36,8 @@ export default async function ITSPage() {
     text: card.text,
     list: [],
   }))
+
+  const faq = toFaq(its.faq)
 
   const table = its.table
   // Тарифа всегда два: ПРОФ и Техно. Третьей колонки на этой странице не бывает
@@ -76,6 +81,11 @@ export default async function ITSPage() {
           disclaimer={settings.tariffDisclaimer}
         />
       )}
+
+      {/* Перед баннером, а не последним, как на других страницах: баннер
+          смыкается с футером и обязан стоять в самом конце */}
+      <Faq id="its" {...faq} />
+      <FaqJsonLd items={faq.items} />
 
       {its.ctaBanner && (
         <CtaBanner

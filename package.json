@@ -29,7 +29,8 @@
     "seed:home": "tsx --env-file=.env src/seed/seed-home.ts",
     "seed:reviews": "tsx --env-file=.env src/seed/seed-reviews.ts",
     "seed:pages": "tsx --env-file=.env src/seed/seed-pages.ts",
-    "seed:cookie": "tsx --env-file=.env src/seed/seed-cookie.ts"
+    "seed:cookie": "tsx --env-file=.env src/seed/seed-cookie.ts",
+    "seed:faq": "tsx --env-file=.env src/seed/seed-faq.ts"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",
